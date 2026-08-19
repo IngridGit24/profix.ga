@@ -19,12 +19,13 @@ const passwordComplexity = Joi.string()
     'string.pattern.name': 'Le mot de passe doit contenir des majuscules, minuscules et chiffres',
   });
 
+// `type` is intentionally not a field here — every registration becomes a
+// plain client; see authService.register()'s doc comment for why.
 const registerSchema = Joi.object({
   name: Joi.string().min(2).max(100).required(),
   email: Joi.string().email().max(255).required(),
   password: passwordComplexity,
   phone: Joi.string().max(20).optional().allow('', null),
-  type: Joi.string().valid('client', 'prestataire').default('client'),
 });
 
 const loginSchema = Joi.object({

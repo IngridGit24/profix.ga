@@ -40,6 +40,7 @@ router.get('/me/profile', authenticateToken, prestataireController.getMyProfile)
 
 // Admin — before /:id so it isn't shadowed by the param route.
 router.get('/admin/pending', authenticateToken, authorizeRoles('admin'), prestataireController.getPending);
+router.get('/admin/all', authenticateToken, authorizeRoles('admin'), prestataireController.getAll);
 router.post('/:id/validate', authenticateToken, authorizeRoles('admin'), prestataireController.validate);
 router.post('/:id/reject', authenticateToken, authorizeRoles('admin'), prestataireController.reject);
 

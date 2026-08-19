@@ -81,15 +81,24 @@ export class MessagerieService {
     return { message: rows[0], recipientId };
   }
 
+  /**
+   * Returns the `limit` most recent messages for `page` (page 1 = most
+   * recent), in chronological (oldest-first) order for the caller to render
+   * directly. Ordering by created_at ASC with a plain OFFSET — the original
+   * version of this method — would make page 1 return the *oldest* messages
+   * in a long conversation instead of the most recent ones, since OFFSET 0
+   * starts from the beginning either way; fetching DESC then reversing is
+   * what actually gets "most recent N, oldest of that batch first".
+   */
   static async getMessages(conversationId, pagination = {}) {
     const { page = 1, limit = 50 } = pagination;
     const offset = (page - 1) * limit;
 
     const rows = await executeQuery(
-      `SELECT * FROM messages WHERE conversation_id = ? ORDER BY created_at ASC LIMIT ? OFFSET ?`,
+      `SELECT * FROM messages WHERE conversation_id = ? ORDER BY created_at DESC LIMIT ? OFFSET ?`,
       [conversationId, limit, offset]
     );
-    return rows;
+    return rows.reverse();
   }
 
   static async markAsRead(conversationId, userId) {

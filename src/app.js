@@ -18,6 +18,7 @@ import devisRoutes from './routes/devisRoutes.js';
 import messagerieRoutes from './routes/messagerieRoutes.js';
 import uploadRoutes from './routes/uploadRoutes.js';
 import referenceRoutes from './routes/referenceRoutes.js';
+import avisRoutes from './routes/avisRoutes.js';
 
 const app = express();
 const server = createServer(app);
@@ -117,6 +118,7 @@ app.use(`${apiPrefix}/devis`, devisRoutes);
 app.use(`${apiPrefix}/conversations`, messagerieRoutes);
 app.use(`${apiPrefix}/uploads`, uploadRoutes);
 app.use(`${apiPrefix}/reference`, referenceRoutes);
+app.use(`${apiPrefix}/avis`, avisRoutes);
 
 app.get('/api-info', (req, res) => {
   res.json({
@@ -132,6 +134,7 @@ app.get('/api-info', (req, res) => {
       conversations: `${apiPrefix}/conversations`,
       uploads: `${apiPrefix}/uploads`,
       reference: `${apiPrefix}/reference`,
+      avis: `${apiPrefix}/avis`,
     },
   });
 });

@@ -85,6 +85,7 @@ const migrations = [
         validated BOOLEAN NOT NULL DEFAULT FALSE,
         available BOOLEAN NOT NULL DEFAULT TRUE,
         rating DECIMAL(3,2) NOT NULL DEFAULT 0,
+        reviews_count INT NOT NULL DEFAULT 0 COMMENT 'denormalized count, kept in sync by avisService.create — see avis table',
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
         updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
         deleted_at DATETIME NULL,
@@ -175,6 +176,23 @@ const migrations = [
         PRIMARY KEY (conversation_id, user_id),
         FOREIGN KEY (conversation_id) REFERENCES conversations(id) ON DELETE CASCADE,
         FOREIGN KEY (user_id) REFERENCES users(id)
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+    `,
+  },
+  {
+    name: 'create_avis_table',
+    mysql: `
+      CREATE TABLE IF NOT EXISTS avis (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        prestataire_id INT NOT NULL,
+        client_id INT NOT NULL,
+        note TINYINT NOT NULL COMMENT '1-5',
+        commentaire TEXT NOT NULL,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (prestataire_id) REFERENCES prestataires(id),
+        FOREIGN KEY (client_id) REFERENCES users(id),
+        UNIQUE KEY uniq_avis_prestataire_client (prestataire_id, client_id) COMMENT 'one review per client per prestataire, same rule as the old Firestore code',
+        INDEX idx_avis_prestataire (prestataire_id)
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
     `,
   },

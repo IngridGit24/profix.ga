@@ -61,6 +61,17 @@ class PrestataireController {
     res.json(ApiResponse.success(result, 'Candidatures en attente récupérées'));
   });
 
+  /**
+   * Everything, validated or not, available or not — the public list()
+   * only returns validated+available, so an admin reviewing e.g. a
+   * validated-but-currently-unavailable provider needs this instead.
+   */
+  getAll = asyncHandler(async (req, res) => {
+    const { page, limit } = Pagination.create(req.query.page, req.query.limit);
+    const result = await PrestataireService.list({ includeAll: true }, { page, limit });
+    res.json(ApiResponse.success(result, 'Tous les prestataires récupérés'));
+  });
+
   validate = asyncHandler(async (req, res) => {
     const prestataire = await PrestataireService.validate(req.params.id);
     try {

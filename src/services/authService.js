@@ -20,7 +20,17 @@ export class AuthService {
     );
   }
 
-  static async register({ name, email, password, phone, type = 'client' }) {
+  /**
+   * `type` is deliberately NOT accepted here — every registration is
+   * type='client', full stop. Becoming a prestataire only ever happens via
+   * PrestataireService.validate(), which requires authorizeRoles('admin').
+   * Letting registration set type directly would mean anyone could sign up
+   * claiming to already be a validated provider, which is exactly the hole
+   * the admin-validation flow exists to close (see prestataireService.js).
+   * A prestataire *applicant* still registers as a plain client and then
+   * calls POST /prestataires — see prestataireController.create.
+   */
+  static async register({ name, email, password, phone }) {
     const existing = await executeQuery('SELECT id FROM users WHERE email = ?', [email]);
     if (existing.length > 0) {
       const err = new Error('Un compte existe déjà avec cet email');
@@ -31,8 +41,8 @@ export class AuthService {
     const hashed = await bcrypt.hash(password, 12);
     const result = await executeQuery(
       `INSERT INTO users (name, email, password, phone, type, current_mode)
-       VALUES (?, ?, ?, ?, ?, ?)`,
-      [name, email, hashed, phone || null, type, type === 'prestataire' ? 'prestataire' : 'client']
+       VALUES (?, ?, ?, ?, 'client', 'client')`,
+      [name, email, hashed, phone || null]
     );
 
     return this.getById(result.insertId);
