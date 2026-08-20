@@ -1,35 +1,3 @@
-# CI/CD pour le monorepo ProFixGabon (backend/ + frontend/).
-#
-# État actuel — 2 étapes : analyse (lint + build) puis build & push des
-# images Docker (déjà prêtes, distroless — voir backend/Dockerfile et
-# frontend/Dockerfile). Le déploiement effectif sur le VPS de prod n'est
-# PAS encore câblé ici : ce sera une 3e étape ajoutée une fois le serveur
-# prêt, sur le même schéma que moncv.ga (SSH, régénération de
-# .env/docker-compose.yml depuis les secrets GitHub, `docker compose pull
-# && up -d`) — voir son .github/workflows/deploy.yml pour le patron
-# complet le moment venu.
-#
-# Le frontend a par ailleurs sa propre preview automatique sur Vercel,
-# connectée directement depuis leur dashboard (pas pilotée par ce
-# workflow) — c'est pour montrer une v0 rapidement, pas la prod.
-#
-# Registre : Docker Hub, compte "ingridcode" (même compte que moncv.ga).
-#
-# Secrets GitHub requis (Settings → Secrets and variables → Actions →
-# Secrets — PAS Variables : DOCKER_PASSWORD est un identifiant, il doit
-# être chiffré et masqué des logs, ce que seuls les Secrets font) :
-#   DOCKER_USERNAME → compte Docker Hub (ingridcode)
-#   DOCKER_PASSWORD → mot de passe ou access token Docker Hub
-#
-# Variable GitHub optionnelle (Settings → Secrets and variables → Actions
-# → Variables, PAS Secrets — non sensible) :
-#   VITE_API_BASE_URL → URL de l'API backend à inliner dans le build
-#                        frontend (ex: https://api.profixgabon.ga/api/v1).
-#                        Vite l'inline au build, jamais au runtime — voir
-#                        frontend/README.md. Sans elle, un placeholder
-#                        évident est utilisé (à corriger dès que le
-#                        backend a une vraie adresse publique).
-
 name: Deploy
 
 on:
