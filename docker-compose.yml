@@ -1,0 +1,92 @@
+# Local development only — hot-reload (nodemon / Vite dev server), real
+# node:20-alpine images with the source bind-mounted, NOT the distroless
+# production Dockerfiles (those have no npm/shell, they're for
+# backend/Dockerfile + frontend/Dockerfile → CI only, see
+# .github/workflows/deploy.yml). The VPS production compose file will be
+# a separate one, added once that server is provisioned.
+#
+# First run:
+#   docker compose up -d
+#   docker compose exec backend npm run migrate   # creates the schema
+#
+# Cloudinary credentials (upload feature) aren't set here — put real ones
+# in a root .env (gitignored, auto-loaded by Compose) to test uploads:
+#   CLOUDINARY_CLOUD_NAME=...
+#   CLOUDINARY_API_KEY=...
+#   CLOUDINARY_API_SECRET=...
+# Everything else below has a working dev default and needs no .env at all.
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: profixgabon-db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DB_NAME:-profixgabon_db}
+      MYSQL_USER: ${DB_USER:-profixgabon_user}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-devpassword}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-devrootpassword}
+    ports:
+      - "3306:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${DB_ROOT_PASSWORD:-devrootpassword}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  backend:
+    image: node:20-alpine
+    container_name: profixgabon-backend
+    working_dir: /app
+    # node_modules named-volume so npm install's Linux-built native deps
+    # (mysql2 etc.) aren't shadowed by the Windows-host bind mount below.
+    command: sh -c "npm install && npm run dev"
+    ports:
+      - "4000:4000"
+    environment:
+      NODE_ENV: development
+      PORT: 4000
+      API_VERSION: v1
+      API_PREFIX: /api
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_NAME: ${DB_NAME:-profixgabon_db}
+      DB_USER: ${DB_USER:-profixgabon_user}
+      DB_PASSWORD: ${DB_PASSWORD:-devpassword}
+      JWT_SECRET: ${JWT_SECRET:-dev-only-secret-change-me}
+      JWT_EXPIRES_IN: 7d
+      CORS_ORIGIN: http://localhost:5173
+      CLOUDINARY_CLOUD_NAME: ${CLOUDINARY_CLOUD_NAME:-}
+      CLOUDINARY_API_KEY: ${CLOUDINARY_API_KEY:-}
+      CLOUDINARY_API_SECRET: ${CLOUDINARY_API_SECRET:-}
+    volumes:
+      - ./backend:/app
+      - backend_node_modules:/app/node_modules
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    image: node:20-alpine
+    container_name: profixgabon-frontend
+    working_dir: /app
+    command: sh -c "npm install && npm run dev -- --host 0.0.0.0 --port 5173"
+    ports:
+      - "5173:5173"
+    environment:
+      # Vite reads this at request-time from its own dev server (unlike
+      # the Docker build-arg path used for the production image), so a
+      # plain runtime env var is fine here — no rebuild needed to change it.
+      VITE_API_BASE_URL: http://localhost:4000/api/v1
+    volumes:
+      - ./frontend:/app
+      - frontend_node_modules:/app/node_modules
+    depends_on:
+      - backend
+
+volumes:
+  dbdata:
+  backend_node_modules:
+  frontend_node_modules:
