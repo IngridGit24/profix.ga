@@ -97,9 +97,9 @@ export default function HomePage() {
   const navigate = useNavigate()
   const [current, setCurrent] = useState(0)
   const [voirTout, setVoirTout] = useState(false)
-const scrollToSection = (id) => {
-  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
-}
+  const scrollToSection = (id) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+  }
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrent(prev => (prev + 1) % SLIDES.length)
@@ -167,7 +167,7 @@ const scrollToSection = (id) => {
               border: 'none', cursor: 'pointer',
               boxShadow: '0 4px 20px rgba(0,0,0,0.2)',
             }}>🔍 Trouver un prestataire</button>
-           <button onClick={() => document.getElementById('comment-ca-marche')?.scrollIntoView({ behavior: 'smooth' })} style={{
+           <button onClick={() => scrollToSection('comment-ca-marche')} style={{
   padding: '14px 28px', borderRadius: '12px',
   fontSize: '15px', fontWeight: '700',
   background: 'transparent', color: '#fff',

@@ -17,6 +17,10 @@ const GENERIC_MESSAGES = {
   500: "Une erreur inattendue s'est produite. Veuillez réessayer plus tard.",
 };
 
+// The unused 4th param is required: Express recognizes error-handling
+// middleware purely by function arity, so dropping `next` here would make
+// this silently stop being treated as an error handler.
+// eslint-disable-next-line no-unused-vars
 export const errorHandler = (err, req, res, next) => {
   const isProd = config.nodeEnv === 'production';
 

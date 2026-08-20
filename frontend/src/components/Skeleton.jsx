@@ -137,8 +137,6 @@ export const SkeletonMessage = () => (
     }} />
     <div style={{
       padding: '10px 14px',
-      borderRadius: '12px',
-      background: '#F7F9F8',
       height: '40px',
       background: 'linear-gradient(90deg, #F0F0F0 25%, #E0E0E0 50%, #F0F0F0 75%)',
       backgroundSize: '200% 100%',

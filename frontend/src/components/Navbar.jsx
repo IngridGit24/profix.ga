@@ -5,7 +5,7 @@
 // authorizeRoles('admin'), but this now reflects the real role (user.type)
 // instead of a hardcoded string.
 import { Link, useNavigate } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useAuth } from '../context/AuthContext'
 import { getSocket } from '../services/socket'
 import messagerieService from '../services/messagerie'
@@ -15,7 +15,7 @@ export default function Navbar() {
   const { user, logout } = useAuth()
   const [unreadCount, setUnreadCount] = useState(0)
 
-  const refreshUnreadCount = async () => {
+  const refreshUnreadCount = useCallback(async () => {
     if (!user) return
     try {
       const conversations = await messagerieService.getConversations()
@@ -24,7 +24,7 @@ export default function Navbar() {
     } catch {
       // Non-critical — just leave the badge as-is on a transient error.
     }
-  }
+  }, [user])
 
   useEffect(() => {
     if (!user) {
@@ -32,7 +32,7 @@ export default function Navbar() {
       return
     }
     refreshUnreadCount()
-  }, [user])
+  }, [user, refreshUnreadCount])
 
   useEffect(() => {
     if (!user) return
@@ -42,7 +42,7 @@ export default function Navbar() {
     const handler = () => refreshUnreadCount()
     socket.on('conversation_updated', handler)
     return () => socket.off('conversation_updated', handler)
-  }, [user])
+  }, [user, refreshUnreadCount])
 
   const handleLogout = async () => {
     await logout()

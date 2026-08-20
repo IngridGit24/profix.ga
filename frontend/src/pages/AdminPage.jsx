@@ -32,6 +32,9 @@ export default function AdminPage() {
   }, [])
 
   useEffect(() => {
+    // Fetch-on-mount, no route params to race against — the accepted use of
+    // setState-in-effect per React's own docs ("Fetching data" in
+    // https://react.dev/learn/you-might-not-need-an-effect).
     loadPrestataires()
   }, [loadPrestataires])
 

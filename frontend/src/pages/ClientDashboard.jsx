@@ -3,7 +3,7 @@
 // AuthContext (user) + a REST fetch refreshed on relevant socket events.
 // `ville`/`bio` are gone from the profile tab — see AccountPage.jsx's
 // header comment for why (no backend column, never functionally used here).
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import authService from '../services/auth'
@@ -22,7 +22,7 @@ export default function ClientDashboard() {
   const [unreadMessages, setUnreadMessages] = useState(0)
   const [newDevis, setNewDevis] = useState(0)
 
-  const refreshBadges = async () => {
+  const refreshBadges = useCallback(async () => {
     if (!user) return
     try {
       const [devisResult, conversations] = await Promise.all([
@@ -34,12 +34,15 @@ export default function ClientDashboard() {
     } catch {
       // Non-critical — badges just stay as-is on a transient error.
     }
-  }
+  }, [user])
 
   useEffect(() => {
     if (!user) return
+    // Fetch-on-mount, no route params to race against — the accepted use of
+    // setState-in-effect per React's own docs ("Fetching data" in
+    // https://react.dev/learn/you-might-not-need-an-effect).
     refreshBadges()
-  }, [user])
+  }, [user, refreshBadges])
 
   useEffect(() => {
     if (!user) return
@@ -54,7 +57,7 @@ export default function ClientDashboard() {
       socket.off('devis_status_changed', handler)
       socket.off('conversation_updated', handler)
     }
-  }, [user])
+  }, [user, refreshBadges])
 
   const switchToProviderMode = async () => {
     try {
