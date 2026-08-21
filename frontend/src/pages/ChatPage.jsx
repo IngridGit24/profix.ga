@@ -128,7 +128,7 @@ export default function ChatPage() {
       setNewMessage('')
     } catch (error) {
       console.error('Erreur envoi message:', error)
-      toast.error("❌ Erreur lors de l'envoi du message")
+      toast.error("Erreur lors de l'envoi du message")
     } finally {
       setSending(false)
     }
@@ -154,7 +154,6 @@ export default function ChatPage() {
           <div style={{
             width: '40px',
             height: '40px',
-            borderRadius: '50%',
             background: '#E8F5EE',
           }} />
           <div>
@@ -162,14 +161,12 @@ export default function ChatPage() {
               width: '150px',
               height: '16px',
               background: '#E8F5EE',
-              borderRadius: '4px',
               marginBottom: '4px',
             }} />
             <div style={{
               width: '80px',
               height: '12px',
               background: '#E8F5EE',
-              borderRadius: '4px',
             }} />
           </div>
         </div>
@@ -198,13 +195,11 @@ export default function ChatPage() {
             flex: 1,
             height: '40px',
             background: '#F7F9F8',
-            borderRadius: '10px',
           }} />
           <div style={{
             width: '80px',
             height: '40px',
             background: '#E8F5EE',
-            borderRadius: '10px',
           }} />
         </div>
       </div>
@@ -242,7 +237,6 @@ export default function ChatPage() {
             cursor: 'pointer',
             color: '#4A5E55',
             padding: '4px 8px',
-            borderRadius: '8px',
           }}
           onMouseEnter={(e) => e.currentTarget.style.background = '#F7F9F8'}
           onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
@@ -253,7 +247,6 @@ export default function ChatPage() {
           <div style={{
             width: '40px',
             height: '40px',
-            borderRadius: '50%',
             background: '#E8F5EE',
             display: 'flex',
             alignItems: 'center',
@@ -288,7 +281,6 @@ export default function ChatPage() {
               padding: '8px 16px',
               background: 'transparent',
               border: '1px solid #E2EBE7',
-              borderRadius: '8px',
               fontSize: '12px',
               color: '#8FA99E',
               cursor: loadingMore ? 'not-allowed' : 'pointer',
@@ -296,7 +288,7 @@ export default function ChatPage() {
               marginBottom: '8px'
             }}
           >
-            {loadingMore ? 'Chargement...' : '📤 Charger plus de messages'}
+            {loadingMore ? 'Chargement...' : 'Charger plus de messages'}
           </button>
         )}
 
@@ -306,7 +298,7 @@ export default function ChatPage() {
             padding: '48px 24px',
             color: '#8FA99E'
           }}>
-            <p style={{ fontSize: '48px', marginBottom: '16px' }}>💬</p>
+            <p style={{ fontSize: '48px', marginBottom: '16px' }}></p>
             <p>Aucun message. Commencez la conversation !</p>
           </div>
         ) : (
@@ -326,7 +318,6 @@ export default function ChatPage() {
                     margin: '8px 0',
                     padding: '4px 12px',
                     background: '#F7F9F8',
-                    borderRadius: '99px',
                     alignSelf: 'center',
                     display: 'inline-block',
                     width: 'auto',
@@ -350,14 +341,13 @@ export default function ChatPage() {
                     marginBottom: '4px',
                     textAlign: isMine ? 'right' : 'left'
                   }}>
-                    {isMine ? '👤 Vous' : `👤 ${autreNom || 'Client'}`}
+                    {isMine ? 'Vous' : `${autreNom || 'Client'}`}
                   </div>
 
                   <div style={{
                     background: isMine ? '#1A6B3C' : '#fff',
                     color: isMine ? '#fff' : '#111',
                     padding: '10px 14px',
-                    borderRadius: '12px',
                     borderBottomRightRadius: isMine ? '4px' : '12px',
                     borderBottomLeftRadius: isMine ? '12px' : '4px',
                     boxShadow: '0 1px 4px rgba(0,0,0,0.08)',
@@ -373,7 +363,7 @@ export default function ChatPage() {
                     textAlign: isMine ? 'right' : 'left',
                   }}>
                     {msgDate?.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' }) || ''}
-                    {isMine && msg.lu ? ' ✅' : ''}
+                    {isMine && msg.lu ? '' : ''}
                   </div>
                 </div>
               </div>
@@ -403,7 +393,6 @@ export default function ChatPage() {
             flex: 1,
             padding: '10px 14px',
             border: '1.5px solid #E2EBE7',
-            borderRadius: '10px',
             fontSize: '14px',
             outline: 'none',
             fontFamily: 'sans-serif',
@@ -421,7 +410,6 @@ export default function ChatPage() {
             background: newMessage.trim() ? '#1A6B3C' : '#B8DCC8',
             color: '#fff',
             border: 'none',
-            borderRadius: '10px',
             fontSize: '14px',
             fontWeight: '700',
             cursor: newMessage.trim() ? 'pointer' : 'not-allowed',

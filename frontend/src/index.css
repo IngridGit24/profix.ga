@@ -99,7 +99,6 @@ code,
 .counter {
   font-family: var(--mono);
   display: inline-flex;
-  border-radius: 4px;
   color: var(--text-h);
 }
 

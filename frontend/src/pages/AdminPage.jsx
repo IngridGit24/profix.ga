@@ -69,8 +69,8 @@ export default function AdminPage() {
   const valides = prestataires.filter((p) => p.validated)
 
   const TABS = [
-    { id: 'en_attente', label: '⏳ En attente', count: enAttente.length },
-    { id: 'valides', label: '✅ Validés', count: valides.length },
+    { id: 'en_attente', label: 'En attente', count: enAttente.length },
+    { id: 'valides', label: 'Validés', count: valides.length },
   ]
 
   const liste = activeTab === 'en_attente' ? enAttente : valides
@@ -93,7 +93,7 @@ export default function AdminPage() {
       <div style={{ background: '#0F4526', padding: '32px 24px' }}>
         <div style={{ maxWidth: '900px', margin: '0 auto' }}>
           <h1 style={{ fontSize: '24px', fontWeight: '800', color: '#fff', marginBottom: '4px' }}>
-            🛡️ Dashboard Admin
+            Dashboard Admin
           </h1>
           <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.65)' }}>
             ProFixGabon · {user?.email}
@@ -107,7 +107,7 @@ export default function AdminPage() {
               { val: prestataires.length, lbl: 'Total', bg: '#EEF0FD', color: '#3C3489' },
             ].map((s) => (
               <div key={s.lbl} style={{
-                background: s.bg, borderRadius: '12px',
+                background: s.bg, 
                 padding: '12px 20px', textAlign: 'center',
               }}>
                 <div style={{ fontSize: '24px', fontWeight: '800', color: s.color }}>{s.val}</div>
@@ -124,13 +124,13 @@ export default function AdminPage() {
         {/* TABS */}
         <div style={{
           display: 'flex', gap: '8px', marginBottom: '24px',
-          background: '#fff', padding: '8px', borderRadius: '14px',
+          background: '#fff', padding: '8px', 
           border: '1px solid #E2EBE7',
         }}>
           {TABS.map((t) => (
             <button key={t.id} onClick={() => setActiveTab(t.id)} style={{
               flex: 1, padding: '10px',
-              borderRadius: '10px', border: 'none',
+               border: 'none',
               cursor: 'pointer', fontSize: '14px', fontWeight: '600',
               background: activeTab === t.id ? '#1A6B3C' : 'transparent',
               color: activeTab === t.id ? '#fff' : '#4A5E55',
@@ -140,7 +140,7 @@ export default function AdminPage() {
               <span style={{
                 background: activeTab === t.id ? 'rgba(255,255,255,0.2)' : '#E2EBE7',
                 color: activeTab === t.id ? '#fff' : '#4A5E55',
-                padding: '2px 8px', borderRadius: '99px',
+                padding: '2px 8px', 
                 fontSize: '12px',
               }}>{t.count}</span>
             </button>
@@ -151,7 +151,7 @@ export default function AdminPage() {
         {liste.length === 0 ? (
           <div style={{ textAlign: 'center', padding: '64px 24px', color: '#8FA99E' }}>
             <div style={{ fontSize: '48px', marginBottom: '16px' }}>
-              {activeTab === 'en_attente' ? '🎉' : '📭'}
+              {activeTab === 'en_attente' ? '' : ''}
             </div>
             <p style={{ fontSize: '16px', fontWeight: '700', color: '#4A5E55', marginBottom: '8px' }}>
               {activeTab === 'en_attente' ? 'Aucune candidature en attente !' : 'Aucun prestataire validé'}
@@ -162,13 +162,13 @@ export default function AdminPage() {
             {liste.map((p) => (
               <div key={p.id} style={{
                 background: '#fff', border: '1px solid #E2EBE7',
-                borderRadius: '18px', padding: '20px',
+                 padding: '20px',
                 display: 'flex', gap: '16px', alignItems: 'flex-start',
                 flexWrap: 'wrap',
               }}>
                 {/* AVATAR */}
                 <div style={{
-                  width: '56px', height: '56px', borderRadius: '12px',
+                  width: '56px', height: '56px', 
                   overflow: 'hidden', flexShrink: 0,
                   background: '#E8F5EE',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -184,14 +184,14 @@ export default function AdminPage() {
                   <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '8px', marginBottom: '8px' }}>
                     <div>
                       <p style={{ fontSize: '15px', fontWeight: '700', marginBottom: '2px' }}>{p.nom}</p>
-                      <p style={{ fontSize: '13px', color: '#4A5E55' }}>{p.categorie} · 📍 {p.ville} · {p.user_email}</p>
+                      <p style={{ fontSize: '13px', color: '#4A5E55' }}>{p.categorie} · {p.ville} · {p.user_email}</p>
                     </div>
                     <span style={{
                       fontSize: '11px', fontWeight: '700',
-                      padding: '4px 10px', borderRadius: '99px',
+                      padding: '4px 10px', 
                       background: p.validated ? '#E8F5EE' : '#FDF3E3',
                       color: p.validated ? '#0F4526' : '#7A5C1A',
-                    }}>{p.validated ? '✅ Validé' : '⏳ En attente'}</span>
+                    }}>{p.validated ? 'Validé' : 'En attente'}</span>
                   </div>
 
                   <p style={{ fontSize: '13px', color: '#4A5E55', lineHeight: '1.6', marginBottom: '12px' }}>
@@ -200,13 +200,13 @@ export default function AdminPage() {
 
                   <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '12px' }}>
                     {[
-                      { label: `⏱ ${p.experience}` },
-                      { label: `📅 ${p.created_at ? new Date(p.created_at).toLocaleDateString('fr-FR') : 'N/A'}` },
+                      { label: `${p.experience}` },
+                      { label: `${p.created_at ? new Date(p.created_at).toLocaleDateString('fr-FR') : 'N/A'}` },
                     ].map((m) => (
                       <span key={m.label} style={{
                         fontSize: '12px', color: '#4A5E55',
                         background: '#F7F9F8', padding: '4px 10px',
-                        borderRadius: '99px', border: '1px solid #E2EBE7',
+                         border: '1px solid #E2EBE7',
                       }}>{m.label}</span>
                     ))}
                   </div>
@@ -219,7 +219,7 @@ export default function AdminPage() {
                           fontSize: '11px', fontWeight: '600',
                           background: '#E8F5EE', color: '#0F4526',
                           border: '1px solid #B8DCC8',
-                          padding: '3px 10px', borderRadius: '99px',
+                          padding: '3px 10px', 
                         }}>{s}</span>
                       ))}
                     </div>
@@ -231,7 +231,7 @@ export default function AdminPage() {
                       {p.galerie.map((img, i) => (
                         <img key={i} src={img} style={{
                           width: '60px', height: '60px',
-                          borderRadius: '8px', objectFit: 'cover',
+                           objectFit: 'cover',
                           border: '1px solid #E2EBE7',
                         }} />
                       ))}
@@ -242,39 +242,39 @@ export default function AdminPage() {
                   {p.piece_identite && (
                     <div style={{
                       marginBottom: '12px',
-                      background: '#F7F9F8', borderRadius: '10px',
+                      background: '#F7F9F8', 
                       padding: '12px 16px', border: '1px solid #E2EBE7',
                     }}>
                       <p style={{ fontSize: '12px', fontWeight: '700', color: '#4A5E55', marginBottom: '8px' }}>
-                        🪪 Pièce d'identité
+                        Pièce d'identité
                       </p>
                       <a href={p.piece_identite} target="_blank" rel="noreferrer" style={{
                         display: 'inline-flex', alignItems: 'center', gap: '6px',
-                        padding: '8px 14px', borderRadius: '8px',
+                        padding: '8px 14px', 
                         background: '#E8F5EE', color: '#0F4526',
                         border: '1px solid #B8DCC8',
                         fontSize: '13px', fontWeight: '600',
                         textDecoration: 'none',
-                      }}>👁️ Voir le document</a>
+                      }}>Voir le document</a>
                     </div>
                   )}
 
                   {!p.validated && (
                     <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
                       <button onClick={() => handleValidate(p.id)} disabled={actingId === p.id} style={{
-                        padding: '10px 20px', borderRadius: '10px',
+                        padding: '10px 20px', 
                         background: '#1A6B3C', color: '#fff',
                         border: 'none', cursor: actingId === p.id ? 'wait' : 'pointer',
                         fontSize: '13px', fontWeight: '700',
                         opacity: actingId === p.id ? 0.6 : 1,
-                      }}>✅ Valider le profil</button>
+                      }}>Valider le profil</button>
                       <button onClick={() => handleReject(p.id)} disabled={actingId === p.id} style={{
-                        padding: '10px 20px', borderRadius: '10px',
+                        padding: '10px 20px', 
                         background: '#FDECEA', color: '#D94F3D',
                         border: '1px solid #F5C6C2', cursor: actingId === p.id ? 'wait' : 'pointer',
                         fontSize: '13px', fontWeight: '700',
                         opacity: actingId === p.id ? 0.6 : 1,
-                      }}>❌ Rejeter</button>
+                      }}>Rejeter</button>
                     </div>
                   )}
                 </div>

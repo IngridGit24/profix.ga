@@ -57,7 +57,6 @@ export default function CreerDevisModal({ demande, onClose, onSuccess }) {
     }}>
       <div style={{
         background: '#fff',
-        borderRadius: '20px',
         maxWidth: '520px',
         width: '100%',
         padding: '32px',
@@ -70,7 +69,7 @@ export default function CreerDevisModal({ demande, onClose, onSuccess }) {
         {/* Entête */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
           <h2 style={{ fontSize: '20px', fontWeight: '800' }}>
-            📄 Créer un devis
+            Créer un devis
           </h2>
           <button
             onClick={onClose}
@@ -81,7 +80,6 @@ export default function CreerDevisModal({ demande, onClose, onSuccess }) {
               cursor: 'pointer',
               color: '#8FA99E',
               padding: '4px 8px',
-              borderRadius: '8px'
             }}
             onMouseEnter={(e) => e.currentTarget.style.background = '#F7F9F8'}
             onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
@@ -93,7 +91,6 @@ export default function CreerDevisModal({ demande, onClose, onSuccess }) {
         {/* Infos client */}
         <div style={{
           background: '#F7F9F8',
-          borderRadius: '12px',
           padding: '12px 16px',
           marginBottom: '20px',
           border: '1px solid #E2EBE7'
@@ -120,7 +117,6 @@ export default function CreerDevisModal({ demande, onClose, onSuccess }) {
                 width: '100%',
                 padding: '10px 14px',
                 border: '1.5px solid #E2EBE7',
-                borderRadius: '10px',
                 fontSize: '14px',
                 fontFamily: 'sans-serif',
                 outline: 'none',
@@ -146,7 +142,6 @@ export default function CreerDevisModal({ demande, onClose, onSuccess }) {
                 minHeight: '110px',
                 padding: '10px 14px',
                 border: '1.5px solid #E2EBE7',
-                borderRadius: '10px',
                 fontSize: '14px',
                 fontFamily: 'sans-serif',
                 outline: 'none',
@@ -165,11 +160,10 @@ export default function CreerDevisModal({ demande, onClose, onSuccess }) {
               padding: '10px 14px',
               background: '#FDECEA',
               border: '1px solid #F5C6C2',
-              borderRadius: '10px',
               fontSize: '13px',
               color: '#D94F3D'
             }}>
-              ⚠️ {error}
+              {error}
             </div>
           )}
 
@@ -182,7 +176,6 @@ export default function CreerDevisModal({ demande, onClose, onSuccess }) {
                 padding: '12px',
                 background: '#F7F9F8',
                 border: '1px solid #E2EBE7',
-                borderRadius: '10px',
                 fontSize: '14px',
                 fontWeight: '600',
                 cursor: 'pointer',
@@ -200,14 +193,13 @@ export default function CreerDevisModal({ demande, onClose, onSuccess }) {
                 background: '#1A6B3C',
                 color: '#fff',
                 border: 'none',
-                borderRadius: '10px',
                 fontSize: '14px',
                 fontWeight: '700',
                 cursor: 'pointer',
                 opacity: loading ? 0.7 : 1
               }}
             >
-              {loading ? 'Création...' : '📄 Créer le devis'}
+              {loading ? 'Création...' : 'Créer le devis'}
             </button>
           </div>
         </form>

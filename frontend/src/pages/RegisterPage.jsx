@@ -129,7 +129,7 @@ export default function RegisterPage() {
     try {
       await authService.register({ name: nom, email, password })
       await refreshUser()
-      toast.success('✅ Compte client créé avec succès !')
+      toast.success('Compte client créé avec succès !')
       navigate('/')
     } catch (err) {
       registerFailed(err)
@@ -158,7 +158,7 @@ export default function RegisterPage() {
         skills: skills.split(',').map((s) => s.trim()).filter(Boolean),
         pieceIdentite,
       })
-      toast.success('✅ Demande de prestataire envoyée !')
+      toast.success('Demande de prestataire envoyée !')
       navigate('/')
     } catch (err) {
       const message = err.response?.data?.message
@@ -170,7 +170,7 @@ export default function RegisterPage() {
 
   const inputStyle = {
     width: '100%', padding: '12px 14px',
-    border: '1.5px solid #E2EBE7', borderRadius: '10px',
+    border: '1.5px solid #E2EBE7', 
     fontSize: '14px', fontFamily: 'sans-serif',
     outline: 'none', boxSizing: 'border-box',
   }
@@ -191,13 +191,8 @@ export default function RegisterPage() {
         {/* LOGO */}
         <div style={{ textAlign: 'center', marginBottom: '28px' }}>
           <div onClick={() => navigate('/')} style={{
-            display: 'inline-flex', alignItems: 'center', gap: '10px', cursor: 'pointer',
+            display: 'inline-flex', alignItems: 'center', cursor: 'pointer',
           }}>
-            <div style={{
-              width: '40px', height: '40px', borderRadius: '12px',
-              background: '#1A6B3C', display: 'flex', alignItems: 'center',
-              justifyContent: 'center', fontSize: '20px',
-            }}>🔧</div>
             <span style={{ fontSize: '22px', fontWeight: '800', color: '#0F4526' }}>ProFixGabon</span>
           </div>
           <h1 style={{ fontSize: '22px', fontWeight: '800', marginTop: '12px', marginBottom: '4px' }}>Créer un compte</h1>
@@ -211,7 +206,7 @@ export default function RegisterPage() {
               <div key={s} style={{ display: 'flex', alignItems: 'center', flex: 1 }}>
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}>
                   <div style={{
-                    width: '28px', height: '28px', borderRadius: '50%',
+                    width: '28px', height: '28px', 
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                     fontSize: '11px', fontWeight: '700',
                     background: i < currentStepIndex ? '#1A6B3C' : '#fff',
@@ -236,7 +231,7 @@ export default function RegisterPage() {
         )}
 
         <div style={{
-          background: '#fff', borderRadius: '20px',
+          background: '#fff', 
           padding: '28px', boxShadow: '0 4px 24px rgba(0,0,0,0.08)',
           border: '1px solid #E2EBE7',
         }}>
@@ -249,17 +244,16 @@ export default function RegisterPage() {
               </p>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginBottom: '24px' }}>
                 {[
-                  { val: 'client', icon: '👤', titre: 'Trouver un service', desc: 'Je cherche un professionnel' },
-                  { val: 'prestataire', icon: '🔧', titre: 'Proposer un service', desc: 'Je suis un professionnel' },
+                  { val: 'client', titre: 'Trouver un service', desc: 'Je cherche un professionnel' },
+                  { val: 'prestataire', titre: 'Proposer un service', desc: 'Je suis un professionnel' },
                 ].map(t => (
                   <div key={t.val} onClick={() => setUserType(t.val)} style={{
-                    padding: '20px 16px', borderRadius: '14px', cursor: 'pointer',
+                    padding: '20px 16px',  cursor: 'pointer',
                     border: '2px solid',
                     borderColor: userType === t.val ? '#1A6B3C' : '#E2EBE7',
                     background: userType === t.val ? '#E8F5EE' : '#fff',
                     textAlign: 'center', transition: 'all 0.15s',
                   }}>
-                    <div style={{ fontSize: '28px', marginBottom: '8px' }}>{t.icon}</div>
                     <p style={{ fontSize: '13px', fontWeight: '700', color: userType === t.val ? '#0F4526' : '#111', marginBottom: '4px' }}>{t.titre}</p>
                     <p style={{ fontSize: '11px', color: '#8FA99E' }}>{t.desc}</p>
                   </div>
@@ -269,10 +263,10 @@ export default function RegisterPage() {
               {userType === 'prestataire' && (
                 <div style={{
                   background: '#FDF3E3', border: '1px solid #E8C97A',
-                  borderRadius: '10px', padding: '12px 14px', marginBottom: '20px',
+                   padding: '12px 14px', marginBottom: '20px',
                 }}>
                   <p style={{ fontSize: '12px', color: '#7A5C1A', lineHeight: '1.6' }}>
-                    ⚠️ Votre profil sera examiné par notre équipe avant d'être publié. Vous aurez accès à la plateforme en tant que client en attendant.
+                    Votre profil sera examiné par notre équipe avant d'être publié. Vous aurez accès à la plateforme en tant que client en attendant.
                   </p>
                 </div>
               )}
@@ -280,9 +274,9 @@ export default function RegisterPage() {
               {error && (
                 <div style={{
                   background: '#FDECEA', border: '1px solid #F5C6C2',
-                  borderRadius: '10px', padding: '10px 14px',
+                   padding: '10px 14px',
                   fontSize: '13px', color: '#D94F3D', marginBottom: '16px',
-                }}>⚠️ {error}</div>
+                }}>{error}</div>
               )}
 
               <button onClick={() => {
@@ -292,7 +286,7 @@ export default function RegisterPage() {
               }} style={{
                 width: '100%', padding: '14px',
                 background: userType ? '#1A6B3C' : '#B8DCC8',
-                color: '#fff', border: 'none', borderRadius: '12px',
+                color: '#fff', border: 'none', 
                 fontSize: '15px', fontWeight: '700',
                 cursor: userType ? 'pointer' : 'not-allowed',
               }}>Continuer →</button>
@@ -326,15 +320,15 @@ export default function RegisterPage() {
               {error && (
                 <div style={{
                   background: '#FDECEA', border: '1px solid #F5C6C2',
-                  borderRadius: '10px', padding: '10px 14px',
+                   padding: '10px 14px',
                   fontSize: '13px', color: '#D94F3D', marginTop: '16px',
-                }}>⚠️ {error}</div>
+                }}>{error}</div>
               )}
 
               <button onClick={handleStep2Continue} disabled={loading} style={{
                 width: '100%', padding: '14px', marginTop: '20px',
                 background: '#1A6B3C', color: '#fff',
-                border: 'none', borderRadius: '12px',
+                border: 'none', 
                 fontSize: '15px', fontWeight: '700', cursor: 'pointer',
                 opacity: loading ? 0.7 : 1,
               }}>
@@ -347,7 +341,6 @@ export default function RegisterPage() {
           {step === 'confirm' && userType === 'client' && (
             <>
               <div style={{ textAlign: 'center', marginBottom: '24px' }}>
-                <div style={{ fontSize: '40px', marginBottom: '8px' }}>👤</div>
                 <h3 style={{ fontSize: '16px', fontWeight: '800', marginBottom: '4px' }}>Confirmer votre compte</h3>
                 <p style={{ fontSize: '13px', color: '#4A5E55', lineHeight: '1.6' }}>
                   Vérifiez vos informations avant de créer votre compte
@@ -362,7 +355,7 @@ export default function RegisterPage() {
                   <div key={r.label} style={{
                     display: 'flex', justifyContent: 'space-between',
                     padding: '12px 16px', background: '#F7F9F8',
-                    borderRadius: '10px', border: '1px solid #E2EBE7',
+                     border: '1px solid #E2EBE7',
                     fontSize: '14px',
                   }}>
                     <span style={{ color: '#4A5E55', fontWeight: '600' }}>{r.label}</span>
@@ -374,26 +367,26 @@ export default function RegisterPage() {
               {error && (
                 <div style={{
                   background: '#FDECEA', border: '1px solid #F5C6C2',
-                  borderRadius: '10px', padding: '10px 14px',
+                   padding: '10px 14px',
                   fontSize: '13px', color: '#D94F3D', marginBottom: '16px',
-                }}>⚠️ {error}</div>
+                }}>{error}</div>
               )}
 
               <button onClick={handleClientConfirm} disabled={loading} style={{
                 width: '100%', padding: '14px',
                 background: '#1A6B3C', color: '#fff',
-                border: 'none', borderRadius: '12px',
+                border: 'none', 
                 fontSize: '15px', fontWeight: '700', cursor: 'pointer',
                 opacity: loading ? 0.7 : 1,
                 marginBottom: '10px',
               }}>
-                {loading ? 'Création du compte...' : '🚀 Créer mon compte'}
+                {loading ? 'Création du compte...' : 'Créer mon compte'}
               </button>
 
               <button onClick={() => setStep(2)} style={{
                 width: '100%', padding: '12px',
                 background: 'transparent', color: '#4A5E55',
-                border: '1.5px solid #E2EBE7', borderRadius: '12px',
+                border: '1.5px solid #E2EBE7', 
                 fontSize: '14px', fontWeight: '600', cursor: 'pointer',
               }}>← Modifier mes infos</button>
             </>
@@ -420,13 +413,12 @@ export default function RegisterPage() {
                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(90px, 1fr))', gap: '8px' }}>
                     {CATEGORIES.slice(0, 12).map(c => (
                       <div key={c.label} onClick={() => setCategorie(c.label)} style={{
-                        padding: '8px', borderRadius: '10px', cursor: 'pointer',
+                        padding: '8px',  cursor: 'pointer',
                         border: '1.5px solid',
                         borderColor: categorie === c.label ? '#1A6B3C' : '#E2EBE7',
                         background: categorie === c.label ? '#E8F5EE' : '#fff',
                         display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px',
                       }}>
-                        <span style={{ fontSize: '18px' }}>{c.icon}</span>
                         <span style={{ fontSize: '10px', fontWeight: '600', textAlign: 'center', color: categorie === c.label ? '#0F4526' : '#4A5E55' }}>
                           {c.label}
                         </span>
@@ -475,9 +467,9 @@ export default function RegisterPage() {
               {error && (
                 <div style={{
                   background: '#FDECEA', border: '1px solid #F5C6C2',
-                  borderRadius: '10px', padding: '10px 14px',
+                   padding: '10px 14px',
                   fontSize: '13px', color: '#D94F3D', marginTop: '12px',
-                }}>⚠️ {error}</div>
+                }}>{error}</div>
               )}
 
               <button onClick={() => {
@@ -490,7 +482,7 @@ export default function RegisterPage() {
               }} style={{
                 width: '100%', padding: '14px', marginTop: '20px',
                 background: '#1A6B3C', color: '#fff',
-                border: 'none', borderRadius: '12px',
+                border: 'none', 
                 fontSize: '15px', fontWeight: '700', cursor: 'pointer',
               }}>Continuer →</button>
             </>
@@ -500,7 +492,6 @@ export default function RegisterPage() {
           {step === 4 && userType === 'prestataire' && (
             <>
               <div style={{ textAlign: 'center', marginBottom: '20px' }}>
-                <div style={{ fontSize: '40px', marginBottom: '8px' }}>🪪</div>
                 <h3 style={{ fontSize: '16px', fontWeight: '800', marginBottom: '4px' }}>Pièce d'identité</h3>
                 <p style={{ fontSize: '13px', color: '#4A5E55', lineHeight: '1.6' }}>
                   Obligatoire pour vérifier votre identité. Visible uniquement par notre équipe.
@@ -511,9 +502,8 @@ export default function RegisterPage() {
                 <div style={{
                   display: 'flex', alignItems: 'center', gap: '10px',
                   background: '#E8F5EE', border: '1px solid #B8DCC8',
-                  borderRadius: '10px', padding: '14px', marginBottom: '20px',
+                   padding: '14px', marginBottom: '20px',
                 }}>
-                  <span style={{ fontSize: '24px' }}>✅</span>
                   <div style={{ flex: 1 }}>
                     <p style={{ fontSize: '13px', fontWeight: '700', color: '#0F4526' }}>Document uploadé !</p>
                     <p style={{ fontSize: '11px', color: '#4A5E55' }}>Votre pièce d'identité a été envoyée</p>
@@ -525,11 +515,10 @@ export default function RegisterPage() {
               ) : (
                 <label style={{
                   display: 'flex', flexDirection: 'column', alignItems: 'center',
-                  gap: '12px', border: '2px dashed #B8DCC8', borderRadius: '14px',
+                  gap: '12px', border: '2px dashed #B8DCC8', 
                   padding: '32px', cursor: 'pointer', background: '#F7FCF9',
                   marginBottom: '20px', opacity: uploadingId ? 0.6 : 1,
                 }}>
-                  <span style={{ fontSize: '40px' }}>📎</span>
                   <div style={{ textAlign: 'center' }}>
                     <p style={{ fontSize: '14px', fontWeight: '700', color: '#111', marginBottom: '4px' }}>
                       {uploadingId ? 'Envoi en cours...' : "Cliquez pour ajouter votre pièce d'identité"}
@@ -543,29 +532,29 @@ export default function RegisterPage() {
               {error && (
                 <div style={{
                   background: '#FDECEA', border: '1px solid #F5C6C2',
-                  borderRadius: '10px', padding: '10px 14px',
+                   padding: '10px 14px',
                   fontSize: '13px', color: '#D94F3D', marginBottom: '16px',
-                }}>⚠️ {error}</div>
+                }}>{error}</div>
               )}
 
               <div style={{
                 background: '#FDF3E3', border: '1px solid #E8C97A',
-                borderRadius: '10px', padding: '12px 14px', marginBottom: '20px',
+                 padding: '12px 14px', marginBottom: '20px',
               }}>
                 <p style={{ fontSize: '12px', color: '#7A5C1A', lineHeight: '1.6' }}>
-                  ⏳ Votre profil sera examiné sous <strong>24-48h</strong>. En attendant, vous pouvez utiliser la plateforme en tant que client.
+                  Votre profil sera examiné sous <strong>24-48h</strong>. En attendant, vous pouvez utiliser la plateforme en tant que client.
                 </p>
               </div>
 
               <button onClick={handleProviderApply} disabled={loading || !pieceIdentite} style={{
                 width: '100%', padding: '14px',
                 background: pieceIdentite ? '#1A6B3C' : '#B8DCC8',
-                color: '#fff', border: 'none', borderRadius: '12px',
+                color: '#fff', border: 'none', 
                 fontSize: '15px', fontWeight: '700',
                 cursor: pieceIdentite ? 'pointer' : 'not-allowed',
                 opacity: loading ? 0.7 : 1,
               }}>
-                {loading ? 'Envoi de la candidature...' : '🚀 Envoyer ma candidature'}
+                {loading ? 'Envoi de la candidature...' : 'Envoyer ma candidature'}
               </button>
             </>
           )}

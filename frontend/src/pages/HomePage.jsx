@@ -36,57 +36,54 @@ const TEMOIGNAGES = [
     role: 'Cliente · Libreville',
     texte: 'J\'ai trouvé un excellent plombier en moins de 5 minutes. Le devis était clair et le travail impeccable. Je recommande ProFixGabon à tout le monde !',
     stars: 5,
-    avatar: '👩🏾',
   },
   {
     nom: 'Jean-Baptiste Ondo',
     role: 'Client · Port-Gentil',
     texte: 'Enfin une plateforme qui connecte vraiment les Gabonais avec des professionnels sérieux. La négociation du prix directement avec le prestataire, c\'est top !',
     stars: 5,
-    avatar: '👨🏿',
   },
   {
     nom: 'Stéphanie Mba',
     role: 'Cliente · Libreville',
     texte: 'La couturière que j\'ai trouvée ici a réalisé ma robe de mariage à la perfection. Professionnelle, ponctuelle et talentueuse. Merci ProFixGabon !',
     stars: 5,
-    avatar: '👩🏿',
   },
 ]
 
 const POURQUOI = [
   {
-    icon: '🛡️',
+
     titre: 'Prestataires vérifiés',
     desc: 'Chaque professionnel est vérifié et évalué par notre équipe avant d\'être publié sur la plateforme.',
     bg: '#E8F5EE',
   },
   {
-    icon: '💬',
+
     titre: 'Prix négocié',
     desc: 'Pas de prix imposé. Vous discutez directement avec le prestataire et convenez du tarif ensemble.',
     bg: '#EEF0FD',
   },
   {
-    icon: '📄',
+
     titre: 'Devis officiel',
     desc: 'Un devis signé est généré automatiquement pour chaque mission, pour votre sécurité et traçabilité.',
     bg: '#FDF3E3',
   },
   {
-    icon: '⭐',
+
     titre: 'Avis transparents',
     desc: 'Les avis clients sont vérifiés et publiés sans filtre pour vous aider à faire le bon choix.',
     bg: '#FBE8F0',
   },
   {
-    icon: '⚡',
+
     titre: 'Disponible 7j/7',
     desc: 'Trouvez un prestataire disponible rapidement, même en urgence, tous les jours de la semaine.',
     bg: '#E8F5EE',
   },
   {
-    icon: '📍',
+
     titre: 'Partout au Gabon',
     desc: 'Libreville, Port-Gentil, Franceville — nous couvrons les principales villes du Gabon.',
     bg: '#FDF3E3',
@@ -137,11 +134,11 @@ export default function HomePage() {
             display: 'inline-flex', alignItems: 'center', gap: '6px',
             background: 'rgba(255,255,255,0.15)',
             border: '1px solid rgba(255,255,255,0.3)',
-            borderRadius: '99px', padding: '6px 16px',
+             padding: '6px 16px',
             fontSize: '12px', fontWeight: '600', color: '#fff',
             marginBottom: '20px',
           }}>
-            📍 {SLIDES[current].metier} · Libreville, Gabon
+            {SLIDES[current].metier} · Libreville, Gabon
           </div>
 
           <h1 style={{
@@ -161,18 +158,18 @@ export default function HomePage() {
 
           <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', justifyContent: 'center' }}>
             <button onClick={() => navigate('/services')} style={{
-              padding: '14px 28px', borderRadius: '12px',
+              padding: '14px 28px', 
               fontSize: '15px', fontWeight: '700',
               background: '#fff', color: '#0F4526',
               border: 'none', cursor: 'pointer',
               boxShadow: '0 4px 20px rgba(0,0,0,0.2)',
-            }}>🔍 Trouver un prestataire</button>
+            }}>Trouver un prestataire</button>
            <button onClick={() => scrollToSection('comment-ca-marche')} style={{
-  padding: '14px 28px', borderRadius: '12px',
+  padding: '14px 28px', 
   fontSize: '15px', fontWeight: '700',
   background: 'transparent', color: '#fff',
   border: '1.5px solid rgba(255,255,255,0.5)', cursor: 'pointer',
-}}>ℹ️ Comment ça marche</button>
+}}>Comment ça marche</button>
           </div>
         </div>
 
@@ -185,7 +182,6 @@ export default function HomePage() {
           {SLIDES.map((_, i) => (
             <div key={i} onClick={() => setCurrent(i)} style={{
               width: i === current ? '24px' : '8px', height: '8px',
-              borderRadius: '99px',
               background: i === current ? '#fff' : 'rgba(255,255,255,0.4)',
               cursor: 'pointer', transition: 'all 0.3s',
             }} />
@@ -199,7 +195,7 @@ export default function HomePage() {
           )} style={{
             position: 'absolute', [i === 0 ? 'left' : 'right']: '16px',
             top: '50%', transform: 'translateY(-50%)', zIndex: 3,
-            width: '40px', height: '40px', borderRadius: '50%',
+            width: '40px', height: '40px', 
             background: 'rgba(255,255,255,0.2)',
             border: '1px solid rgba(255,255,255,0.3)',
             color: '#fff', fontSize: '20px', cursor: 'pointer',
@@ -211,11 +207,11 @@ export default function HomePage() {
           position: 'absolute', bottom: '60px', right: '32px',
           zIndex: 3, display: 'flex', gap: '12px', flexWrap: 'wrap',
         }}>
-          {[{ val: '500+', lbl: 'Prestataires' }, { val: '2 000+', lbl: 'Missions' }, { val: '4.8★', lbl: 'Note moyenne' }].map(s => (
+          {[{ val: '500+', lbl: 'Prestataires' }, { val: '2 000+', lbl: 'Missions' }, { val: '4.8', lbl: 'Note moyenne' }].map(s => (
             <div key={s.lbl} style={{
               background: 'rgba(0,0,0,0.4)', backdropFilter: 'blur(8px)',
               border: '1px solid rgba(255,255,255,0.15)',
-              borderRadius: '12px', padding: '10px 16px', textAlign: 'center',
+               padding: '10px 16px', textAlign: 'center',
             }}>
               <div style={{ fontSize: '18px', fontWeight: '800', color: '#fff' }}>{s.val}</div>
               <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.6)' }}>{s.lbl}</div>
@@ -227,18 +223,17 @@ export default function HomePage() {
       {/* ═══════════════ BARRE DE RECHERCHE ═══════════════ */}
       <div style={{ maxWidth: '700px', margin: '-28px auto 0', padding: '0 24px', position: 'relative', zIndex: 10 }}>
         <div style={{
-          background: '#fff', borderRadius: '18px',
+          background: '#fff', 
           boxShadow: '0 8px 40px rgba(0,0,0,0.15)',
           padding: '8px 8px 8px 20px',
           display: 'flex', alignItems: 'center', gap: '12px',
           border: '1px solid #E2EBE7',
         }}>
-          <span style={{ fontSize: '20px' }}>🔍</span>
           <input type="text" placeholder="Ex : plombier, couturière, électricien..."
             style={{ flex: 1, border: 'none', outline: 'none', fontSize: '15px', fontFamily: 'inherit' }}
           />
           <button onClick={() => navigate('/services')} style={{
-            padding: '12px 22px', borderRadius: '12px',
+            padding: '12px 22px', 
             background: '#1A6B3C', color: '#fff',
             border: 'none', cursor: 'pointer',
             fontSize: '14px', fontWeight: '700',
@@ -259,15 +254,10 @@ export default function HomePage() {
           {(voirTout ? CATEGORIES : CATEGORIES.slice(0, 8)).map(c => (
             <div key={c.label} onClick={() => navigate('/services')} style={{
               background: '#fff', border: '1px solid #E2EBE7',
-              borderRadius: '18px', padding: '20px 12px',
+               padding: '20px 12px',
               display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px',
               cursor: 'pointer',
             }}>
-              <div style={{
-                width: '52px', height: '52px', borderRadius: '12px',
-                background: c.bg, display: 'flex', alignItems: 'center',
-                justifyContent: 'center', fontSize: '22px',
-              }}>{c.icon}</div>
               <span style={{ fontSize: '12px', fontWeight: '600', color: '#4A5E55', textAlign: 'center' }}>{c.label}</span>
             </div>
           ))}
@@ -285,13 +275,13 @@ export default function HomePage() {
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '24px' }}>
             {[
-              { n: '01', icon: '🔍', titre: 'Cherchez', desc: 'Parcourez nos catégories et trouvez le type de service dont vous avez besoin.' },
-              { n: '02', icon: '👤', titre: 'Choisissez', desc: 'Consultez les profils, les avis et les spécialités des prestataires disponibles.' },
-              { n: '03', icon: '💬', titre: 'Négociez', desc: 'Contactez le prestataire et convenez du prix directement via la messagerie.' },
-              { n: '04', icon: '📄', titre: 'Validez', desc: 'Un devis officiel est généré et signé avant le début de la mission.' },
+              { n: '01', titre: 'Cherchez', desc: 'Parcourez nos catégories et trouvez le type de service dont vous avez besoin.' },
+              { n: '02', titre: 'Choisissez', desc: 'Consultez les profils, les avis et les spécialités des prestataires disponibles.' },
+              { n: '03', titre: 'Négociez', desc: 'Contactez le prestataire et convenez du prix directement via la messagerie.' },
+              { n: '04', titre: 'Validez', desc: 'Un devis officiel est généré et signé avant le début de la mission.' },
             ].map(s => (
               <div key={s.n} style={{
-                background: '#fff', borderRadius: '18px',
+                background: '#fff', 
                 padding: '28px 24px', border: '1px solid #E2EBE7',
                 position: 'relative',
               }}>
@@ -299,13 +289,6 @@ export default function HomePage() {
                   fontSize: '48px', fontWeight: '800',
                   color: '#E8F5EE', lineHeight: '1', marginBottom: '16px',
                 }}>{s.n}</div>
-                <div style={{
-                  position: 'absolute', top: '24px', right: '24px',
-                  width: '40px', height: '40px', borderRadius: '10px',
-                  background: '#E8F5EE',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  fontSize: '20px',
-                }}>{s.icon}</div>
                 <p style={{ fontSize: '16px', fontWeight: '700', marginBottom: '8px' }}>{s.titre}</p>
                 <p style={{ fontSize: '13px', color: '#4A5E55', lineHeight: '1.6' }}>{s.desc}</p>
               </div>
@@ -327,17 +310,22 @@ export default function HomePage() {
           {PROVIDERS.slice(0, 3).map(p => (
             <div key={p.id} onClick={() => navigate(`/profil/${p.id}`)} style={{
               background: '#fff', border: '1px solid #E2EBE7',
-              borderRadius: '18px', overflow: 'hidden', cursor: 'pointer',
+               overflow: 'hidden', cursor: 'pointer',
             }}>
               <div style={{
                 height: '140px', background: p.bg,
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                fontSize: '52px',
-              }}>{p.emoji}</div>
+                overflow: 'hidden',
+              }}>
+                {p.photo
+                  ? <img src={p.photo} style={{ width: '100%', height: '100%', objectFit: 'cover' }} loading="lazy" />
+                  : <span style={{ fontSize: '32px', fontWeight: '800', color: '#0F4526' }}>{p.initials}</span>
+                }
+              </div>
               <div style={{ padding: '16px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
                   <span style={{ fontSize: '15px', fontWeight: '700' }}>{p.name}</span>
-                  <span style={{ fontSize: '13px', fontWeight: '600', color: '#C8922A' }}>⭐ {p.rating}</span>
+                  <span style={{ fontSize: '13px', fontWeight: '600', color: '#C8922A' }}>{p.rating}</span>
                 </div>
                 <p style={{ fontSize: '13px', color: '#4A5E55', marginBottom: '12px' }}>{p.role} · {p.exp} d'exp.</p>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -345,13 +333,13 @@ export default function HomePage() {
                     fontSize: '11px', fontWeight: '600',
                     background: '#E8F5EE', color: '#0F4526',
                     border: '1px solid #B8DCC8',
-                    padding: '4px 10px', borderRadius: '99px',
-                  }}>📄 Devis sur demande</span>
+                    padding: '4px 10px', 
+                  }}>Devis sur demande</span>
                   <span style={{
                     fontSize: '11px', fontWeight: '600',
                     background: p.available ? '#E6F9EE' : '#FDECEA',
                     color: p.available ? '#1A6B3C' : '#D94F3D',
-                    padding: '4px 10px', borderRadius: '99px',
+                    padding: '4px 10px', 
                   }}>{p.available ? 'Disponible' : 'Occupé'}</span>
                 </div>
               </div>
@@ -376,15 +364,9 @@ export default function HomePage() {
               <div key={p.titre} style={{
                 background: 'rgba(255,255,255,0.07)',
                 border: '1px solid rgba(255,255,255,0.12)',
-                borderRadius: '18px', padding: '24px',
+                 padding: '24px',
                 display: 'flex', gap: '16px', alignItems: 'flex-start',
               }}>
-                <div style={{
-                  width: '48px', height: '48px', borderRadius: '12px',
-                  background: p.bg, flexShrink: 0,
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  fontSize: '22px',
-                }}>{p.icon}</div>
                 <div>
                   <p style={{ fontSize: '15px', fontWeight: '700', color: '#fff', marginBottom: '6px' }}>{p.titre}</p>
                   <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.6)', lineHeight: '1.6' }}>{p.desc}</p>
@@ -405,10 +387,10 @@ export default function HomePage() {
           {TEMOIGNAGES.map(t => (
             <div key={t.nom} style={{
               background: '#fff', border: '1px solid #E2EBE7',
-              borderRadius: '18px', padding: '28px',
+               padding: '28px',
             }}>
-              <div style={{ display: 'flex', gap: '4px', marginBottom: '16px' }}>
-                {Array(t.stars).fill('⭐').map((s, i) => <span key={i}>{s}</span>)}
+              <div style={{ marginBottom: '16px', fontSize: '13px', fontWeight: '700', color: '#C8922A' }}>
+                {t.stars}/5
               </div>
               <p style={{
                 fontSize: '14px', color: '#4A5E55',
@@ -417,10 +399,10 @@ export default function HomePage() {
               }}>"{t.texte}"</p>
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                 <div style={{
-                  width: '44px', height: '44px', borderRadius: '50%',
-                  background: '#E8F5EE', fontSize: '24px',
+                  width: '44px', height: '44px',
+                  background: '#E8F5EE', fontSize: '18px', fontWeight: '800', color: '#0F4526',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
-                }}>{t.avatar}</div>
+                }}>{t.nom.charAt(0)}</div>
                 <div>
                   <p style={{ fontSize: '14px', fontWeight: '700' }}>{t.nom}</p>
                   <p style={{ fontSize: '12px', color: '#8FA99E' }}>{t.role}</p>
@@ -444,18 +426,18 @@ export default function HomePage() {
         </p>
         <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
           <button onClick={() => navigate('/services')} style={{
-            padding: '16px 32px', borderRadius: '12px',
+            padding: '16px 32px', 
             fontSize: '16px', fontWeight: '700',
             background: '#fff', color: '#0F4526',
             border: 'none', cursor: 'pointer',
             boxShadow: '0 4px 20px rgba(0,0,0,0.2)',
-          }}>🔍 Trouver un prestataire</button>
+          }}>Trouver un prestataire</button>
           <button onClick={() => navigate('/devenir-prestataire')} style={{
-  padding: '16px 32px', borderRadius: '12px',
+  padding: '16px 32px', 
   fontSize: '16px', fontWeight: '700',
   background: 'transparent', color: '#fff',
   border: '1.5px solid rgba(255,255,255,0.4)', cursor: 'pointer',
-}}>📝 Devenir prestataire</button>
+}}>Devenir prestataire</button>
         </div>
       </div>
 
@@ -483,9 +465,6 @@ export default function HomePage() {
                 </div>
               ))}
             </div>
-          </div>
-          <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '24px', textAlign: 'center' }}>
-            <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.3)' }}>© 2026 ProFixGabon · Tous droits réservés · Libreville, Gabon</p>
           </div>
         </div>
       </div>

@@ -12,7 +12,7 @@ export default class ErrorBoundary extends Component {
   }
 
   componentDidCatch(error, errorInfo) {
-    console.error('❌ ErrorBoundary a attrapé une erreur:', error, errorInfo)
+    console.error('ErrorBoundary a attrapé une erreur:', error, errorInfo)
   }
 
   render() {
@@ -28,7 +28,6 @@ export default class ErrorBoundary extends Component {
           textAlign: 'center',
           fontFamily: 'sans-serif',
         }}>
-          <div style={{ fontSize: '48px', marginBottom: '16px' }}>😅</div>
           <h2 style={{ fontSize: '24px', fontWeight: '800', marginBottom: '8px' }}>
             Oups ! Une erreur est survenue
           </h2>
@@ -42,20 +41,18 @@ export default class ErrorBoundary extends Component {
               background: '#1A6B3C',
               color: '#fff',
               border: 'none',
-              borderRadius: '10px',
               fontSize: '14px',
               fontWeight: '700',
               cursor: 'pointer',
             }}
           >
-            🔄 Rafraîchir la page
+            Rafraîchir la page
           </button>
           {this.state.error && (
             <details style={{
               marginTop: '20px',
               padding: '16px',
               background: '#FDECEA',
-              borderRadius: '10px',
               textAlign: 'left',
               maxWidth: '500px',
               width: '100%',

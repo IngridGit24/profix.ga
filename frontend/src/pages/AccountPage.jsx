@@ -59,8 +59,8 @@ export default function AccountPage() {
   }
 
   const TABS = [
-    { id: 'profil', icon: '👤', label: 'Mon profil' },
-    { id: 'securite', icon: '🔒', label: 'Sécurité' },
+    { id: 'profil', label: 'Mon profil' },
+    { id: 'securite', label: 'Sécurité' },
   ]
 
   return (
@@ -74,10 +74,10 @@ export default function AccountPage() {
         <div style={{ maxWidth: '700px', margin: '0 auto', display: 'flex', alignItems: 'center', gap: '20px', flexWrap: 'wrap' }}>
           <div style={{ position: 'relative' }}>
             {photo ? (
-              <img src={photo} style={{ width: '80px', height: '80px', borderRadius: '20px', objectFit: 'cover', border: '3px solid rgba(255,255,255,0.3)' }} />
+              <img src={photo} style={{ width: '80px', height: '80px',  objectFit: 'cover', border: '3px solid rgba(255,255,255,0.3)' }} />
             ) : (
               <div style={{
-                width: '80px', height: '80px', borderRadius: '20px',
+                width: '80px', height: '80px', 
                 background: 'rgba(255,255,255,0.15)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 fontSize: '32px', fontWeight: '800', color: '#fff',
@@ -92,9 +92,9 @@ export default function AccountPage() {
               fontSize: '11px', fontWeight: '700',
               background: user?.type === 'prestataire' ? '#E8F5EE' : '#FDF3E3',
               color: user?.type === 'prestataire' ? '#0F4526' : '#7A5C1A',
-              padding: '3px 10px', borderRadius: '99px',
+              padding: '3px 10px', 
             }}>
-              {user?.type === 'prestataire' ? '🔧 Prestataire' : '👤 Client'}
+              {user?.type === 'prestataire' ? 'Prestataire' : 'Client'}
             </span>
           </div>
         </div>
@@ -102,7 +102,7 @@ export default function AccountPage() {
 
       {/* BODY */}
       <div style={{ maxWidth: '700px', margin: '-48px auto 0', padding: '0 24px 64px' }}>
-        <div style={{ background: '#fff', borderRadius: '24px', boxShadow: '0 8px 40px rgba(0,0,0,0.1)', overflow: 'hidden' }}>
+        <div style={{ background: '#fff',  boxShadow: '0 8px 40px rgba(0,0,0,0.1)', overflow: 'hidden' }}>
 
           {/* TABS */}
           <div style={{ display: 'flex', borderBottom: '1px solid #E2EBE7' }}>
@@ -116,7 +116,6 @@ export default function AccountPage() {
                 borderBottom: activeTab === t.id ? '2px solid #1A6B3C' : '2px solid transparent',
                 display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px',
               }}>
-                <span>{t.icon}</span>
                 <span>{t.label}</span>
               </button>
             ))}
@@ -140,7 +139,7 @@ export default function AccountPage() {
                 <label style={{ fontSize: '13px', fontWeight: '700', color: '#4A5E55', display: 'block', marginBottom: '6px' }}>Nom complet</label>
                 <input value={nom} onChange={e => setNom(e.target.value)} style={{
                   width: '100%', padding: '12px 14px',
-                  border: '1.5px solid #E2EBE7', borderRadius: '10px',
+                  border: '1.5px solid #E2EBE7', 
                   fontSize: '14px', fontFamily: 'inherit',
                   outline: 'none', boxSizing: 'border-box',
                 }}
@@ -156,7 +155,7 @@ export default function AccountPage() {
                   placeholder="+241 XX XX XX XX"
                   style={{
                     width: '100%', padding: '12px 14px',
-                    border: '1.5px solid #E2EBE7', borderRadius: '10px',
+                    border: '1.5px solid #E2EBE7', 
                     fontSize: '14px', fontFamily: 'inherit',
                     outline: 'none', boxSizing: 'border-box',
                   }}
@@ -168,15 +167,15 @@ export default function AccountPage() {
               {saved && (
                 <div style={{
                   background: '#E8F5EE', border: '1px solid #B8DCC8',
-                  borderRadius: '10px', padding: '10px 14px',
+                   padding: '10px 14px',
                   fontSize: '13px', color: '#0F4526', marginBottom: '16px',
-                }}>✅ Profil mis à jour avec succès !</div>
+                }}>Profil mis à jour avec succès !</div>
               )}
 
               <button onClick={handleSave} disabled={saving} style={{
                 width: '100%', padding: '14px',
                 background: '#1A6B3C', color: '#fff',
-                border: 'none', borderRadius: '12px',
+                border: 'none', 
                 fontSize: '15px', fontWeight: '700', cursor: 'pointer',
                 opacity: saving ? 0.7 : 1,
               }}>{saving ? 'Enregistrement...' : 'Enregistrer les modifications'}</button>
@@ -186,7 +185,7 @@ export default function AccountPage() {
                 <div style={{
                   marginTop: '20px',
                   background: '#FDF3E3', border: '1px solid #E8C97A',
-                  borderRadius: '12px', padding: '16px 20px',
+                   padding: '16px 20px',
                   display: 'flex', alignItems: 'center', justifyContent: 'space-between',
                   gap: '12px', flexWrap: 'wrap',
                 }}>
@@ -195,7 +194,7 @@ export default function AccountPage() {
                     <p style={{ fontSize: '12px', color: '#8FA99E', marginTop: '2px' }}>Devenez prestataire sur ProFixGabon</p>
                   </div>
                   <button onClick={() => navigate('/devenir-prestataire')} style={{
-                    padding: '10px 20px', borderRadius: '10px',
+                    padding: '10px 20px', 
                     background: '#C8922A', color: '#fff',
                     border: 'none', cursor: 'pointer',
                     fontSize: '13px', fontWeight: '700',
@@ -211,12 +210,12 @@ export default function AccountPage() {
             <div style={{ padding: '24px' }}>
               <div style={{ marginBottom: '24px' }}>
                 <p style={{ fontSize: '13px', fontWeight: '700', color: '#4A5E55', marginBottom: '4px' }}>Email</p>
-                <p style={{ fontSize: '14px', color: '#111', padding: '12px 14px', background: '#F7F9F8', borderRadius: '10px' }}>{user?.email}</p>
+                <p style={{ fontSize: '14px', color: '#111', padding: '12px 14px', background: '#F7F9F8', }}>{user?.email}</p>
               </div>
 
               <div style={{ marginBottom: '24px' }}>
                 <p style={{ fontSize: '13px', fontWeight: '700', color: '#4A5E55', marginBottom: '4px' }}>Compte créé le</p>
-                <p style={{ fontSize: '14px', color: '#111', padding: '12px 14px', background: '#F7F9F8', borderRadius: '10px' }}>
+                <p style={{ fontSize: '14px', color: '#111', padding: '12px 14px', background: '#F7F9F8', }}>
                   {user?.created_at ? new Date(user.created_at).toLocaleDateString('fr-FR') : 'N/A'}
                 </p>
               </div>
@@ -224,9 +223,9 @@ export default function AccountPage() {
               <button onClick={handleLogout} style={{
                 width: '100%', padding: '14px',
                 background: 'transparent', color: '#D94F3D',
-                border: '1.5px solid #F5C6C2', borderRadius: '12px',
+                border: '1.5px solid #F5C6C2', 
                 fontSize: '14px', fontWeight: '700', cursor: 'pointer',
-              }}>🚪 Se déconnecter</button>
+              }}>Se déconnecter</button>
             </div>
           )}
 

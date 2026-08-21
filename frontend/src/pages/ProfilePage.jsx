@@ -4,7 +4,7 @@
 // (see api-profixgabon avisService.js). The PROVIDERS static-data fallback
 // is gone — see BookingPage.jsx's header comment for why.
 import { useNavigate, useParams } from 'react-router-dom'
-import { useState, useEffect, useCallback, useMemo } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useAuth } from '../context/AuthContext'
 import prestatairesService from '../services/prestataires'
 import avisService from '../services/avis'
@@ -52,7 +52,7 @@ export default function ProfilePage() {
           skills: data.skills || [],
           galerie: data.galerie || [],
           bg: '#E8F5EE',
-          emoji: '🔧',
+          emoji: '',
         })
         setAvis(avisData)
       } catch (err) {
@@ -100,7 +100,7 @@ export default function ProfilePage() {
       setRating(0)
       setComment('')
       setSuccess(true)
-      toast.success('✅ Votre avis a été publié !')
+      toast.success('Votre avis a été publié !')
       setTimeout(() => setSuccess(false), 5000)
     } catch (err) {
       const message = err.response?.data?.message
@@ -124,20 +124,13 @@ export default function ProfilePage() {
 
     try {
       const conversation = await messagerieService.getOrCreateConversation(provider.userId)
-      toast.success('💬 Conversation créée !')
+      toast.success('Conversation créée !')
       navigate(`/chat/${conversation.id}`)
     } catch (error) {
       console.error('Erreur création conversation:', error)
       toast.error('Une erreur est survenue. Veuillez réessayer.')
     }
   }, [user, provider, navigate])
-
-  const stars = useMemo(() => {
-    const ratingValue = provider?.rating || 0
-    const fullStars = Math.round(ratingValue)
-    const emptyStars = 5 - fullStars
-    return { fullStars, emptyStars }
-  }, [provider?.rating])
 
   if (loading) {
     return (
@@ -167,7 +160,7 @@ export default function ProfilePage() {
 
           <div style={{ display: 'flex', alignItems: 'flex-start', gap: '24px', flexWrap: 'wrap' }}>
             <div style={{
-              width: '88px', height: '88px', borderRadius: '18px',
+              width: '88px', height: '88px', 
               overflow: 'hidden', flexShrink: 0,
               border: '3px solid rgba(255,255,255,0.3)',
               boxShadow: '0 8px 32px rgba(0,0,0,0.3)',
@@ -192,21 +185,15 @@ export default function ProfilePage() {
                   fontSize: '11px', fontWeight: '600',
                   background: provider.available ? '#E6F9EE' : '#FDECEA',
                   color: provider.available ? '#1A6B3C' : '#D94F3D',
-                  padding: '4px 10px', borderRadius: '99px',
-                }}>{provider.available ? '🟢 Disponible' : '🔴 Occupé'}</span>
+                  padding: '4px 10px', 
+                }}>{provider.available ? 'Disponible' : 'Occupé'}</span>
               </div>
               <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.7)', marginBottom: '6px' }}>{provider.role}</p>
               <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.6)', marginBottom: '12px' }}>
-                📍 {provider.ville} · ⏱ {provider.exp} d'expérience
+                {provider.ville} · {provider.exp} d'expérience
               </p>
               <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                {[...Array(5)].map((_, index) => (
-                  <span key={index} style={{
-                    color: index < stars.fullStars ? '#F5C842' : 'rgba(255,255,255,0.3)',
-                    fontSize: '16px'
-                  }}>★</span>
-                ))}
-                <span style={{ fontSize: '13px', color: 'rgba(255,255,255,0.7)', marginLeft: '6px' }}>
+                <span style={{ fontSize: '13px', color: 'rgba(255,255,255,0.7)' }}>
                   {provider.rating > 0 ? `${provider.rating.toFixed(1)} · ${provider.reviews} avis` : 'Nouveau prestataire'}
                 </span>
               </div>
@@ -218,7 +205,7 @@ export default function ProfilePage() {
       {/* BODY */}
       <div style={{ maxWidth: '700px', margin: '-48px auto 0', padding: '0 24px 64px' }}>
         <div style={{
-          background: '#fff', borderRadius: '24px',
+          background: '#fff', 
           boxShadow: '0 8px 40px rgba(0,0,0,0.12)',
           overflow: 'hidden',
         }}>
@@ -252,7 +239,7 @@ export default function ProfilePage() {
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
                 {provider.skills.map(s => (
                   <span key={s} style={{
-                    padding: '6px 14px', borderRadius: '99px',
+                    padding: '6px 14px', 
                     fontSize: '12px', fontWeight: '600',
                     background: '#E8F5EE', color: '#0F4526',
                     border: '1px solid #B8DCC8',
@@ -269,7 +256,7 @@ export default function ProfilePage() {
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px' }}>
                 {provider.galerie.map((img, i) => (
                   <div key={i} style={{
-                    aspectRatio: '1', borderRadius: '12px',
+                    aspectRatio: '1', 
                     overflow: 'hidden', background: '#F0F7F3',
                   }}>
                     <img
@@ -288,21 +275,15 @@ export default function ProfilePage() {
           <div style={{ padding: '24px', borderBottom: '1px solid #E2EBE7' }}>
             <p style={{ fontSize: '13px', fontWeight: '700', textTransform: 'uppercase', color: '#8FA99E', marginBottom: '16px', letterSpacing: '0.06em' }}>Localisation</p>
             <div style={{
-              background: '#F0F7F3', borderRadius: '16px',
+              background: '#F0F7F3',
               padding: '20px', display: 'flex', alignItems: 'center', gap: '16px',
               border: '1px solid #B8DCC8',
             }}>
-              <div style={{
-                width: '56px', height: '56px', borderRadius: '12px',
-                background: '#1A6B3C',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                fontSize: '24px', flexShrink: 0,
-              }}>📍</div>
               <div>
                 <p style={{ fontSize: '16px', fontWeight: '700', color: '#0F4526', marginBottom: '4px' }}>{provider.ville}</p>
                 <p style={{ fontSize: '13px', color: '#4A5E55' }}>Gabon · Interventions à domicile</p>
                 <p style={{ fontSize: '12px', color: '#8FA99E', marginTop: '4px' }}>
-                  💡 Si vous êtes dans une autre ville, discutez du déplacement avec le prestataire
+                  Si vous êtes dans une autre ville, discutez du déplacement avec le prestataire
                 </p>
               </div>
             </div>
@@ -323,13 +304,13 @@ export default function ProfilePage() {
               </p>
               {avis.map((a) => (
                 <div key={a.id} style={{
-                  padding: '14px', borderRadius: '12px',
+                  padding: '14px', 
                   background: '#F7F9F8', marginBottom: '10px',
                 }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
                     <span style={{ fontSize: '14px', fontWeight: '700' }}>{a.client_name || 'Client'}</span>
-                    <span style={{ color: '#C8922A', fontSize: '16px' }}>
-                      {'⭐'.repeat(a.note)}{'☆'.repeat(5 - a.note)}
+                    <span style={{ color: '#C8922A', fontSize: '13px', fontWeight: '700' }}>
+                      {a.note}/5
                     </span>
                   </div>
                   <p style={{ fontSize: '13px', color: '#4A5E55', lineHeight: '1.6' }}>{a.commentaire}</p>
@@ -357,11 +338,10 @@ export default function ProfilePage() {
 
               <div style={{
                 background: '#F7F9F8',
-                borderRadius: '12px',
                 padding: '20px'
               }}>
 
-                {/* Étoiles */}
+                {/* Note */}
                 <div style={{ marginBottom: '16px' }}>
                   <p style={{
                     fontSize: '13px',
@@ -373,30 +353,29 @@ export default function ProfilePage() {
                   </p>
                   <div style={{ display: 'flex', gap: '8px' }}>
                     {[1, 2, 3, 4, 5].map((star) => (
-                      <span
+                      <button
                         key={star}
+                        type="button"
                         onClick={() => setRating(star)}
                         style={{
-                          fontSize: '36px',
+                          width: '40px',
+                          height: '40px',
+                          fontSize: '15px',
+                          fontWeight: '700',
                           cursor: 'pointer',
-                          transition: 'transform 0.15s',
-                          transform: rating >= star ? 'scale(1.1)' : 'scale(1)',
-                          display: 'inline-block',
-                        }}
-                        onMouseEnter={(e) => {
-                          if (rating < star) e.target.style.transform = 'scale(1.2)'
-                        }}
-                        onMouseLeave={(e) => {
-                          e.target.style.transform = rating >= star ? 'scale(1.1)' : 'scale(1)'
+                          border: rating >= star ? '1.5px solid #1A6B3C' : '1.5px solid #E2EBE7',
+                          background: rating >= star ? '#1A6B3C' : '#fff',
+                          color: rating >= star ? '#fff' : '#4A5E55',
+                          transition: 'all 0.15s',
                         }}
                       >
-                        {rating >= star ? '⭐' : '☆'}
-                      </span>
+                        {star}
+                      </button>
                     ))}
                   </div>
                   {rating > 0 && (
                     <p style={{ fontSize: '12px', color: '#1A6B3C', marginTop: '4px' }}>
-                      Vous avez sélectionné {rating} étoile{rating > 1 ? 's' : ''}
+                      Vous avez sélectionné {rating} sur 5
                     </p>
                   )}
                 </div>
@@ -421,7 +400,6 @@ export default function ProfilePage() {
                       minHeight: '80px',
                       padding: '12px 14px',
                       border: '1.5px solid #E2EBE7',
-                      borderRadius: '10px',
                       fontSize: '14px',
                       fontFamily: 'sans-serif',
                       outline: 'none',
@@ -445,7 +423,7 @@ export default function ProfilePage() {
                     </span>
                     {comment.length >= 10 && (
                       <span style={{ fontSize: '12px', color: '#1A6B3C' }}>
-                        ✅ OK
+                        OK
                       </span>
                     )}
                   </div>
@@ -457,11 +435,10 @@ export default function ProfilePage() {
                     padding: '10px 14px',
                     background: '#FDECEA',
                     border: '1px solid #F5C6C2',
-                    borderRadius: '10px',
                     fontSize: '13px',
                     color: '#D94F3D',
                   }}>
-                    ⚠️ {error}
+                    {error}
                   </div>
                 )}
 
@@ -471,11 +448,10 @@ export default function ProfilePage() {
                     padding: '10px 14px',
                     background: '#E8F5EE',
                     border: '1px solid #B8DCC8',
-                    borderRadius: '10px',
                     fontSize: '13px',
                     color: '#0F4526',
                   }}>
-                    ✅ Merci ! Votre avis a été publié et la note a été mise à jour.
+                    Merci ! Votre avis a été publié et la note a été mise à jour.
                   </div>
                 )}
 
@@ -489,7 +465,6 @@ export default function ProfilePage() {
                     background: rating > 0 && comment.length >= 10 ? '#1A6B3C' : '#B8DCC8',
                     color: '#fff',
                     border: 'none',
-                    borderRadius: '10px',
                     fontSize: '15px',
                     fontWeight: '700',
                     cursor: rating > 0 && comment.length >= 10 ? 'pointer' : 'not-allowed',
@@ -497,7 +472,7 @@ export default function ProfilePage() {
                     transition: 'background 0.2s',
                   }}
                 >
-                  {submitting ? '⏳ Envoi en cours...' : '⭐ Envoyer mon avis'}
+                  {submitting ? 'Envoi en cours...' : 'Envoyer mon avis'}
                 </button>
 
                 <p style={{
@@ -516,7 +491,7 @@ export default function ProfilePage() {
           <div style={{ padding: '24px' }}>
             <div style={{
               background: '#E8F5EE', border: '1.5px solid #B8DCC8',
-              borderRadius: '12px', padding: '16px 20px',
+               padding: '16px 20px',
               display: 'flex', justifyContent: 'space-between',
               alignItems: 'center', marginBottom: '12px',
               flexWrap: 'wrap', gap: '12px',
@@ -525,27 +500,27 @@ export default function ProfilePage() {
                 <p style={{ fontSize: '14px', fontWeight: '700', color: '#0F4526' }}>Prix négocié entre vous</p>
                 <p style={{ fontSize: '12px', color: '#4A5E55', marginTop: '2px' }}>Un devis officiel sera généré avant la mission</p>
               </div>
-              <span style={{ fontSize: '12px', color: '#1A6B3C', fontWeight: '600' }}>📍 {provider.ville}</span>
+              <span style={{ fontSize: '12px', color: '#1A6B3C', fontWeight: '600' }}>{provider.ville}</span>
             </div>
 
             <button onClick={() => navigate(`/reservation/${provider.id}`)} style={{
               width: '100%', padding: '16px',
               background: '#1A6B3C', color: '#fff',
-              border: 'none', borderRadius: '12px',
+              border: 'none', 
               fontSize: '15px', fontWeight: '700', cursor: 'pointer',
               marginBottom: '10px',
               boxShadow: '0 4px 16px rgba(26,107,60,0.3)',
-            }}>📄 Demander un devis</button>
+            }}>Demander un devis</button>
 
             <button
               onClick={handleSendMessage}
               style={{
                 width: '100%', padding: '14px',
                 background: 'transparent', color: '#1A6B3C',
-                border: '1.5px solid #1A6B3C', borderRadius: '12px',
+                border: '1.5px solid #1A6B3C', 
                 fontSize: '14px', fontWeight: '700', cursor: 'pointer',
               }}
-            >💬 Envoyer un message</button>
+            >Envoyer un message</button>
           </div>
 
         </div>

@@ -88,7 +88,7 @@ export default function BookingPage() {
         categorie: provider.role,
         description: fullDescription,
       })
-      toast.success('✅ Demande envoyée avec succès !')
+      toast.success('Demande envoyée avec succès !')
       setSubmitted(true)
     } catch (error) {
       console.error('Erreur envoi demande:', error)
@@ -121,12 +121,6 @@ export default function BookingPage() {
         alignItems: 'center', justifyContent: 'center',
         textAlign: 'center', padding: '48px 24px',
       }}>
-        <div style={{
-          width: '80px', height: '80px', borderRadius: '50%',
-          background: '#E8F5EE', border: '2px solid #B8DCC8',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          fontSize: '36px', marginBottom: '24px',
-        }}>✅</div>
         <h2 style={{ fontSize: '28px', fontWeight: '800', marginBottom: '12px' }}>Demande envoyée !</h2>
         <p style={{ fontSize: '15px', color: '#4A5E55', maxWidth: '420px', lineHeight: '1.6', marginBottom: '8px' }}>
           Votre demande a bien été transmise à <strong>{provider.name}</strong>.
@@ -135,10 +129,10 @@ export default function BookingPage() {
           Il vous contactera pour convenir du prix et valider le devis avant de commencer la mission.
         </p>
         <button onClick={() => navigate('/')} style={{
-          padding: '14px 28px', borderRadius: '12px',
+          padding: '14px 28px', 
           background: '#1A6B3C', color: '#fff',
           border: 'none', fontSize: '15px', fontWeight: '700', cursor: 'pointer',
-        }}>🏠 Retour à l'accueil</button>
+        }}>Retour à l'accueil</button>
       </div>
     )
   }
@@ -147,7 +141,7 @@ export default function BookingPage() {
 
   const cardStyle = {
     background: '#fff', border: '1px solid #E2EBE7',
-    borderRadius: '18px', overflow: 'hidden', marginBottom: '16px',
+     overflow: 'hidden', marginBottom: '16px',
   }
   const cardHeaderStyle = {
     padding: '16px 20px', borderBottom: '1px solid #E2EBE7',
@@ -169,7 +163,7 @@ export default function BookingPage() {
 
         <h1 style={{ fontSize: '24px', fontWeight: '800', marginBottom: '4px' }}>Réserver une intervention</h1>
         <p style={{ fontSize: '14px', color: '#4A5E55', marginBottom: '28px' }}>
-          avec <strong>{provider.name}</strong> · 📍 {provider.ville}
+          avec <strong>{provider.name}</strong> · {provider.ville}
         </p>
 
         {/* PROGRESS */}
@@ -178,7 +172,7 @@ export default function BookingPage() {
             <div key={s} style={{ display: 'flex', alignItems: 'center', flex: 1 }}>
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
                 <div style={{
-                  width: '32px', height: '32px', borderRadius: '50%',
+                  width: '32px', height: '32px', 
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   fontSize: '12px', fontWeight: '700',
                   background: i + 1 < step ? '#1A6B3C' : '#fff',
@@ -204,12 +198,12 @@ export default function BookingPage() {
         {step === 1 && (
           <>
             <div style={cardStyle}>
-              <div style={cardHeaderStyle}>📅 Choisissez une date</div>
+              <div style={cardHeaderStyle}>Choisissez une date</div>
               <div style={{ padding: '20px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-                  <button style={{ width: '32px', height: '32px', borderRadius: '8px', border: '1px solid #E2EBE7', background: '#fff', cursor: 'pointer', fontSize: '16px' }}>‹</button>
+                  <button style={{ width: '32px', height: '32px',  border: '1px solid #E2EBE7', background: '#fff', cursor: 'pointer', fontSize: '16px' }}>‹</button>
                   <span style={{ fontSize: '15px', fontWeight: '700' }}>Juin 2026</span>
-                  <button style={{ width: '32px', height: '32px', borderRadius: '8px', border: '1px solid #E2EBE7', background: '#fff', cursor: 'pointer', fontSize: '16px' }}>›</button>
+                  <button style={{ width: '32px', height: '32px',  border: '1px solid #E2EBE7', background: '#fff', cursor: 'pointer', fontSize: '16px' }}>›</button>
                 </div>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', textAlign: 'center', gap: '2px' }}>
                   {['L','M','M','J','V','S','D'].map((d, i) => (
@@ -219,7 +213,7 @@ export default function BookingPage() {
                   {days.map(d => (
                     <div key={d} onClick={() => setSelectedDay(d)} style={{
                       aspectRatio: '1', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      fontSize: '13px', borderRadius: '8px', cursor: 'pointer',
+                      fontSize: '13px',  cursor: 'pointer',
                       background: d === selectedDay ? '#1A6B3C' : 'transparent',
                       color: d === selectedDay ? '#fff' : '#111',
                       fontWeight: d === selectedDay ? '700' : '400',
@@ -230,12 +224,12 @@ export default function BookingPage() {
             </div>
 
             <div style={cardStyle}>
-              <div style={cardHeaderStyle}>🕐 Choisissez un créneau</div>
+              <div style={cardHeaderStyle}>Choisissez un créneau</div>
               <div style={{ padding: '20px' }}>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px' }}>
                   {times.map(t => (
                     <div key={t} onClick={() => !disabledTimes.includes(t) && setSelectedTime(t)} style={{
-                      padding: '10px', borderRadius: '10px', textAlign: 'center',
+                      padding: '10px',  textAlign: 'center',
                       fontSize: '13px', fontWeight: '600',
                       cursor: disabledTimes.includes(t) ? 'not-allowed' : 'pointer',
                       border: '1.5px solid',
@@ -246,14 +240,14 @@ export default function BookingPage() {
                     }}>{t}</div>
                   ))}
                 </div>
-                <p style={{ fontSize: '12px', color: '#8FA99E', marginTop: '12px' }}>🔴 Créneaux grisés = déjà réservés</p>
+                <p style={{ fontSize: '12px', color: '#8FA99E', marginTop: '12px' }}>Créneaux grisés = déjà réservés</p>
               </div>
             </div>
 
             <button onClick={() => selectedDay && selectedTime && setStep(2)} style={{
               width: '100%', padding: '16px',
               background: selectedDay && selectedTime ? '#1A6B3C' : '#B8DCC8',
-              color: '#fff', border: 'none', borderRadius: '12px',
+              color: '#fff', border: 'none', 
               fontSize: '15px', fontWeight: '700',
               cursor: selectedDay && selectedTime ? 'pointer' : 'not-allowed',
             }}>
@@ -266,13 +260,13 @@ export default function BookingPage() {
         {step === 2 && (
           <>
             <div style={cardStyle}>
-              <div style={cardHeaderStyle}>📝 Décrivez votre problème</div>
+              <div style={cardHeaderStyle}>Décrivez votre problème</div>
               <div style={{ padding: '20px' }}>
                 <textarea value={description} onChange={e => setDescription(e.target.value)}
                   placeholder="Ex : J'ai une fuite sous l'évier depuis 2 jours..."
                   style={{
                     width: '100%', minHeight: '140px',
-                    border: '1.5px solid #E2EBE7', borderRadius: '12px',
+                    border: '1.5px solid #E2EBE7', 
                     padding: '14px', fontSize: '14px',
                     fontFamily: 'sans-serif', outline: 'none',
                     resize: 'vertical', lineHeight: '1.6', boxSizing: 'border-box',
@@ -291,7 +285,7 @@ export default function BookingPage() {
             <button onClick={() => description.length >= 20 && setStep(3)} style={{
               width: '100%', padding: '16px',
               background: description.length >= 20 ? '#1A6B3C' : '#B8DCC8',
-              color: '#fff', border: 'none', borderRadius: '12px',
+              color: '#fff', border: 'none', 
               fontSize: '15px', fontWeight: '700',
               cursor: description.length >= 20 ? 'pointer' : 'not-allowed',
             }}>
@@ -304,24 +298,24 @@ export default function BookingPage() {
         {step === 3 && (
           <>
             <div style={cardStyle}>
-              <div style={cardHeaderStyle}>📋 Récapitulatif de votre demande</div>
+              <div style={cardHeaderStyle}>Récapitulatif de votre demande</div>
               <div style={{ padding: '20px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px', padding: '12px', background: '#F7F9F8', borderRadius: '12px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px', padding: '12px', background: '#F7F9F8', }}>
                   {provider.photo
-                    ? <img src={provider.photo} alt={provider.name} style={{ width: '48px', height: '48px', borderRadius: '10px', objectFit: 'cover' }} />
-                    : <div style={{ width: '48px', height: '48px', borderRadius: '10px', background: '#E8F5EE', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '20px', fontWeight: '800', color: '#0F4526' }}>
+                    ? <img src={provider.photo} alt={provider.name} style={{ width: '48px', height: '48px',  objectFit: 'cover' }} />
+                    : <div style={{ width: '48px', height: '48px',  background: '#E8F5EE', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '20px', fontWeight: '800', color: '#0F4526' }}>
                         {provider.name?.charAt(0)}
                       </div>
                   }
                   <div>
                     <p style={{ fontSize: '14px', fontWeight: '700' }}>{provider.name}</p>
-                    <p style={{ fontSize: '12px', color: '#4A5E55' }}>{provider.role} · 📍 {provider.ville}</p>
+                    <p style={{ fontSize: '12px', color: '#4A5E55' }}>{provider.role} · {provider.ville}</p>
                   </div>
                 </div>
 
                 {[
-                  { label: '📅 Date', val: `${selectedDay} juin 2026` },
-                  { label: '🕐 Heure', val: selectedTime },
+                  { label: 'Date', val: `${selectedDay} juin 2026` },
+                  { label: 'Heure', val: selectedTime },
                 ].map(r => (
                   <div key={r.label} style={{
                     display: 'flex', justifyContent: 'space-between',
@@ -333,16 +327,16 @@ export default function BookingPage() {
                 ))}
 
                 <div style={{ padding: '12px 0' }}>
-                  <p style={{ fontSize: '13px', color: '#4A5E55', marginBottom: '6px', fontWeight: '600' }}>📝 Description</p>
-                  <p style={{ fontSize: '13px', color: '#111', lineHeight: '1.6', background: '#F7F9F8', padding: '10px', borderRadius: '8px' }}>{description}</p>
+                  <p style={{ fontSize: '13px', color: '#4A5E55', marginBottom: '6px', fontWeight: '600' }}>Description</p>
+                  <p style={{ fontSize: '13px', color: '#111', lineHeight: '1.6', background: '#F7F9F8', padding: '10px' }}>{description}</p>
                 </div>
 
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 0', borderTop: '1px solid #E2EBE7' }}>
-                  <span style={{ fontSize: '14px', color: '#4A5E55' }}>💰 Montant</span>
+                  <span style={{ fontSize: '14px', color: '#4A5E55' }}>Montant</span>
                   <span style={{
                     background: '#E8F5EE', color: '#0F4526',
                     border: '1px solid #B8DCC8',
-                    padding: '4px 12px', borderRadius: '99px',
+                    padding: '4px 12px', 
                     fontSize: '12px', fontWeight: '700',
                   }}>À négocier</span>
                 </div>
@@ -352,9 +346,8 @@ export default function BookingPage() {
             <div style={{
               display: 'flex', alignItems: 'flex-start', gap: '12px',
               background: '#FDF3E3', border: '1px solid #E8C97A',
-              borderRadius: '12px', padding: '14px 16px', marginBottom: '16px',
+               padding: '14px 16px', marginBottom: '16px',
             }}>
-              <span style={{ fontSize: '18px' }}>🛡️</span>
               <p style={{ fontSize: '13px', color: '#7A5C1A', lineHeight: '1.6' }}>
                 Un devis officiel sera généré et signé par les deux parties avant le début de la mission.
               </p>
@@ -367,14 +360,14 @@ export default function BookingPage() {
                 width: '100%', padding: '16px',
                 background: submitting ? '#B8DCC8' : '#1A6B3C',
                 color: '#fff',
-                border: 'none', borderRadius: '12px',
+                border: 'none', 
                 fontSize: '16px', fontWeight: '700',
                 cursor: submitting ? 'not-allowed' : 'pointer',
                 boxShadow: submitting ? 'none' : '0 4px 16px rgba(26,107,60,0.3)',
                 opacity: submitting ? 0.7 : 1
               }}
             >
-              {submitting ? '⏳ Envoi en cours...' : '📤 Envoyer la demande'}
+              {submitting ? 'Envoi en cours...' : 'Envoyer la demande'}
             </button>
           </>
         )}

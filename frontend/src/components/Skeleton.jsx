@@ -2,7 +2,6 @@
 export const SkeletonCard = () => (
   <div style={{
     background: '#fff',
-    borderRadius: '12px',
     padding: '16px',
     border: '1px solid #E2EBE7',
   }}>
@@ -12,7 +11,6 @@ export const SkeletonCard = () => (
       background: 'linear-gradient(90deg, #F0F0F0 25%, #E0E0E0 50%, #F0F0F0 75%)',
       backgroundSize: '200% 100%',
       animation: 'shimmer 1.5s infinite',
-      borderRadius: '8px',
     }} />
     <div style={{
       width: '70%',
@@ -21,7 +19,6 @@ export const SkeletonCard = () => (
       background: 'linear-gradient(90deg, #F0F0F0 25%, #E0E0E0 50%, #F0F0F0 75%)',
       backgroundSize: '200% 100%',
       animation: 'shimmer 1.5s infinite',
-      borderRadius: '4px',
     }} />
     <div style={{
       width: '50%',
@@ -30,7 +27,6 @@ export const SkeletonCard = () => (
       background: 'linear-gradient(90deg, #F0F0F0 25%, #E0E0E0 50%, #F0F0F0 75%)',
       backgroundSize: '200% 100%',
       animation: 'shimmer 1.5s infinite',
-      borderRadius: '4px',
     }} />
     <div style={{
       display: 'flex',
@@ -43,7 +39,6 @@ export const SkeletonCard = () => (
         background: 'linear-gradient(90deg, #F0F0F0 25%, #E0E0E0 50%, #F0F0F0 75%)',
         backgroundSize: '200% 100%',
         animation: 'shimmer 1.5s infinite',
-        borderRadius: '4px',
       }} />
       <div style={{
         width: '30%',
@@ -51,7 +46,6 @@ export const SkeletonCard = () => (
         background: 'linear-gradient(90deg, #F0F0F0 25%, #E0E0E0 50%, #F0F0F0 75%)',
         backgroundSize: '200% 100%',
         animation: 'shimmer 1.5s infinite',
-        borderRadius: '4px',
       }} />
     </div>
     <style>{`
@@ -72,7 +66,6 @@ export const SkeletonProviderList = ({ count = 6 }) => (
 export const SkeletonProfile = () => (
   <div style={{
     background: '#fff',
-    borderRadius: '12px',
     padding: '24px',
     border: '1px solid #E2EBE7',
   }}>
@@ -84,7 +77,6 @@ export const SkeletonProfile = () => (
       <div style={{
         width: '80px',
         height: '80px',
-        borderRadius: '50%',
         background: 'linear-gradient(90deg, #F0F0F0 25%, #E0E0E0 50%, #F0F0F0 75%)',
         backgroundSize: '200% 100%',
         animation: 'shimmer 1.5s infinite',
@@ -96,7 +88,6 @@ export const SkeletonProfile = () => (
           background: 'linear-gradient(90deg, #F0F0F0 25%, #E0E0E0 50%, #F0F0F0 75%)',
           backgroundSize: '200% 100%',
           animation: 'shimmer 1.5s infinite',
-          borderRadius: '4px',
           marginBottom: '8px',
         }} />
         <div style={{
@@ -105,7 +96,6 @@ export const SkeletonProfile = () => (
           background: 'linear-gradient(90deg, #F0F0F0 25%, #E0E0E0 50%, #F0F0F0 75%)',
           backgroundSize: '200% 100%',
           animation: 'shimmer 1.5s infinite',
-          borderRadius: '4px',
         }} />
       </div>
     </div>
@@ -115,7 +105,6 @@ export const SkeletonProfile = () => (
       background: 'linear-gradient(90deg, #F0F0F0 25%, #E0E0E0 50%, #F0F0F0 75%)',
       backgroundSize: '200% 100%',
       animation: 'shimmer 1.5s infinite',
-      borderRadius: '8px',
     }} />
   </div>
 )
@@ -133,7 +122,6 @@ export const SkeletonMessage = () => (
       background: 'linear-gradient(90deg, #F0F0F0 25%, #E0E0E0 50%, #F0F0F0 75%)',
       backgroundSize: '200% 100%',
       animation: 'shimmer 1.5s infinite',
-      borderRadius: '4px',
     }} />
     <div style={{
       padding: '10px 14px',
@@ -141,7 +129,6 @@ export const SkeletonMessage = () => (
       background: 'linear-gradient(90deg, #F0F0F0 25%, #E0E0E0 50%, #F0F0F0 75%)',
       backgroundSize: '200% 100%',
       animation: 'shimmer 1.5s infinite',
-      borderRadius: '12px',
     }} />
   </div>
 )

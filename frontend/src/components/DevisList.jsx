@@ -25,7 +25,7 @@ export default function DevisList({ type }) {
       setPage(1)
       setHasMore(result.devis.length < result.total)
     } catch (err) {
-      console.error('❌ Erreur chargement devis:', err)
+      console.error('Erreur chargement devis:', err)
       setError('Erreur lors du chargement des devis')
     } finally {
       setLoading(false)
@@ -46,7 +46,7 @@ export default function DevisList({ type }) {
       setPage(nextPage)
       setHasMore(devis.length + result.devis.length < result.total)
     } catch (err) {
-      console.error('❌ Erreur chargement plus de devis:', err)
+      console.error('Erreur chargement plus de devis:', err)
     } finally {
       setLoadingMore(false)
     }
@@ -67,7 +67,7 @@ export default function DevisList({ type }) {
       await devisService.accepter(devisId)
       setDevis(prev => prev.map(d => d.id === devisId ? { ...d, statut: 'accepte' } : d))
     } catch (error) {
-      console.error('❌ Erreur acceptation:', error)
+      console.error('Erreur acceptation:', error)
       alert("Erreur lors de l'acceptation du devis")
     }
     setActionLoading(null)
@@ -79,7 +79,7 @@ export default function DevisList({ type }) {
       await devisService.refuser(devisId)
       setDevis(prev => prev.map(d => d.id === devisId ? { ...d, statut: 'refuse' } : d))
     } catch (error) {
-      console.error('❌ Erreur refus:', error)
+      console.error('Erreur refus:', error)
       alert('Erreur lors du refus du devis')
     }
     setActionLoading(null)
@@ -99,9 +99,9 @@ export default function DevisList({ type }) {
 
   const getStatutBadge = useCallback((statut) => {
     const styles = {
-      'en_attente': { background: '#FDF3E3', color: '#7A5C1A', label: '⏳ En attente' },
-      'accepte': { background: '#E8F5EE', color: '#0F4526', label: '✅ Accepté' },
-      'refuse': { background: '#FDECEA', color: '#D94F3D', label: '❌ Refusé' }
+      'en_attente': { background: '#FDF3E3', color: '#7A5C1A', label: 'En attente' },
+      'accepte': { background: '#E8F5EE', color: '#0F4526', label: 'Accepté' },
+      'refuse': { background: '#FDECEA', color: '#D94F3D', label: 'Refusé' }
     }
     return styles[statut] || styles['en_attente']
   }, [])
@@ -127,7 +127,7 @@ export default function DevisList({ type }) {
   if (error) {
     return (
       <div style={{ textAlign: 'center', padding: '32px', color: '#D94F3D' }}>
-        <p>⚠️ {error}</p>
+        <p>{error}</p>
         <button
           onClick={() => window.location.reload()}
           style={{
@@ -136,7 +136,6 @@ export default function DevisList({ type }) {
             background: '#1A6B3C',
             color: '#fff',
             border: 'none',
-            borderRadius: '8px',
             cursor: 'pointer'
           }}
         >
@@ -149,7 +148,6 @@ export default function DevisList({ type }) {
   if (devis.length === 0) {
     return (
       <div style={{ textAlign: 'center', padding: '48px 24px', color: '#8FA99E' }}>
-        <div style={{ fontSize: '48px', marginBottom: '16px' }}>📄</div>
         <p style={{ fontSize: '16px', fontWeight: '600', color: '#4A5E55' }}>
           {type === 'prestataire' ? 'Aucun devis envoyé' : 'Aucun devis reçu'}
         </p>
@@ -171,7 +169,6 @@ export default function DevisList({ type }) {
             onClick={() => setFilter('en_attente')}
             style={{
               padding: '6px 14px',
-              borderRadius: '99px',
               fontSize: '12px',
               fontWeight: '600',
               border: '1px solid',
@@ -182,13 +179,12 @@ export default function DevisList({ type }) {
               transition: 'all 0.2s',
             }}
           >
-            ⏳ En attente ({counts.enAttente})
+            En attente ({counts.enAttente})
           </button>
           <button
             onClick={() => setFilter('historique')}
             style={{
               padding: '6px 14px',
-              borderRadius: '99px',
               fontSize: '12px',
               fontWeight: '600',
               border: '1px solid',
@@ -199,7 +195,7 @@ export default function DevisList({ type }) {
               transition: 'all 0.2s',
             }}
           >
-            📜 Historique ({counts.historique})
+            Historique ({counts.historique})
           </button>
         </div>
       )}
@@ -225,7 +221,6 @@ export default function DevisList({ type }) {
                 style={{
                   background: '#fff',
                   border: '1px solid #E2EBE7',
-                  borderRadius: '12px',
                   padding: '16px',
                   transition: 'transform 0.15s, box-shadow 0.15s',
                 }}
@@ -262,7 +257,6 @@ export default function DevisList({ type }) {
                           gap: '4px',
                           background: '#E8F5EE',
                           padding: '2px 10px',
-                          borderRadius: '99px',
                           border: '1px solid #B8DCC8',
                           transition: 'all 0.2s',
                         }}
@@ -273,9 +267,9 @@ export default function DevisList({ type }) {
                           e.currentTarget.style.background = '#E8F5EE'
                         }}
                       >
-                        📄 {d.numero_devis}
+                        {d.numero_devis}
                         <span style={{ fontSize: '10px' }}>
-                          {copiedId === d.numero_devis ? '✅ Copié !' : '📋'}
+                          {copiedId === d.numero_devis ? 'Copié !' : ''}
                         </span>
                       </span>
                     </div>
@@ -285,7 +279,6 @@ export default function DevisList({ type }) {
                       fontSize: '11px',
                       fontWeight: '600',
                       padding: '4px 10px',
-                      borderRadius: '99px',
                       background: statut.background,
                       color: statut.color,
                       display: 'inline-block',
@@ -315,7 +308,6 @@ export default function DevisList({ type }) {
                         background: '#1A6B3C',
                         color: '#fff',
                         border: 'none',
-                        borderRadius: '8px',
                         fontSize: '13px',
                         fontWeight: '700',
                         cursor: 'pointer',
@@ -329,7 +321,7 @@ export default function DevisList({ type }) {
                         if (!actionLoading) e.currentTarget.style.background = '#1A6B3C'
                       }}
                     >
-                      {actionLoading === d.id ? '⏳...' : '✅ Accepter'}
+                      {actionLoading === d.id ? '...' : 'Accepter'}
                     </button>
                     <button
                       onClick={() => handleRefuser(d.id)}
@@ -340,7 +332,6 @@ export default function DevisList({ type }) {
                         background: '#FDECEA',
                         color: '#D94F3D',
                         border: '1px solid #F5C6C2',
-                        borderRadius: '8px',
                         fontSize: '13px',
                         fontWeight: '700',
                         cursor: 'pointer',
@@ -354,7 +345,7 @@ export default function DevisList({ type }) {
                         if (!actionLoading) e.currentTarget.style.background = '#FDECEA'
                       }}
                     >
-                      {actionLoading === d.id ? '⏳...' : '❌ Refuser'}
+                      {actionLoading === d.id ? '...' : 'Refuser'}
                     </button>
                   </div>
                 )}
@@ -371,7 +362,6 @@ export default function DevisList({ type }) {
               padding: '12px 20px',
               background: '#E8F5EE',
               border: '1px solid #B8DCC8',
-              borderRadius: '10px',
               fontSize: '13px',
               fontWeight: '600',
               color: '#0F4526',
@@ -388,7 +378,7 @@ export default function DevisList({ type }) {
               if (!loadingMore) e.currentTarget.style.background = '#E8F5EE'
             }}
           >
-            {loadingMore ? '⏳ Chargement...' : '📤 Charger plus de devis'}
+            {loadingMore ? 'Chargement...' : 'Charger plus de devis'}
           </button>
         )}
       </div>

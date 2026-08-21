@@ -1,9 +1,10 @@
 // App.jsx
 import { lazy, Suspense } from 'react'
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom' // 👈 AJOUTER useLocation
-import { motion, AnimatePresence } from 'framer-motion' // 👈 NOUVEAU
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
+import { motion, AnimatePresence } from 'framer-motion'
 import { AuthProvider } from './context/AuthContext'
 import Navbar from './components/Navbar'
+import Footer from './components/Footer'
 import ProtectedRoute from './components/ProtectedRoute'
 import AppToaster from './components/AppToaster'
 
@@ -43,7 +44,7 @@ const PageLoader = () => (
   </div>
 )
 
-// 📦 COMPOSANT AVEC TRANSITIONS
+// COMPOSANT AVEC TRANSITIONS
 function AnimatedRoutes() {
   const location = useLocation()
 
@@ -129,6 +130,7 @@ export default function App() {
         <Navbar />
         <AppToaster />
         <AnimatedRoutes />
+        <Footer />
       </AuthProvider>
     </BrowserRouter>
   )
