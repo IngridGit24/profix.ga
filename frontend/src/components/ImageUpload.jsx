@@ -40,14 +40,13 @@ export default function ImageUpload({ onUpload, label = 'Ajouter une photo', fol
         <div style={{ position: 'relative', display: 'inline-block' }}>
           <img src={preview} style={{
             width: '100px', height: '100px',
-            borderRadius: '16px', objectFit: 'cover',
+             objectFit: 'cover',
             border: '2px solid #1A6B3C',
           }} />
           {loading && (
             <div style={{
               position: 'absolute', inset: 0,
               background: 'rgba(0,0,0,0.5)',
-              borderRadius: '16px',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               color: '#fff', fontSize: '12px', fontWeight: '600',
             }}>Upload...</div>
@@ -55,13 +54,12 @@ export default function ImageUpload({ onUpload, label = 'Ajouter une photo', fol
         </div>
       ) : (
         <div style={{
-          width: '100px', height: '100px', borderRadius: '16px',
+          width: '100px', height: '100px', 
           border: '2px dashed #B8DCC8',
           display: 'flex', flexDirection: 'column',
           alignItems: 'center', justifyContent: 'center',
           gap: '6px', background: '#F7FCF9',
         }}>
-          <span style={{ fontSize: '24px' }}>📷</span>
           <span style={{ fontSize: '11px', fontWeight: '600', color: '#1A6B3C', textAlign: 'center' }}>{label}</span>
         </div>
       )}

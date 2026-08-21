@@ -49,7 +49,6 @@ export default function ConversationsList() {
   if (conversations.length === 0) {
     return (
       <div style={{ textAlign: 'center', padding: '48px 24px', color: '#8FA99E' }}>
-        <div style={{ fontSize: '48px', marginBottom: '16px' }}>💬</div>
         <p style={{ fontSize: '16px', fontWeight: '600', color: '#4A5E55', marginBottom: '8px' }}>
           Aucune conversation
         </p>
@@ -72,7 +71,6 @@ export default function ConversationsList() {
             style={{
               background: '#fff',
               border: '1px solid #E2EBE7',
-              borderRadius: '12px',
               padding: '16px',
               cursor: 'pointer',
               transition: 'all 0.15s',
@@ -86,7 +84,6 @@ export default function ConversationsList() {
           >
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <span style={{ fontSize: '20px' }}>💬</span>
                 <span style={{ fontWeight: '700', fontSize: '15px' }}>{autreNom}</span>
                 {conv.unread_count > 0 && (
                   <span style={{
@@ -95,7 +92,6 @@ export default function ConversationsList() {
                     fontSize: '10px',
                     fontWeight: '700',
                     padding: '2px 8px',
-                    borderRadius: '99px'
                   }}>
                     {conv.unread_count}
                   </span>

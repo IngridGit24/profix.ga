@@ -24,7 +24,7 @@ export default function DemandesList({ type }) {
       setPage(1)
       setHasMore(result.demandes.length < result.total)
     } catch (err) {
-      console.error('❌ Erreur chargement demandes:', err)
+      console.error('Erreur chargement demandes:', err)
     } finally {
       setLoading(false)
     }
@@ -44,7 +44,7 @@ export default function DemandesList({ type }) {
       setPage(nextPage)
       setHasMore(demandes.length + result.demandes.length < result.total)
     } catch (err) {
-      console.error('❌ Erreur chargement plus de demandes:', err)
+      console.error('Erreur chargement plus de demandes:', err)
     } finally {
       setLoadingMore(false)
     }
@@ -63,10 +63,10 @@ export default function DemandesList({ type }) {
 
   const getStatutBadge = (statut) => {
     const styles = {
-      'en_attente': { background: '#FDF3E3', color: '#7A5C1A', label: '⏳ En attente' },
-      'devis_envoye': { background: '#E8F5EE', color: '#0F4526', label: '📄 Devis envoyé' },
-      'accepte': { background: '#E8F5EE', color: '#0F4526', label: '✅ Accepté' },
-      'refuse': { background: '#FDECEA', color: '#D94F3D', label: '❌ Refusé' }
+      'en_attente': { background: '#FDF3E3', color: '#7A5C1A', label: 'En attente' },
+      'devis_envoye': { background: '#E8F5EE', color: '#0F4526', label: 'Devis envoyé' },
+      'accepte': { background: '#E8F5EE', color: '#0F4526', label: 'Accepté' },
+      'refuse': { background: '#FDECEA', color: '#D94F3D', label: 'Refusé' }
     }
     return styles[statut] || styles['en_attente']
   }
@@ -92,7 +92,6 @@ export default function DemandesList({ type }) {
   if (demandes.length === 0) {
     return (
       <div style={{ textAlign: 'center', padding: '48px 24px', color: '#8FA99E' }}>
-        <div style={{ fontSize: '48px', marginBottom: '16px' }}>📋</div>
         <p style={{ fontSize: '16px', fontWeight: '600', color: '#4A5E55' }}>
           {type === 'prestataire' ? 'Aucune demande reçue' : 'Aucune demande envoyée'}
         </p>
@@ -119,7 +118,6 @@ export default function DemandesList({ type }) {
               style={{
                 background: '#fff',
                 border: '1px solid #E2EBE7',
-                borderRadius: '12px',
                 padding: '16px',
                 transition: 'all 0.15s',
               }}
@@ -136,7 +134,7 @@ export default function DemandesList({ type }) {
                     {demande.description?.length > 150 && '...'}
                   </p>
                   {demande.categorie && (
-                    <span style={{ fontSize: '12px', color: '#8FA99E' }}>🔧 {demande.categorie}</span>
+                    <span style={{ fontSize: '12px', color: '#8FA99E' }}>{demande.categorie}</span>
                   )}
                 </div>
                 <div style={{ textAlign: 'right' }}>
@@ -144,7 +142,6 @@ export default function DemandesList({ type }) {
                     fontSize: '11px',
                     fontWeight: '600',
                     padding: '4px 10px',
-                    borderRadius: '99px',
                     background: statut.background,
                     color: statut.color,
                     display: 'inline-block'
@@ -167,7 +164,6 @@ export default function DemandesList({ type }) {
                       background: '#1A6B3C',
                       color: '#fff',
                       border: 'none',
-                      borderRadius: '8px',
                       fontSize: '13px',
                       fontWeight: '700',
                       cursor: 'pointer',
@@ -176,7 +172,7 @@ export default function DemandesList({ type }) {
                     onMouseEnter={(e) => e.currentTarget.style.background = '#0F4526'}
                     onMouseLeave={(e) => e.currentTarget.style.background = '#1A6B3C'}
                   >
-                    📄 Créer un devis
+                    Créer un devis
                   </button>
                 </div>
               )}
@@ -192,7 +188,6 @@ export default function DemandesList({ type }) {
               padding: '12px 20px',
               background: '#EEF0FD',
               border: '1px solid #C8CEE8',
-              borderRadius: '10px',
               fontSize: '13px',
               fontWeight: '600',
               color: '#3C3489',
@@ -209,7 +204,7 @@ export default function DemandesList({ type }) {
               if (!loadingMore) e.currentTarget.style.background = '#EEF0FD'
             }}
           >
-            {loadingMore ? '⏳ Chargement...' : '📤 Charger plus de demandes'}
+            {loadingMore ? 'Chargement...' : 'Charger plus de demandes'}
           </button>
         )}
       </div>

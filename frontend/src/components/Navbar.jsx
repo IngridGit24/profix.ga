@@ -60,13 +60,7 @@ export default function Navbar() {
       display: 'flex', alignItems: 'center', justifyContent: 'space-between',
     }}>
 
-      <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }}>
-        <div style={{
-          width: '36px', height: '36px', borderRadius: '10px',
-          background: '#1A6B3C',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          fontSize: '18px',
-        }}>🔧</div>
+      <Link to="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
         <span style={{ fontFamily: 'sans-serif', fontSize: '20px', fontWeight: '800', color: '#0F4526' }}>
           ProFixGabon
         </span>
@@ -74,7 +68,7 @@ export default function Navbar() {
 
       <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
         <Link to="/services" style={{
-          padding: '8px 16px', borderRadius: '8px',
+          padding: '8px 16px', 
           fontSize: '14px', fontWeight: '500', color: '#4A5E55',
           textDecoration: 'none',
         }}>Services</Link>
@@ -86,7 +80,6 @@ export default function Navbar() {
               onClick={() => navigate('/dashboard')}
               style={{
                 padding: '8px 16px',
-                borderRadius: '8px',
                 fontSize: '13px',
                 fontWeight: '600',
                 background: '#E8F5EE',
@@ -107,7 +100,6 @@ export default function Navbar() {
                   fontSize: '10px',
                   fontWeight: '700',
                   padding: '2px 7px',
-                  borderRadius: '99px',
                   minWidth: '18px',
                   textAlign: 'center',
                   animation: 'pulse 1.5s ease-in-out infinite',
@@ -119,20 +111,20 @@ export default function Navbar() {
 
             <div onClick={() => navigate('/compte')} style={{
               display: 'flex', alignItems: 'center', gap: '8px',
-              background: '#E8F5EE', borderRadius: '99px',
+              background: '#E8F5EE', 
               padding: '6px 14px 6px 8px',
               border: '1px solid #B8DCC8',
               cursor: 'pointer',
             }}>
               <div style={{
-                width: '28px', height: '28px', borderRadius: '50%',
+                width: '28px', height: '28px', 
                 background: '#1A6B3C',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 fontSize: '13px', color: '#fff', fontWeight: '700',
                 overflow: 'hidden',
               }}>
                 {user.profile_image
-                  ? <img src={user.profile_image} style={{ width: '28px', height: '28px', borderRadius: '50%', objectFit: 'cover' }} />
+                  ? <img src={user.profile_image} style={{ width: '28px', height: '28px',  objectFit: 'cover' }} />
                   : <span style={{ fontSize: '13px', fontWeight: '800' }}>
                       {user.name?.charAt(0).toUpperCase() || user.email?.charAt(0).toUpperCase() || '?'}
                     </span>}
@@ -144,16 +136,16 @@ export default function Navbar() {
 
             {user.type === 'admin' && (
               <button onClick={() => navigate('/admin')} style={{
-                padding: '8px 16px', borderRadius: '8px',
+                padding: '8px 16px', 
                 fontSize: '13px', fontWeight: '600',
                 background: '#0F4526', color: '#fff',
                 border: 'none', cursor: 'pointer',
                 display: 'flex', alignItems: 'center', gap: '6px',
-              }}>🛡️ Admin</button>
+              }}>Admin</button>
             )}
 
             <button onClick={handleLogout} style={{
-              padding: '8px 16px', borderRadius: '8px',
+              padding: '8px 16px', 
               fontSize: '13px', fontWeight: '600',
               background: 'transparent', color: '#D94F3D',
               border: '1.5px solid #F5C6C2', cursor: 'pointer',
@@ -163,13 +155,13 @@ export default function Navbar() {
         ) : (
           <>
             <button onClick={() => navigate('/connexion')} style={{
-              padding: '8px 16px', borderRadius: '8px',
+              padding: '8px 16px', 
               fontSize: '14px', fontWeight: '600', color: '#1A6B3C',
               background: 'transparent', border: '1.5px solid #1A6B3C',
               cursor: 'pointer',
             }}>Connexion</button>
             <button onClick={() => navigate('/inscription')} style={{
-              padding: '8px 18px', borderRadius: '8px',
+              padding: '8px 18px', 
               fontSize: '14px', fontWeight: '600',
               background: '#1A6B3C', color: '#fff',
               border: 'none', cursor: 'pointer',

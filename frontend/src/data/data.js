@@ -10,88 +10,88 @@ export const VILLES = [
 ]
 
 export const CATEGORIES = [
-  // 🏠 Maison & Bâtiment
-  { icon: '🔧', label: 'Plomberie', bg: '#E6F1FB' },
-  { icon: '⚡', label: 'Électricité', bg: '#EAF3DE' },
-  { icon: '🧱', label: 'Maçonnerie', bg: '#F5EFE6' },
-  { icon: '🎨', label: 'Peinture', bg: '#EEEDFE' },
-  { icon: '🪚', label: 'Menuiserie', bg: '#FBF0E6' },
-  { icon: '❄️', label: 'Climatisation', bg: '#E6F4FB' },
-  { icon: '🔑', label: 'Serrurerie', bg: '#F0F0F0' },
-  { icon: '🔩', label: 'Soudure', bg: '#F5F5DC' },
-  { icon: '🪟', label: 'Carrelage', bg: '#E8F8F5' },
-  { icon: '🏗️', label: 'Toiture', bg: '#FDEBD0' },
+  // Maison & Bâtiment
+  { label: 'Plomberie', bg: '#E6F1FB' },
+  { label: 'Électricité', bg: '#EAF3DE' },
+  { label: 'Maçonnerie', bg: '#F5EFE6' },
+  { label: 'Peinture', bg: '#EEEDFE' },
+  { label: 'Menuiserie', bg: '#FBF0E6' },
+  { label: 'Climatisation', bg: '#E6F4FB' },
+  { label: 'Serrurerie', bg: '#F0F0F0' },
+  { label: 'Soudure', bg: '#F5F5DC' },
+  { label: 'Carrelage', bg: '#E8F8F5' },
+  { label: 'Toiture', bg: '#FDEBD0' },
 
-  // 🧹 Entretien & Nettoyage
-  { icon: '🏠', label: 'Nettoyage', bg: '#FBEAF0' },
-  { icon: '👕', label: 'Repassage', bg: '#EAF3DE' },
-  { icon: '🚗', label: 'Lavage auto', bg: '#E8F8F5' },
-  { icon: '🛋️', label: 'Nettoyage canapés', bg: '#F9EBEA' },
-  { icon: '🐀', label: 'Dératisation', bg: '#F0F3F4' },
-  { icon: '🚽', label: 'Vidange fosse', bg: '#EBF5FB' },
+  // Entretien & Nettoyage
+  { label: 'Nettoyage', bg: '#FBEAF0' },
+  { label: 'Repassage', bg: '#EAF3DE' },
+  { label: 'Lavage auto', bg: '#E8F8F5' },
+  { label: 'Nettoyage canapés', bg: '#F9EBEA' },
+  { label: 'Dératisation', bg: '#F0F3F4' },
+  { label: 'Vidange fosse', bg: '#EBF5FB' },
 
-  // 🚗 Automobile
-  { icon: '🔨', label: 'Mécanique auto', bg: '#FDFEFE' },
-  { icon: '⚡', label: 'Électricité auto', bg: '#EAF3DE' },
-  { icon: '🚘', label: 'Carrosserie', bg: '#F5EEF8' },
-  { icon: '🔧', label: 'Vulcanisation', bg: '#FBEEE6' },
+  // Automobile
+  { label: 'Mécanique auto', bg: '#FDFEFE' },
+  { label: 'Électricité auto', bg: '#EAF3DE' },
+  { label: 'Carrosserie', bg: '#F5EEF8' },
+  { label: 'Vulcanisation', bg: '#FBEEE6' },
 
-  // 💇 Beauté & Bien-être
-  { icon: '💇', label: 'Coiffure femme', bg: '#FDEEF8' },
-  { icon: '💈', label: 'Barbier', bg: '#E8F8F5' },
-  { icon: '💅', label: 'Esthétique', bg: '#FDEDEC' },
-  { icon: '💆', label: 'Massage', bg: '#EAF0FB' },
-  { icon: '💄', label: 'Maquillage', bg: '#FBEAF0' },
+  // Beauté & Bien-être
+  { label: 'Coiffure femme', bg: '#FDEEF8' },
+  { label: 'Barbier', bg: '#E8F8F5' },
+  { label: 'Esthétique', bg: '#FDEDEC' },
+  { label: 'Massage', bg: '#EAF0FB' },
+  { label: 'Maquillage', bg: '#FBEAF0' },
 
-  // 👗 Couture & Mode
-  { icon: '✂️', label: 'Couture', bg: '#FBF0E6' },
+  // Couture & Mode
+  { label: 'Couture', bg: '#FBF0E6' },
 
-  // 🍳 Cuisine & Alimentation
-  { icon: '👨‍🍳', label: 'Cuisinier', bg: '#FEF9E7' },
-  { icon: '🎂', label: 'Pâtisserie', bg: '#FEF5E7' },
+  // Cuisine & Alimentation
+  { label: 'Cuisinier', bg: '#FEF9E7' },
+  { label: 'Pâtisserie', bg: '#FEF5E7' },
 
-  // 💻 Informatique & Tech
-  { icon: '💻', label: 'Informatique', bg: '#FAECE7' },
-  { icon: '📱', label: 'Réparation téléphone', bg: '#EAF3DE' },
-  { icon: '📡', label: 'Installation WiFi', bg: '#E8F8F5' },
-  { icon: '🎨', label: 'Infographie', bg: '#F5EEF8' },
+  // Informatique & Tech
+  { label: 'Informatique', bg: '#FAECE7' },
+  { label: 'Réparation téléphone', bg: '#EAF3DE' },
+  { label: 'Installation WiFi', bg: '#E8F8F5' },
+  { label: 'Infographie', bg: '#F5EEF8' },
 
-  // 🏥 Santé & Soins
-  { icon: '🏥', label: 'Garde-malade', bg: '#E8F8F5' },
+  // Santé & Soins
+  { label: 'Garde-malade', bg: '#E8F8F5' },
 
-  // 👶 Enfants & Famille
-  { icon: '👶', label: 'Nounou', bg: '#FDEEF8' },
-  { icon: '📚', label: 'Répétiteur', bg: '#EAF3DE' },
-  { icon: '🎓', label: 'Cours particuliers', bg: '#EBF5FB' },
+  // Enfants & Famille
+  { label: 'Nounou', bg: '#FDEEF8' },
+  { label: 'Répétiteur', bg: '#EAF3DE' },
+  { label: 'Cours particuliers', bg: '#EBF5FB' },
 
-  // 🚗 Transport & Mobilité
-  { icon: '🚖', label: 'Chauffeur', bg: '#F5EFE6' },
-  { icon: '🏍️', label: 'Moto-taxi', bg: '#FBEEE6' },
-  { icon: '📦', label: 'Livraison colis', bg: '#F0F3F4' },
+  // Transport & Mobilité
+  { label: 'Chauffeur', bg: '#F5EFE6' },
+  { label: 'Moto-taxi', bg: '#FBEEE6' },
+  { label: 'Livraison colis', bg: '#F0F3F4' },
 
-  // 🔒 Sécurité
-  { icon: '💂', label: 'Gardiennage', bg: '#F2F3F4' },
-  { icon: '🔍', label: 'Vigile événement', bg: '#EAEDED' },
+  // Sécurité
+  { label: 'Gardiennage', bg: '#F2F3F4' },
+  { label: 'Vigile événement', bg: '#EAEDED' },
 
-  // 🐾 Animaux
-  { icon: '🐾', label: 'Vétérinaire', bg: '#E8F8F5' },
-  { icon: '🐕', label: 'Garde animaux', bg: '#FEF9E7' },
-  { icon: '✂️', label: 'Toilettage', bg: '#FBEAF0' },
+  // Animaux
+  { label: 'Vétérinaire', bg: '#E8F8F5' },
+  { label: 'Garde animaux', bg: '#FEF9E7' },
+  { label: 'Toilettage', bg: '#FBEAF0' },
 
-  // 📸 Événementiel
-  { icon: '📸', label: 'Photographe', bg: '#EAF0FB' },
-  { icon: '🎥', label: 'Vidéaste', bg: '#F5EEF8' },
-  { icon: '🎵', label: 'DJ / Animateur', bg: '#FDEEF8' },
-  { icon: '🎪', label: 'Décoration événement', bg: '#FEF5E7' },
-  { icon: '🎤', label: 'Maître de cérémonie', bg: '#F9EBEA' },
+  // Événementiel
+  { label: 'Photographe', bg: '#EAF0FB' },
+  { label: 'Vidéaste', bg: '#F5EEF8' },
+  { label: 'DJ / Animateur', bg: '#FDEEF8' },
+  { label: 'Décoration événement', bg: '#FEF5E7' },
+  { label: 'Maître de cérémonie', bg: '#F9EBEA' },
 
-  // 🌿 Extérieur
-  { icon: '🌿', label: 'Jardinage', bg: '#FAEEDA' },
-  { icon: '🏊', label: 'Entretien piscine', bg: '#E6F4FB' },
+  // Extérieur
+  { label: 'Jardinage', bg: '#FAEEDA' },
+  { label: 'Entretien piscine', bg: '#E6F4FB' },
 
-  // ☀️ Énergie
-  { icon: '☀️', label: 'Panneau solaire', bg: '#FEF9E7' },
-  { icon: '📺', label: 'Antenne/Parabole', bg: '#F0F3F4' },
+  // Énergie
+  { label: 'Panneau solaire', bg: '#FEF9E7' },
+  { label: 'Antenne/Parabole', bg: '#F0F3F4' },
 ]
 
 export const PROVIDERS = [
@@ -103,7 +103,6 @@ export const PROVIDERS = [
     role: 'Plombier certifié',
     category: 'Plomberie',
     ville: 'Libreville',
-    emoji: '🔧',
     bg: '#E6F1FB',
     rating: 4.8,
     reviews: 32,
@@ -130,7 +129,6 @@ export const PROVIDERS = [
     role: 'Électricien agréé',
     category: 'Électricité',
     ville: 'Port-Gentil',
-    emoji: '⚡',
     bg: '#EAF3DE',
     rating: 4.6,
     reviews: 18,
@@ -157,7 +155,6 @@ export const PROVIDERS = [
     role: 'Couturière & styliste',
     category: 'Couture',
     ville: 'Franceville',
-    emoji: '✂️',
     bg: '#FBF0E6',
     rating: 4.9,
     reviews: 61,
@@ -184,7 +181,6 @@ export const PROVIDERS = [
     role: 'Agent de nettoyage',
     category: 'Nettoyage',
     ville: 'Libreville',
-    emoji: '🏠',
     bg: '#FBEAF0',
     rating: 4.7,
     reviews: 45,
@@ -210,7 +206,6 @@ export const PROVIDERS = [
     role: 'Plombier',
     category: 'Plomberie',
     ville: 'Oyem',
-    emoji: '💧',
     bg: '#E1F5EE',
     rating: 4.9,
     reviews: 28,
@@ -236,7 +231,6 @@ export const PROVIDERS = [
     role: 'Peintre en bâtiment',
     category: 'Peinture',
     ville: 'Franceville',
-    emoji: '🎨',
     bg: '#EEEDFE',
     rating: 4.5,
     reviews: 22,

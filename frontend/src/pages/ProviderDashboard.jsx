@@ -42,11 +42,7 @@ export default function ProviderDashboard() {
   const [saving, setSaving] = useState(false)
   const [togglingAvailability, setTogglingAvailability] = useState(false)
 
-  const renderStars = useCallback((note) => {
-    const fullStars = Math.round(note || 0)
-    const emptyStars = 5 - fullStars
-    return '⭐'.repeat(fullStars) + '☆'.repeat(emptyStars)
-  }, [])
+  const renderStars = useCallback((note) => `${(note || 0).toFixed(1)}/5`, [])
 
   const stats = useMemo(() => ({
     demandesCount: '0',
@@ -58,17 +54,17 @@ export default function ProviderDashboard() {
   }), [prestataire])
 
   const quickActions = useMemo(() => [
-    { icon: '📋', titre: 'Demandes', desc: 'Voir les nouvelles demandes', action: () => setActiveTab('demandes'), bg: '#E8F5EE', color: '#0F4526' },
-    { icon: '📅', titre: 'Planning', desc: 'Gérer mon agenda', action: () => setActiveTab('planning'), bg: '#EEF0FD', color: '#3C3489' },
-    { icon: '💬', titre: 'Messages', desc: 'Vos conversations', action: () => setActiveTab('messages'), bg: '#FDF3E3', color: '#7A5C1A' },
-    { icon: '📄', titre: 'Devis', desc: 'Gérer vos devis', action: () => setActiveTab('devis'), bg: '#FBEAF0', color: '#993556' },
+    { titre: 'Demandes', desc: 'Voir les nouvelles demandes', action: () => setActiveTab('demandes'), bg: '#E8F5EE', color: '#0F4526' },
+    { titre: 'Planning', desc: 'Gérer mon agenda', action: () => setActiveTab('planning'), bg: '#EEF0FD', color: '#3C3489' },
+    { titre: 'Messages', desc: 'Vos conversations', action: () => setActiveTab('messages'), bg: '#FDF3E3', color: '#7A5C1A' },
+    { titre: 'Devis', desc: 'Gérer vos devis', action: () => setActiveTab('devis'), bg: '#FBEAF0', color: '#993556' },
   ], [])
 
   const serviceInfo = useMemo(() => [
-    { label: '🔧 Catégorie', val: prestataire?.categorie || '-' },
-    { label: '📍 Ville', val: prestataire?.ville || '-' },
-    { label: '⏱ Expérience', val: prestataire?.experience || '-' },
-    { label: '📊 Disponibilité', val: prestataire?.available ? '🟢 Disponible' : '🔴 Occupé' },
+    { label: 'Catégorie', val: prestataire?.categorie || '-' },
+    { label: 'Ville', val: prestataire?.ville || '-' },
+    { label: 'Expérience', val: prestataire?.experience || '-' },
+    { label: 'Disponibilité', val: prestataire?.available ? 'Disponible' : 'Occupé' },
   ], [prestataire])
 
   const handleTabChange = useCallback((tabId) => {
@@ -197,13 +193,13 @@ export default function ProviderDashboard() {
   )
 
   const TABS = [
-    { id: 'accueil', icon: '🏠', label: 'Accueil' },
-    { id: 'demandes', icon: '📋', label: 'Demandes', count: newDemandes },
-    { id: 'planning', icon: '📅', label: 'Planning' },
-    { id: 'devis', icon: '📄', label: 'Devis', count: newDevis },
-    { id: 'messages', icon: '💬', label: 'Messages', count: unreadMessages },
-    { id: 'avis', icon: '⭐', label: 'Avis' },
-    { id: 'profil', icon: '👤', label: 'Mon profil' },
+    { id: 'accueil', label: 'Accueil' },
+    { id: 'demandes', label: 'Demandes', count: newDemandes },
+    { id: 'planning', label: 'Planning' },
+    { id: 'devis', label: 'Devis', count: newDevis },
+    { id: 'messages', label: 'Messages', count: unreadMessages },
+    { id: 'avis', label: 'Avis' },
+    { id: 'profil', label: 'Mon profil' },
   ]
 
   return (
@@ -218,7 +214,7 @@ export default function ProviderDashboard() {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '16px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
               <div style={{
-                width: '64px', height: '64px', borderRadius: '16px',
+                width: '64px', height: '64px', 
                 background: 'rgba(255,255,255,0.15)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 fontSize: '28px', fontWeight: '800', color: '#fff',
@@ -237,7 +233,7 @@ export default function ProviderDashboard() {
               </div>
               <div>
                 <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.65)', marginBottom: '4px' }}>
-                  Dashboard Prestataire 🔧
+                  Dashboard Prestataire
                 </p>
                 <h1 style={{ fontSize: '22px', fontWeight: '800', color: '#fff', marginBottom: '4px' }}>
                   {user?.name}
@@ -247,48 +243,47 @@ export default function ProviderDashboard() {
                     fontSize: '11px', fontWeight: '700',
                     background: prestataire?.validated ? '#E8F5EE' : '#FDF3E3',
                     color: prestataire?.validated ? '#0F4526' : '#7A5C1A',
-                    padding: '3px 10px', borderRadius: '99px',
+                    padding: '3px 10px', 
                   }}>
-                    {prestataire?.validated ? '✅ Profil validé' : '⏳ En attente de validation'}
+                    {prestataire?.validated ? 'Profil validé' : 'En attente de validation'}
                   </span>
                   {prestataire?.ville && (
                     <span style={{
                       fontSize: '11px', fontWeight: '700',
                       background: 'rgba(255,255,255,0.15)', color: '#fff',
-                      padding: '3px 10px', borderRadius: '99px',
-                    }}>📍 {prestataire.ville}</span>
+                      padding: '3px 10px', 
+                    }}>{prestataire.ville}</span>
                   )}
                 </div>
               </div>
             </div>
 
             <button onClick={toggleMode} style={{
-              padding: '10px 18px', borderRadius: '10px',
+              padding: '10px 18px', 
               background: 'rgba(255,255,255,0.15)',
               border: '1px solid rgba(255,255,255,0.3)',
               color: '#fff', cursor: 'pointer',
               fontSize: '13px', fontWeight: '600',
               display: 'flex', alignItems: 'center', gap: '8px',
             }}>
-              👤 Passer en mode client
+              Passer en mode client
             </button>
           </div>
 
           {/* STATS */}
           <div style={{ display: 'flex', gap: '12px', marginTop: '24px', flexWrap: 'wrap' }}>
             {[
-              { val: stats.demandesCount, lbl: 'Demandes reçues', icon: '📋' },
-              { val: stats.missionsEnCours, lbl: 'Missions en cours', icon: '⚡' },
-              { val: stats.missions, lbl: 'Missions terminées', icon: '✅' },
-              { val: stats.rating, lbl: 'Note moyenne', icon: '⭐' },
+              { val: stats.demandesCount, lbl: 'Demandes reçues' },
+              { val: stats.missionsEnCours, lbl: 'Missions en cours' },
+              { val: stats.missions, lbl: 'Missions terminées' },
+              { val: stats.rating, lbl: 'Note moyenne' },
             ].map(s => (
               <div key={s.lbl} style={{
                 background: 'rgba(255,255,255,0.1)',
                 border: '1px solid rgba(255,255,255,0.15)',
-                borderRadius: '12px', padding: '12px 20px',
+                 padding: '12px 20px',
                 textAlign: 'center', minWidth: '110px', flex: '1'
               }}>
-                <div style={{ fontSize: '20px', marginBottom: '4px' }}>{s.icon}</div>
                 <div style={{ fontSize: '20px', fontWeight: '800', color: '#fff' }}>{s.val}</div>
                 <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.6)' }}>{s.lbl}</div>
               </div>
@@ -300,7 +295,7 @@ export default function ProviderDashboard() {
       {/* BODY */}
       <div style={{ maxWidth: '900px', margin: '-48px auto 0', padding: '0 24px 64px' }}>
         <div style={{
-          background: '#fff', borderRadius: '16px',
+          background: '#fff', 
           boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
           overflow: 'hidden',
         }}>
@@ -324,7 +319,6 @@ export default function ProviderDashboard() {
                   position: 'relative',
                 }}
               >
-                <span style={{ fontSize: '18px' }}>{t.icon}</span>
                 <span>{t.label}</span>
                 {t.count > 0 && (
                   <span style={{
@@ -336,7 +330,6 @@ export default function ProviderDashboard() {
                     fontSize: '9px',
                     fontWeight: '700',
                     padding: '1px 5px',
-                    borderRadius: '99px',
                     minWidth: '16px',
                     textAlign: 'center',
                     lineHeight: '1.4',
@@ -364,11 +357,10 @@ export default function ProviderDashboard() {
               {!prestataire?.validated && (
                 <div style={{
                   background: '#FDF3E3', border: '1px solid #E8C97A',
-                  borderRadius: '12px', padding: '16px 20px',
+                   padding: '16px 20px',
                   display: 'flex', alignItems: 'center', gap: '16px',
                   marginBottom: '24px',
                 }}>
-                  <span style={{ fontSize: '28px' }}>⏳</span>
                   <div>
                     <p style={{ fontSize: '14px', fontWeight: '700', color: '#7A5C1A', marginBottom: '4px' }}>
                       Profil en cours de validation
@@ -384,10 +376,9 @@ export default function ProviderDashboard() {
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '12px', marginBottom: '24px' }}>
                 {quickActions.map(a => (
                   <div key={a.titre} onClick={a.action} style={{
-                    background: a.bg, borderRadius: '14px',
+                    background: a.bg, 
                     padding: '16px', cursor: 'pointer',
                   }}>
-                    <div style={{ fontSize: '28px', marginBottom: '8px' }}>{a.icon}</div>
                     <p style={{ fontSize: '13px', fontWeight: '700', color: a.color, marginBottom: '4px' }}>{a.titre}</p>
                     <p style={{ fontSize: '11px', color: '#8FA99E' }}>{a.desc}</p>
                   </div>
@@ -400,7 +391,7 @@ export default function ProviderDashboard() {
                   <div key={r.label} style={{
                     display: 'flex', justifyContent: 'space-between',
                     padding: '12px 16px', background: '#F7F9F8',
-                    borderRadius: '10px', border: '1px solid #E2EBE7',
+                     border: '1px solid #E2EBE7',
                     fontSize: '14px',
                   }}>
                     <span style={{ color: '#4A5E55', fontWeight: '600' }}>{r.label}</span>
@@ -411,19 +402,19 @@ export default function ProviderDashboard() {
                 <div style={{
                   display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                   padding: '12px 16px', background: '#F7F9F8',
-                  borderRadius: '10px', border: '1px solid #E2EBE7',
+                   border: '1px solid #E2EBE7',
                 }}>
                   <span style={{ fontSize: '14px', fontWeight: '600', color: '#4A5E55' }}>
                     Changer ma disponibilité
                   </span>
                   <div onClick={toggleAvailability} style={{
-                    width: '48px', height: '26px', borderRadius: '99px',
+                    width: '48px', height: '26px', 
                     background: prestataire?.available ? '#1A6B3C' : '#E2EBE7',
                     cursor: togglingAvailability ? 'wait' : 'pointer', position: 'relative',
                     transition: 'background 0.2s', opacity: togglingAvailability ? 0.6 : 1,
                   }}>
                     <div style={{
-                      width: '20px', height: '20px', borderRadius: '50%',
+                      width: '20px', height: '20px', 
                       background: '#fff', position: 'absolute',
                       top: '3px', left: prestataire?.available ? '25px' : '3px',
                       transition: 'left 0.2s',
@@ -436,12 +427,11 @@ export default function ProviderDashboard() {
               {/* SECTION AVIS */}
               <div style={{ marginTop: '32px', borderTop: '1px solid #E2EBE7', paddingTop: '24px' }}>
                 <h2 style={{ fontSize: '16px', fontWeight: '800', marginBottom: '16px' }}>
-                  ⭐ Avis et évaluations
+                  Avis et évaluations
                 </h2>
 
                 <div style={{
                   background: '#F7F9F8',
-                  borderRadius: '12px',
                   padding: '20px',
                   marginBottom: '16px',
                   border: '1px solid #E2EBE7',
@@ -499,9 +489,7 @@ export default function ProviderDashboard() {
                       padding: '32px 16px',
                       color: '#8FA99E',
                       background: '#fff',
-                      borderRadius: '8px'
                     }}>
-                      <div style={{ fontSize: '28px', marginBottom: '8px' }}>💬</div>
                       <p style={{ fontWeight: '600' }}>Aucun avis pour le moment</p>
                       <p style={{ fontSize: '13px' }}>Les premiers avis apparaîtront après vos missions</p>
                     </div>
@@ -534,7 +522,7 @@ export default function ProviderDashboard() {
           {activeTab === 'demandes' && (
             <div style={{ padding: '24px' }}>
               <h2 style={{ fontSize: '18px', fontWeight: '800', marginBottom: '20px' }}>
-                📋 Demandes reçues
+                Demandes reçues
                 {newDemandes > 0 && (
                   <span style={{
                     marginLeft: '8px',
@@ -543,7 +531,6 @@ export default function ProviderDashboard() {
                     fontSize: '11px',
                     fontWeight: '700',
                     padding: '2px 8px',
-                    borderRadius: '99px',
                   }}>
                     {newDemandes}
                   </span>
@@ -558,7 +545,6 @@ export default function ProviderDashboard() {
             <div style={{ padding: '24px' }}>
               <h2 style={{ fontSize: '18px', fontWeight: '800' }}>Mon planning</h2>
               <div style={{ textAlign: 'center', padding: '48px 24px', color: '#8FA99E' }}>
-                <div style={{ fontSize: '48px', marginBottom: '16px' }}>📅</div>
                 <p style={{ fontSize: '15px', fontWeight: '700', color: '#4A5E55', marginBottom: '8px' }}>
                   Gestion du planning à venir
                 </p>
@@ -570,7 +556,7 @@ export default function ProviderDashboard() {
           {activeTab === 'devis' && (
             <div style={{ padding: '24px' }}>
               <h2 style={{ fontSize: '18px', fontWeight: '800', marginBottom: '20px' }}>
-                📄 Mes devis
+                Mes devis
                 {newDevis > 0 && (
                   <span style={{
                     marginLeft: '8px',
@@ -579,7 +565,6 @@ export default function ProviderDashboard() {
                     fontSize: '11px',
                     fontWeight: '700',
                     padding: '2px 8px',
-                    borderRadius: '99px',
                   }}>
                     {newDevis}
                   </span>
@@ -593,7 +578,7 @@ export default function ProviderDashboard() {
           {activeTab === 'messages' && (
             <div style={{ padding: '24px' }}>
               <h2 style={{ fontSize: '18px', fontWeight: '800', marginBottom: '20px' }}>
-                💬 Mes messages
+                Mes messages
                 {unreadMessages > 0 && (
                   <span style={{
                     marginLeft: '8px',
@@ -602,7 +587,6 @@ export default function ProviderDashboard() {
                     fontSize: '11px',
                     fontWeight: '700',
                     padding: '2px 8px',
-                    borderRadius: '99px',
                   }}>
                     {unreadMessages}
                   </span>
@@ -616,12 +600,11 @@ export default function ProviderDashboard() {
           {activeTab === 'avis' && (
             <div style={{ padding: '24px' }}>
               <h2 style={{ fontSize: '18px', fontWeight: '800', marginBottom: '20px' }}>
-                ⭐ Tous mes avis clients
+                Tous mes avis clients
               </h2>
 
               <div style={{
                 background: 'linear-gradient(135deg, #F7F9F8, #E8F5EE)',
-                borderRadius: '16px',
                 padding: '24px',
                 marginBottom: '24px',
                 border: '1px solid #B8DCC8',
@@ -653,7 +636,6 @@ export default function ProviderDashboard() {
                     <div key={a.id} style={{
                       background: '#fff',
                       border: '1px solid #E2EBE7',
-                      borderRadius: '12px',
                       padding: '16px',
                     }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
@@ -676,7 +658,6 @@ export default function ProviderDashboard() {
                         <div style={{
                           padding: '12px 16px',
                           background: '#F7F9F8',
-                          borderRadius: '8px',
                           marginTop: '4px'
                         }}>
                           <p style={{
@@ -697,9 +678,7 @@ export default function ProviderDashboard() {
                     padding: '60px 24px',
                     color: '#8FA99E',
                     background: '#F7F9F8',
-                    borderRadius: '12px'
                   }}>
-                    <div style={{ fontSize: '48px', marginBottom: '16px' }}>💬</div>
                     <p style={{ fontSize: '16px', fontWeight: '600', color: '#4A5E55' }}>
                       Pas encore d'avis
                     </p>
@@ -729,7 +708,7 @@ export default function ProviderDashboard() {
                     <div key={r.label} style={{
                       display: 'flex', justifyContent: 'space-between',
                       padding: '12px 16px', background: '#F7F9F8',
-                      borderRadius: '10px', border: '1px solid #E2EBE7',
+                       border: '1px solid #E2EBE7',
                       fontSize: '14px',
                     }}>
                       <span style={{ color: '#4A5E55', fontWeight: '600' }}>{r.label}</span>
@@ -740,11 +719,10 @@ export default function ProviderDashboard() {
                   <div style={{
                     padding: '12px 16px',
                     background: '#F7F9F8',
-                    borderRadius: '10px',
                     border: '1px solid #E2EBE7',
                   }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <span style={{ color: '#4A5E55', fontWeight: '600' }}>⭐ Note moyenne</span>
+                      <span style={{ color: '#4A5E55', fontWeight: '600' }}>Note moyenne</span>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                         <span style={{ fontSize: '20px' }}>
                           {renderStars(stats.moyenneAvis)}
@@ -760,12 +738,12 @@ export default function ProviderDashboard() {
                   </div>
 
                   {prestataire?.skills?.length > 0 && (
-                    <div style={{ padding: '12px 16px', background: '#F7F9F8', borderRadius: '10px', border: '1px solid #E2EBE7' }}>
+                    <div style={{ padding: '12px 16px', background: '#F7F9F8',  border: '1px solid #E2EBE7' }}>
                       <p style={{ fontSize: '13px', fontWeight: '600', color: '#4A5E55', marginBottom: '8px' }}>Spécialités / Tags</p>
                       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
                         {prestataire.skills.map(s => (
                           <span key={s} style={{
-                            padding: '4px 10px', borderRadius: '99px',
+                            padding: '4px 10px', 
                             fontSize: '11px', fontWeight: '600',
                             background: '#E8F5EE', color: '#0F4526',
                             border: '1px solid #B8DCC8',
@@ -778,10 +756,10 @@ export default function ProviderDashboard() {
                   <button onClick={() => setIsEditing(true)} style={{
                     width: '100%', padding: '12px',
                     background: '#1A6B3C', color: '#fff',
-                    border: 'none', borderRadius: '10px',
+                    border: 'none', 
                     fontSize: '14px', fontWeight: '700', cursor: 'pointer',
                     marginTop: '8px',
-                  }}>✏️ Modifier les détails de mon service</button>
+                  }}>Modifier les détails de mon service</button>
                 </div>
               ) : (
                 <form onSubmit={handleSaveProfile} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
@@ -792,17 +770,17 @@ export default function ProviderDashboard() {
                       value={editForm.categorie}
                       onChange={e => setEditForm({...editForm, categorie: e.target.value})}
                       placeholder="Ex: Électricien, Plombier, Coiffeuse à domicile..."
-                      style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #E2EBE7', boxSizing: 'border-box' }}
+                      style={{ width: '100%', padding: '10px 14px',  border: '1px solid #E2EBE7', boxSizing: 'border-box' }}
                       required
                     />
                   </div>
 
                   <div>
-                    <label style={{ display: 'block', fontSize: '13px', fontWeight: '600', color: '#4A5E55', marginBottom: '6px' }}>Ville au Gabon 📍</label>
+                    <label style={{ display: 'block', fontSize: '13px', fontWeight: '600', color: '#4A5E55', marginBottom: '6px' }}>Ville au Gabon</label>
                     <select
                       value={editForm.ville}
                       onChange={e => setEditForm({...editForm, ville: e.target.value})}
-                      style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #E2EBE7', boxSizing: 'border-box', background: '#fff' }}
+                      style={{ width: '100%', padding: '10px 14px',  border: '1px solid #E2EBE7', boxSizing: 'border-box', background: '#fff' }}
                       required
                     >
                       <option value="">Sélectionne ta ville</option>
@@ -817,7 +795,7 @@ export default function ProviderDashboard() {
                       value={editForm.experience}
                       onChange={e => setEditForm({...editForm, experience: e.target.value})}
                       placeholder="Ex: 3 ans d'expérience, Plus de 5 ans..."
-                      style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #E2EBE7', boxSizing: 'border-box' }}
+                      style={{ width: '100%', padding: '10px 14px',  border: '1px solid #E2EBE7', boxSizing: 'border-box' }}
                     />
                   </div>
 
@@ -828,18 +806,18 @@ export default function ProviderDashboard() {
                       value={editForm.skillsInput}
                       onChange={e => setEditForm({...editForm, skillsInput: e.target.value})}
                       placeholder="Ex: Dépannage rapide, Climatisation, Coiffure nappy"
-                      style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #E2EBE7', boxSizing: 'border-box' }}
+                      style={{ width: '100%', padding: '10px 14px',  border: '1px solid #E2EBE7', boxSizing: 'border-box' }}
                     />
                     <small style={{ color: '#8FA99E', fontSize: '11px', marginTop: '4px', display: 'block' }}>Sépare chaque spécialité par une virgule.</small>
                   </div>
 
                   <div style={{ display: 'flex', gap: '10px', marginTop: '8px' }}>
                     <button type="button" onClick={() => setIsEditing(false)} style={{
-                      flex: 1, padding: '12px', background: '#F7F9F8', border: '1px solid #E2EBE7', borderRadius: '10px', fontSize: '14px', fontWeight: '600', cursor: 'pointer'
+                      flex: 1, padding: '12px', background: '#F7F9F8', border: '1px solid #E2EBE7',  fontSize: '14px', fontWeight: '600', cursor: 'pointer'
                     }}>Annuler</button>
 
                     <button type="submit" disabled={saving} style={{
-                      flex: 1, padding: '12px', background: '#1A6B3C', color: '#fff', border: 'none', borderRadius: '10px', fontSize: '14px', fontWeight: '700', cursor: 'pointer',
+                      flex: 1, padding: '12px', background: '#1A6B3C', color: '#fff', border: 'none',  fontSize: '14px', fontWeight: '700', cursor: 'pointer',
                       opacity: saving ? 0.7 : 1
                     }}>{saving ? 'Sauvegarde...' : 'Enregistrer'}</button>
                   </div>

@@ -9,7 +9,8 @@
     "dev": "nodemon src/app.js",
     "test": "jest",
     "lint": "eslint src/",
-    "migrate": "node src/utils/migrate.js"
+    "migrate": "node src/utils/migrate.js",
+    "seed": "node src/utils/seed.js"
   },
   "keywords": [
     "api",

@@ -90,12 +90,6 @@ export default function BecomeProviderPage() {
         textAlign: 'center', padding: '48px 24px',
         fontFamily: 'sans-serif',
       }}>
-        <div style={{
-          width: '80px', height: '80px', borderRadius: '50%',
-          background: '#E8F5EE', border: '2px solid #B8DCC8',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          fontSize: '36px', marginBottom: '24px',
-        }}>🎉</div>
         <h2 style={{ fontSize: '28px', fontWeight: '800', marginBottom: '12px' }}>
           Demande envoyée !
         </h2>
@@ -106,17 +100,17 @@ export default function BecomeProviderPage() {
           Notre équipe va vérifier vos informations et valider votre profil sous 24-48h.
         </p>
         <button onClick={() => navigate('/')} style={{
-          padding: '14px 28px', borderRadius: '12px',
+          padding: '14px 28px', 
           background: '#1A6B3C', color: '#fff',
           border: 'none', fontSize: '15px', fontWeight: '700', cursor: 'pointer',
-        }}>🏠 Retour à l'accueil</button>
+        }}>Retour à l'accueil</button>
       </div>
     )
   }
 
   const cardStyle = {
     background: '#fff', border: '1px solid #E2EBE7',
-    borderRadius: '18px', overflow: 'hidden', marginBottom: '16px',
+     overflow: 'hidden', marginBottom: '16px',
   }
   const headerStyle = {
     padding: '16px 20px', borderBottom: '1px solid #E2EBE7',
@@ -125,7 +119,7 @@ export default function BecomeProviderPage() {
   }
   const inputStyle = {
     width: '100%', padding: '12px 14px',
-    border: '1.5px solid #E2EBE7', borderRadius: '10px',
+    border: '1.5px solid #E2EBE7', 
     fontSize: '14px', fontFamily: 'sans-serif',
     outline: 'none', boxSizing: 'border-box',
   }
@@ -156,7 +150,7 @@ export default function BecomeProviderPage() {
             <div key={s} style={{ display: 'flex', alignItems: 'center', flex: 1 }}>
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
                 <div style={{
-                  width: '32px', height: '32px', borderRadius: '50%',
+                  width: '32px', height: '32px', 
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   fontSize: '12px', fontWeight: '700',
                   background: i + 1 < step ? '#1A6B3C' : '#fff',
@@ -182,7 +176,7 @@ export default function BecomeProviderPage() {
         {step === 1 && (
           <>
             <div style={cardStyle}>
-              <div style={headerStyle}>👤 Vos informations de base</div>
+              <div style={headerStyle}>Vos informations de base</div>
               <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
 
                 {/* Pièce d'identité */}
@@ -197,9 +191,8 @@ export default function BecomeProviderPage() {
                     <div style={{
                       display: 'flex', alignItems: 'center', gap: '10px',
                       background: '#E8F5EE', border: '1px solid #B8DCC8',
-                      borderRadius: '10px', padding: '10px 14px',
+                       padding: '10px 14px',
                     }}>
-                      <span style={{ fontSize: '20px' }}>✅</span>
                       <div style={{ flex: 1 }}>
                         <p style={{ fontSize: '13px', fontWeight: '700', color: '#0F4526' }}>Document uploadé</p>
                         <p style={{ fontSize: '11px', color: '#4A5E55' }}>Votre pièce d'identité a été envoyée</p>
@@ -212,11 +205,10 @@ export default function BecomeProviderPage() {
                   ) : (
                     <label style={{
                       display: 'flex', alignItems: 'center', gap: '12px',
-                      border: '2px dashed #E2EBE7', borderRadius: '12px',
+                      border: '2px dashed #E2EBE7', 
                       padding: '16px', cursor: 'pointer',
                       background: '#F7F9F8', opacity: uploadingId ? 0.6 : 1,
                     }}>
-                      <span style={{ fontSize: '28px' }}>🪪</span>
                       <div>
                         <p style={{ fontSize: '13px', fontWeight: '700', color: '#111' }}>
                           {uploadingId ? 'Envoi en cours...' : 'Ajouter votre pièce d\'identité'}
@@ -272,7 +264,7 @@ export default function BecomeProviderPage() {
               style={{
                 width: '100%', padding: '16px',
                 background: ville && experience ? '#1A6B3C' : '#B8DCC8',
-                color: '#fff', border: 'none', borderRadius: '12px',
+                color: '#fff', border: 'none', 
                 fontSize: '15px', fontWeight: '700',
                 cursor: ville && experience ? 'pointer' : 'not-allowed',
               }}>
@@ -285,7 +277,7 @@ export default function BecomeProviderPage() {
         {step === 2 && (
           <>
             <div style={cardStyle}>
-              <div style={headerStyle}>🔧 Votre service</div>
+              <div style={headerStyle}>Votre service</div>
               <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
 
                 {/* Catégorie */}
@@ -296,14 +288,13 @@ export default function BecomeProviderPage() {
                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(100px, 1fr))', gap: '8px' }}>
                     {CATEGORIES.slice(0, 16).map(c => (
                       <div key={c.label} onClick={() => setCategorie(c.label)} style={{
-                        padding: '10px 8px', borderRadius: '10px', cursor: 'pointer',
+                        padding: '10px 8px',  cursor: 'pointer',
                         border: '1.5px solid',
                         borderColor: categorie === c.label ? '#1A6B3C' : '#E2EBE7',
                         background: categorie === c.label ? '#E8F5EE' : '#fff',
                         display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px',
                         textAlign: 'center',
                       }}>
-                        <span style={{ fontSize: '20px' }}>{c.icon}</span>
                         <span style={{ fontSize: '11px', fontWeight: '600', color: categorie === c.label ? '#0F4526' : '#4A5E55' }}>
                           {c.label}
                         </span>
@@ -351,7 +342,7 @@ export default function BecomeProviderPage() {
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginTop: '8px' }}>
                       {skills.split(',').map((s, i) => s.trim() && (
                         <span key={i} style={{
-                          padding: '4px 10px', borderRadius: '99px',
+                          padding: '4px 10px', 
                           fontSize: '11px', fontWeight: '600',
                           background: '#E8F5EE', color: '#0F4526',
                           border: '1px solid #B8DCC8',
@@ -368,7 +359,7 @@ export default function BecomeProviderPage() {
               style={{
                 width: '100%', padding: '16px',
                 background: categorie && description.length >= 30 ? '#1A6B3C' : '#B8DCC8',
-                color: '#fff', border: 'none', borderRadius: '12px',
+                color: '#fff', border: 'none', 
                 fontSize: '15px', fontWeight: '700',
                 cursor: categorie && description.length >= 30 ? 'pointer' : 'not-allowed',
               }}>
@@ -382,7 +373,7 @@ export default function BecomeProviderPage() {
           <>
             <div style={cardStyle}>
               <div style={headerStyle}>
-                📸 Photos de vos travaux
+                Photos de vos travaux
                 <span style={{ fontSize: '12px', color: '#8FA99E', fontWeight: '400' }}>(optionnel · max 4)</span>
               </div>
               <div style={{ padding: '20px' }}>
@@ -392,14 +383,14 @@ export default function BecomeProviderPage() {
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '10px' }}>
                   {galerie.map((url, i) => (
                     <div key={i} style={{
-                      aspectRatio: '1', borderRadius: '12px',
+                      aspectRatio: '1', 
                       overflow: 'hidden', position: 'relative',
                       border: '1px solid #E2EBE7',
                     }}>
                       <img src={url} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                       <button onClick={() => setGalerie(prev => prev.filter((_, j) => j !== i))} style={{
                         position: 'absolute', top: '6px', right: '6px',
-                        width: '24px', height: '24px', borderRadius: '50%',
+                        width: '24px', height: '24px', 
                         background: 'rgba(0,0,0,0.6)', color: '#fff',
                         border: 'none', cursor: 'pointer', fontSize: '14px',
                       }}>×</button>
@@ -414,7 +405,7 @@ export default function BecomeProviderPage() {
 
             {/* Récapitulatif */}
             <div style={cardStyle}>
-              <div style={headerStyle}>📋 Récapitulatif</div>
+              <div style={headerStyle}>Récapitulatif</div>
               <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
                 {[
                   { label: 'Ville', val: ville },
@@ -438,9 +429,8 @@ export default function BecomeProviderPage() {
             <div style={{
               display: 'flex', alignItems: 'flex-start', gap: '12px',
               background: '#FDF3E3', border: '1px solid #E8C97A',
-              borderRadius: '12px', padding: '14px 16px', marginBottom: '16px',
+               padding: '14px 16px', marginBottom: '16px',
             }}>
-              <span style={{ fontSize: '18px' }}>⏳</span>
               <p style={{ fontSize: '13px', color: '#7A5C1A', lineHeight: '1.6' }}>
                 Votre profil sera examiné par notre équipe sous <strong>24-48h</strong> avant d'être publié sur la plateforme.
               </p>
@@ -449,12 +439,12 @@ export default function BecomeProviderPage() {
             <button onClick={handleSubmit} disabled={loading} style={{
               width: '100%', padding: '16px',
               background: '#1A6B3C', color: '#fff',
-              border: 'none', borderRadius: '12px',
+              border: 'none', 
               fontSize: '16px', fontWeight: '700', cursor: 'pointer',
               boxShadow: '0 4px 16px rgba(26,107,60,0.3)',
               opacity: loading ? 0.7 : 1,
             }}>
-              {loading ? 'Envoi en cours...' : '🚀 Soumettre ma candidature'}
+              {loading ? 'Envoi en cours...' : 'Soumettre ma candidature'}
             </button>
           </>
         )}

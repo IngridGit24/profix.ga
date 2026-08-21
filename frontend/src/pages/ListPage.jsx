@@ -48,7 +48,7 @@ export default function ListPage() {
           rating: Number(p.rating) || 0,
           reviews: p.reviews_count || 0,
           bg: '#E8F5EE',
-          emoji: '🔧',
+          emoji: '',
         })))
       } catch (err) {
         console.error('Erreur chargement prestataires:', err)
@@ -103,12 +103,11 @@ export default function ListPage() {
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="🔍 Rechercher un prestataire, un service, une ville..."
+              placeholder="Rechercher un prestataire, un service, une ville..."
               style={{
                 width: '100%',
                 padding: '12px 16px',
                 border: '1.5px solid rgba(255,255,255,0.2)',
-                borderRadius: '10px',
                 fontSize: '15px',
                 outline: 'none',
                 fontFamily: 'sans-serif',
@@ -131,11 +130,11 @@ export default function ListPage() {
       }}>
         <div style={{ maxWidth: '900px', margin: '0 auto' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px', flexWrap: 'wrap' }}>
-            <span style={{ fontSize: '13px', fontWeight: '700', color: '#4A5E55' }}>📍 Ville :</span>
+            <span style={{ fontSize: '13px', fontWeight: '700', color: '#4A5E55' }}>Ville :</span>
             <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
               {['Toutes les villes', ...VILLES].map(v => (
                 <button key={v} onClick={() => setVilleFilter(v)} style={{
-                  padding: '5px 14px', borderRadius: '99px',
+                  padding: '5px 14px', 
                   fontSize: '12px', fontWeight: '600', border: '1.5px solid',
                   borderColor: villeFilter === v ? '#1A6B3C' : '#E2EBE7',
                   background: villeFilter === v ? '#1A6B3C' : '#fff',
@@ -146,11 +145,11 @@ export default function ListPage() {
             </div>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
-            <span style={{ fontSize: '13px', fontWeight: '700', color: '#4A5E55' }}>🔧 Service :</span>
+            <span style={{ fontSize: '13px', fontWeight: '700', color: '#4A5E55' }}>Service :</span>
             <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
               {filters.map(f => (
                 <button key={f} onClick={() => setActiveFilter(f)} style={{
-                  padding: '5px 14px', borderRadius: '99px',
+                  padding: '5px 14px', 
                   fontSize: '12px', fontWeight: '600', border: '1.5px solid',
                   borderColor: activeFilter === f ? '#C8922A' : '#E2EBE7',
                   background: activeFilter === f ? '#C8922A' : '#fff',
@@ -175,7 +174,6 @@ export default function ListPage() {
             transition={{ duration: 0.4 }}
             style={{ textAlign: 'center', padding: '64px 24px', color: '#8FA99E' }}
           >
-            <div style={{ fontSize: '48px', marginBottom: '16px' }}>🔍</div>
             <p style={{ fontSize: '16px', fontWeight: '700', color: '#4A5E55', marginBottom: '8px' }}>
               {debouncedSearch ? `Aucun résultat pour "${debouncedSearch}"` : 'Aucun prestataire trouvé'}
             </p>
@@ -194,7 +192,6 @@ export default function ListPage() {
               style={{
                 background: '#fff',
                 border: '1px solid #E2EBE7',
-                borderRadius: '18px',
                 padding: '20px',
                 display: 'flex',
                 alignItems: 'center',
@@ -213,14 +210,14 @@ export default function ListPage() {
             >
               {/* AVATAR */}
               <div style={{
-                width: '64px', height: '64px', borderRadius: '12px',
+                width: '64px', height: '64px', 
                 background: p.bg || '#E8F5EE', flexShrink: 0,
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 fontSize: '28px', overflow: 'hidden',
               }}>
                 {p.photo
                   ? <img src={p.photo} style={{ width: '100%', height: '100%', objectFit: 'cover' }} loading="lazy" />
-                  : p.emoji || '🔧'
+                  : <span style={{ fontSize: '20px', fontWeight: '800', color: '#0F4526' }}>{p.initials}</span>
                 }
               </div>
 
@@ -231,16 +228,16 @@ export default function ListPage() {
                 <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
                   {p.rating > 0 && (
                     <span style={{ fontSize: '12px', color: '#8FA99E' }}>
-                      ⭐ <strong style={{ color: '#111' }}>{p.rating.toFixed(1)}</strong> ({p.reviews} avis)
+                      <strong style={{ color: '#111' }}>{p.rating.toFixed(1)}</strong> ({p.reviews} avis)
                     </span>
                   )}
-                  <span style={{ fontSize: '12px', color: '#8FA99E' }}>🕐 {p.exp}</span>
+                  <span style={{ fontSize: '12px', color: '#8FA99E' }}>{p.exp}</span>
                   <span style={{
                     fontSize: '12px', fontWeight: '600',
                     background: '#F0F7F3', color: '#1A6B3C',
                     border: '1px solid #B8DCC8',
-                    padding: '2px 10px', borderRadius: '99px',
-                  }}>📍 {p.ville}</span>
+                    padding: '2px 10px', 
+                  }}>{p.ville}</span>
                 </div>
               </div>
 
@@ -250,14 +247,14 @@ export default function ListPage() {
                   fontSize: '11px', fontWeight: '600',
                   background: p.available ? '#E6F9EE' : '#FDECEA',
                   color: p.available ? '#1A6B3C' : '#D94F3D',
-                  padding: '4px 10px', borderRadius: '99px',
-                }}>{p.available ? '🟢 Disponible' : '🔴 Occupé'}</span>
+                  padding: '4px 10px', 
+                }}>{p.available ? 'Disponible' : 'Occupé'}</span>
                 <span style={{
                   fontSize: '11px', fontWeight: '600',
                   background: '#E8F5EE', color: '#0F4526',
                   border: '1px solid #B8DCC8',
-                  padding: '4px 10px', borderRadius: '99px',
-                }}>📄 Devis gratuit</span>
+                  padding: '4px 10px', 
+                }}>Devis gratuit</span>
               </div>
             </motion.div>
           ))

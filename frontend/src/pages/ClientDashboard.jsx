@@ -81,11 +81,11 @@ export default function ClientDashboard() {
   )
 
   const TABS = [
-    { id: 'accueil', icon: '🏠', label: 'Accueil' },
-    { id: 'reservations', icon: '📋', label: 'Mes demandes' },
-    { id: 'devis', icon: '📄', label: 'Mes devis', count: newDevis },
-    { id: 'messages', icon: '💬', label: 'Messages', count: unreadMessages },
-    { id: 'profil', icon: '👤', label: 'Mon profil' },
+    { id: 'accueil', label: 'Accueil' },
+    { id: 'reservations', label: 'Mes demandes' },
+    { id: 'devis', label: 'Mes devis', count: newDevis },
+    { id: 'messages', label: 'Messages', count: unreadMessages },
+    { id: 'profil', label: 'Mon profil' },
   ]
 
   return (
@@ -99,7 +99,7 @@ export default function ClientDashboard() {
         <div style={{ maxWidth: '900px', margin: '0 auto' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
             <div style={{
-              width: '64px', height: '64px', borderRadius: '16px',
+              width: '64px', height: '64px', 
               background: 'rgba(255,255,255,0.15)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               fontSize: '28px', fontWeight: '800', color: '#fff',
@@ -113,7 +113,7 @@ export default function ClientDashboard() {
             </div>
             <div>
               <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.65)', marginBottom: '4px' }}>
-                Bonjour 👋
+                Bonjour
               </p>
               <h1 style={{ fontSize: '22px', fontWeight: '800', color: '#fff', marginBottom: '4px' }}>
                 {user.name || 'Mon compte'}
@@ -122,8 +122,8 @@ export default function ClientDashboard() {
                 <span style={{
                   fontSize: '11px', fontWeight: '700',
                   background: '#FDF3E3', color: '#7A5C1A',
-                  padding: '3px 10px', borderRadius: '99px',
-                }}>👤 Client</span>
+                  padding: '3px 10px', 
+                }}>Client</span>
               </div>
             </div>
           </div>
@@ -131,17 +131,16 @@ export default function ClientDashboard() {
           {/* STATS RAPIDES */}
           <div style={{ display: 'flex', gap: '12px', marginTop: '24px', flexWrap: 'wrap' }}>
             {[
-              { val: '0', lbl: 'Demandes', icon: '📋' },
-              { val: String(newDevis), lbl: 'Devis en attente', icon: '📄' },
-              { val: '0', lbl: 'Missions terminées', icon: '✅' },
+              { val: '0', lbl: 'Demandes' },
+              { val: String(newDevis), lbl: 'Devis en attente' },
+              { val: '0', lbl: 'Missions terminées' },
             ].map(s => (
               <div key={s.lbl} style={{
                 background: 'rgba(255,255,255,0.1)',
                 border: '1px solid rgba(255,255,255,0.15)',
-                borderRadius: '12px', padding: '12px 20px',
+                 padding: '12px 20px',
                 textAlign: 'center',
               }}>
-                <div style={{ fontSize: '20px', marginBottom: '4px' }}>{s.icon}</div>
                 <div style={{ fontSize: '20px', fontWeight: '800', color: '#fff' }}>{s.val}</div>
                 <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.6)' }}>{s.lbl}</div>
               </div>
@@ -155,7 +154,7 @@ export default function ClientDashboard() {
 
         {/* TABS AVEC BADGES */}
         <div style={{
-          background: '#fff', borderRadius: '16px',
+          background: '#fff', 
           boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
           overflow: 'hidden', marginBottom: '20px',
         }}>
@@ -173,7 +172,6 @@ export default function ClientDashboard() {
                 whiteSpace: 'nowrap', minWidth: '80px',
                 position: 'relative',
               }}>
-                <span style={{ fontSize: '18px' }}>{t.icon}</span>
                 <span>{t.label}</span>
                 {t.count > 0 && (
                   <span style={{
@@ -185,7 +183,6 @@ export default function ClientDashboard() {
                     fontSize: '9px',
                     fontWeight: '700',
                     padding: '1px 5px',
-                    borderRadius: '99px',
                     minWidth: '16px',
                     textAlign: 'center',
                     lineHeight: '1.4',
@@ -217,18 +214,17 @@ export default function ClientDashboard() {
               {/* Actions rapides */}
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '12px', marginBottom: '24px' }}>
                 {[
-                  { icon: '🔍', titre: 'Trouver un prestataire', desc: 'Parcourez nos professionnels', action: () => navigate('/services'), bg: '#E8F5EE', color: '#0F4526' },
-                  { icon: '📋', titre: 'Mes demandes', desc: 'Suivez vos demandes', action: () => setActiveTab('reservations'), bg: '#EEF0FD', color: '#3C3489' },
-                  { icon: '💬', titre: 'Messages', desc: 'Vos conversations', action: () => setActiveTab('messages'), bg: '#FDF3E3', color: '#7A5C1A' },
-                  { icon: '📄', titre: 'Mes devis', desc: 'Consultez vos devis', action: () => setActiveTab('devis'), bg: '#FBEAF0', color: '#993556' },
+                  { titre: 'Trouver un prestataire', desc: 'Parcourez nos professionnels', action: () => navigate('/services'), bg: '#E8F5EE', color: '#0F4526' },
+                  { titre: 'Mes demandes', desc: 'Suivez vos demandes', action: () => setActiveTab('reservations'), bg: '#EEF0FD', color: '#3C3489' },
+                  { titre: 'Messages', desc: 'Vos conversations', action: () => setActiveTab('messages'), bg: '#FDF3E3', color: '#7A5C1A' },
+                  { titre: 'Mes devis', desc: 'Consultez vos devis', action: () => setActiveTab('devis'), bg: '#FBEAF0', color: '#993556' },
                 ].map(a => (
                   <div key={a.titre} onClick={a.action} style={{
-                    background: a.bg, borderRadius: '14px',
+                    background: a.bg, 
                     padding: '16px', cursor: 'pointer',
                     border: `1px solid ${a.bg}`,
                     transition: 'transform 0.15s',
                   }}>
-                    <div style={{ fontSize: '28px', marginBottom: '8px' }}>{a.icon}</div>
                     <p style={{ fontSize: '13px', fontWeight: '700', color: a.color, marginBottom: '4px' }}>{a.titre}</p>
                     <p style={{ fontSize: '11px', color: '#8FA99E' }}>{a.desc}</p>
                   </div>
@@ -239,7 +235,7 @@ export default function ClientDashboard() {
               {!user.pending_provider && user.type === 'client' && (
                 <div style={{
                   background: 'linear-gradient(135deg, #0F4526, #1A6B3C)',
-                  borderRadius: '16px', padding: '20px 24px',
+                   padding: '20px 24px',
                   display: 'flex', justifyContent: 'space-between',
                   alignItems: 'center', flexWrap: 'wrap', gap: '12px',
                 }}>
@@ -252,7 +248,7 @@ export default function ClientDashboard() {
                     </p>
                   </div>
                   <button onClick={() => navigate('/devenir-prestataire')} style={{
-                    padding: '10px 20px', borderRadius: '10px',
+                    padding: '10px 20px', 
                     background: '#fff', color: '#0F4526',
                     border: 'none', cursor: 'pointer',
                     fontSize: '13px', fontWeight: '700',
@@ -264,10 +260,9 @@ export default function ClientDashboard() {
               {user.pending_provider && (
                 <div style={{
                   background: '#FDF3E3', border: '1px solid #E8C97A',
-                  borderRadius: '16px', padding: '20px 24px',
+                   padding: '20px 24px',
                   display: 'flex', alignItems: 'center', gap: '16px',
                 }}>
-                  <span style={{ fontSize: '32px' }}>⏳</span>
                   <div>
                     <p style={{ fontSize: '15px', fontWeight: '800', color: '#7A5C1A', marginBottom: '4px' }}>
                       Candidature en cours d'examen
@@ -286,10 +281,9 @@ export default function ClientDashboard() {
                   padding: '16px',
                   background: '#E8F5EE',
                   border: '1px solid #B8DCC8',
-                  borderRadius: '12px',
                 }}>
                   <p style={{ fontSize: '13px', fontWeight: '600', color: '#0F4526', marginBottom: '8px' }}>
-                    🔧 Vous êtes prestataire mais actuellement en mode client
+                    Vous êtes prestataire mais actuellement en mode client
                   </p>
                   <button
                     onClick={switchToProviderMode}
@@ -299,13 +293,12 @@ export default function ClientDashboard() {
                       background: '#1A6B3C',
                       color: '#fff',
                       border: 'none',
-                      borderRadius: '10px',
                       fontSize: '14px',
                       fontWeight: '700',
                       cursor: 'pointer',
                     }}
                   >
-                    🔄 Repasser en mode prestataire
+                    Repasser en mode prestataire
                   </button>
                 </div>
               )}
@@ -316,7 +309,7 @@ export default function ClientDashboard() {
           {activeTab === 'reservations' && (
             <div style={{ padding: '24px' }}>
               <h2 style={{ fontSize: '18px', fontWeight: '800', marginBottom: '20px' }}>
-                📋 Mes demandes
+                Mes demandes
               </h2>
               <DemandesList type="client" />
             </div>
@@ -326,7 +319,7 @@ export default function ClientDashboard() {
           {activeTab === 'devis' && (
             <div style={{ padding: '24px' }}>
               <h2 style={{ fontSize: '18px', fontWeight: '800', marginBottom: '20px' }}>
-                📄 Mes devis
+                Mes devis
                 {newDevis > 0 && (
                   <span style={{
                     marginLeft: '8px',
@@ -335,7 +328,6 @@ export default function ClientDashboard() {
                     fontSize: '11px',
                     fontWeight: '700',
                     padding: '2px 8px',
-                    borderRadius: '99px',
                   }}>
                     {newDevis}
                   </span>
@@ -349,7 +341,7 @@ export default function ClientDashboard() {
           {activeTab === 'messages' && (
             <div style={{ padding: '24px' }}>
               <h2 style={{ fontSize: '18px', fontWeight: '800', marginBottom: '20px' }}>
-                💬 Mes messages
+                Mes messages
                 {unreadMessages > 0 && (
                   <span style={{
                     marginLeft: '8px',
@@ -358,7 +350,6 @@ export default function ClientDashboard() {
                     fontSize: '11px',
                     fontWeight: '700',
                     padding: '2px 8px',
-                    borderRadius: '99px',
                   }}>
                     {unreadMessages}
                   </span>
@@ -376,12 +367,12 @@ export default function ClientDashboard() {
                 {[
                   { label: 'Nom', val: user.name || '-' },
                   { label: 'Email', val: user.email || '-' },
-                  { label: 'Type de compte', val: user.type === 'prestataire' ? '🔧 Prestataire' : '👤 Client' },
+                  { label: 'Type de compte', val: user.type === 'prestataire' ? 'Prestataire' : 'Client' },
                 ].map(r => (
                   <div key={r.label} style={{
                     display: 'flex', justifyContent: 'space-between',
                     padding: '12px 16px', background: '#F7F9F8',
-                    borderRadius: '10px', border: '1px solid #E2EBE7',
+                     border: '1px solid #E2EBE7',
                     fontSize: '14px',
                   }}>
                     <span style={{ color: '#4A5E55', fontWeight: '600' }}>{r.label}</span>
@@ -400,13 +391,12 @@ export default function ClientDashboard() {
                       background: '#1A6B3C',
                       color: '#fff',
                       border: 'none',
-                      borderRadius: '10px',
                       fontSize: '14px',
                       fontWeight: '700',
                       cursor: 'pointer',
                     }}
                   >
-                    🔧 Repasser en mode prestataire
+                    Repasser en mode prestataire
                   </button>
                 )}
 
@@ -417,10 +407,9 @@ export default function ClientDashboard() {
                     padding: '16px',
                     background: '#FDF3E3',
                     border: '1px solid #E8C97A',
-                    borderRadius: '10px',
                   }}>
                     <p style={{ fontSize: '13px', fontWeight: '600', color: '#7A5C1A', marginBottom: '8px' }}>
-                      💡 Vous proposez un service ?
+                      Vous proposez un service ?
                     </p>
                     <button
                       onClick={() => navigate('/devenir-prestataire')}
@@ -430,7 +419,6 @@ export default function ClientDashboard() {
                         background: '#C8922A',
                         color: '#fff',
                         border: 'none',
-                        borderRadius: '8px',
                         fontSize: '13px',
                         fontWeight: '600',
                         cursor: 'pointer',
@@ -447,10 +435,9 @@ export default function ClientDashboard() {
                     padding: '12px 16px',
                     background: '#FDF3E3',
                     border: '1px solid #E8C97A',
-                    borderRadius: '10px',
                   }}>
                     <p style={{ fontSize: '13px', fontWeight: '600', color: '#7A5C1A' }}>
-                      ⏳ Candidature en cours d'examen
+                      Candidature en cours d'examen
                     </p>
                   </div>
                 )}
@@ -458,10 +445,10 @@ export default function ClientDashboard() {
                 <button onClick={() => navigate('/compte')} style={{
                   width: '100%', padding: '12px',
                   background: '#1A6B3C', color: '#fff',
-                  border: 'none', borderRadius: '10px',
+                  border: 'none', 
                   fontSize: '14px', fontWeight: '700', cursor: 'pointer',
                   marginTop: '8px',
-                }}>✏️ Modifier mon profil</button>
+                }}>Modifier mon profil</button>
               </div>
             </div>
           )}

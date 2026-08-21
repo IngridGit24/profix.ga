@@ -15,7 +15,6 @@ export default function Badge({ count, children }) {
         fontSize: '10px',
         fontWeight: '700',
         padding: '2px 6px',
-        borderRadius: '99px',
         minWidth: '18px',
         textAlign: 'center',
         lineHeight: '1.4',

@@ -37,7 +37,7 @@ export default function LoginPage() {
     try {
       await authService.login(email, password)
       await refreshUser()
-      toast.success('✅ Connexion réussie !')
+      toast.success('Connexion réussie !')
       navigate('/')
     } catch (err) {
       const status = err.response?.status
@@ -49,14 +49,14 @@ export default function LoginPage() {
         setError(message || 'Réinitialisation requise.')
         setShowForgot(true)
       } else if (status === 429) {
-        toast.error(`⛔ ${message || 'Trop de tentatives. Réessayez plus tard.'}`)
+        toast.error(`${message || 'Trop de tentatives. Réessayez plus tard.'}`)
         setError(message)
       } else if (status === 401) {
-        toast.error('❌ Email ou mot de passe incorrect')
+        toast.error('Email ou mot de passe incorrect')
         setError('Email ou mot de passe incorrect')
         setShowForgot(true)
       } else {
-        toast.error('❌ Erreur de connexion')
+        toast.error('Erreur de connexion')
         setError('Erreur de connexion')
       }
     }
@@ -65,7 +65,7 @@ export default function LoginPage() {
 
   const inputStyle = {
     width: '100%', padding: '12px 14px',
-    border: '1.5px solid #E2EBE7', borderRadius: '10px',
+    border: '1.5px solid #E2EBE7', 
     fontSize: '14px', fontFamily: 'sans-serif',
     outline: 'none', boxSizing: 'border-box',
   }
@@ -81,13 +81,8 @@ export default function LoginPage() {
         {/* LOGO */}
         <div style={{ textAlign: 'center', marginBottom: '32px' }}>
           <div onClick={() => navigate('/')} style={{
-            display: 'inline-flex', alignItems: 'center', gap: '10px', cursor: 'pointer', marginBottom: '8px',
+            display: 'inline-flex', alignItems: 'center', cursor: 'pointer', marginBottom: '8px',
           }}>
-            <div style={{
-              width: '40px', height: '40px', borderRadius: '12px',
-              background: '#1A6B3C', display: 'flex', alignItems: 'center',
-              justifyContent: 'center', fontSize: '20px',
-            }}>🔧</div>
             <span style={{ fontSize: '22px', fontWeight: '800', color: '#0F4526' }}>ProFixGabon</span>
           </div>
           <h1 style={{ fontSize: '24px', fontWeight: '800', marginBottom: '8px' }}>Bon retour !</h1>
@@ -95,7 +90,7 @@ export default function LoginPage() {
         </div>
 
         <div style={{
-          background: '#fff', borderRadius: '20px',
+          background: '#fff', 
           padding: '32px', boxShadow: '0 4px 24px rgba(0,0,0,0.08)',
           border: '1px solid #E2EBE7',
         }}>
@@ -137,15 +132,15 @@ export default function LoginPage() {
             {error && (
               <div style={{
                 background: '#FDECEA', border: '1px solid #F5C6C2',
-                borderRadius: '10px', padding: '10px 14px',
+                 padding: '10px 14px',
                 fontSize: '13px', color: '#D94F3D', marginBottom: '16px',
-              }}>⚠️ {error}</div>
+              }}>{error}</div>
             )}
 
             <button type="submit" disabled={loading} style={{
               width: '100%', padding: '14px',
               background: '#1A6B3C', color: '#fff',
-              border: 'none', borderRadius: '12px',
+              border: 'none', 
               fontSize: '15px', fontWeight: '700', cursor: 'pointer',
               opacity: loading ? 0.7 : 1,
             }}>
