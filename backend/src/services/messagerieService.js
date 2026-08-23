@@ -47,6 +47,15 @@ export class MessagerieService {
     return rows[0] || null;
   }
 
+  /** Used to gate devis creation without a demandeId — see devisController.create. */
+  static async conversationExists(clientId, prestataireUserId) {
+    const rows = await executeQuery(
+      'SELECT id FROM conversations WHERE client_id = ? AND prestataire_id = ? LIMIT 1',
+      [clientId, prestataireUserId]
+    );
+    return rows.length > 0;
+  }
+
   static async sendMessage(conversationId, expediteurId, contenu) {
     const conversation = await this.getById(conversationId);
     if (!conversation) {

@@ -1,5 +1,7 @@
 import { DevisService } from '../services/devisService.js';
 import { PrestataireService } from '../services/prestataireService.js';
+import { DemandeService } from '../services/demandeService.js';
+import { MessagerieService } from '../services/messagerieService.js';
 import { ApiResponse, Pagination } from '../types/index.js';
 import { asyncHandler } from '../middlewares/errorHandler.js';
 import { emitNewDevis, emitDevisStatusChange } from '../config/socket.js';
@@ -12,6 +14,28 @@ class DevisController {
     const prestataire = await PrestataireService.getByUserId(req.user.id);
     if (!prestataire) {
       return res.status(403).json(ApiResponse.error('Vous devez être un prestataire pour créer un devis', 403));
+    }
+
+    // A devis must correspond to a real relationship with this client —
+    // either a demande they sent to this prestataire, or an existing
+    // conversation. Without this, clientId (prestataire-supplied) was only
+    // ever type-checked by Joi, letting a devis be created for any
+    // existing user_id with zero prior contact.
+    if (demandeId) {
+      const demande = await DemandeService.getById(demandeId);
+      if (!demande || demande.prestataire_id !== prestataire.id) {
+        return res.status(404).json(ApiResponse.error('Demande introuvable', 404));
+      }
+      if (demande.client_id !== Number(clientId)) {
+        return res.status(400).json(ApiResponse.error('Le client ne correspond pas à cette demande', 400));
+      }
+    } else {
+      const hasRelation = await MessagerieService.conversationExists(clientId, req.user.id);
+      if (!hasRelation) {
+        return res.status(403).json(
+          ApiResponse.error('Aucune relation existante avec ce client (demande ou conversation requise)', 403)
+        );
+      }
     }
 
     const devis = await DevisService.create({

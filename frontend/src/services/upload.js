@@ -12,7 +12,7 @@ import api from './api'
  */
 export async function uploadImage(file, folder = 'general') {
   const { data } = await api.get('/uploads/signature', { params: { folder } })
-  const { signature, timestamp, apiKey, cloudName, folder: signedFolder } = data.data
+  const { signature, timestamp, apiKey, cloudName, folder: signedFolder, type } = data.data
 
   const formData = new FormData()
   formData.append('file', file)
@@ -20,6 +20,10 @@ export async function uploadImage(file, folder = 'general') {
   formData.append('timestamp', timestamp)
   formData.append('signature', signature)
   formData.append('folder', signedFolder)
+  // Only present for 'identite' uploads (type: 'authenticated' — see
+  // backend/src/services/cloudinaryService.js). Must be resubmitted
+  // exactly as signed or Cloudinary rejects the signature.
+  if (type) formData.append('type', type)
 
   const res = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
     method: 'POST',
