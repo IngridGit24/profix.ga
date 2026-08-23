@@ -7,6 +7,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import messagerieService from '../services/messagerie'
 import { getSocket, joinConversation, leaveConversation } from '../services/socket'
+import { usePolling } from '../hooks/usePolling'
 import { SkeletonMessage } from '../components/Skeleton'
 import toast from 'react-hot-toast'
 import { sanitizeText } from '../utils/validators'
@@ -80,6 +81,26 @@ export default function ChatPage() {
       leaveConversation(conversationId)
     }
   }, [conversationId, user])
+
+  // Filet de secours sans socket (voir usePolling) : revérifie les messages
+  // les plus récents et les fusionne par id — pas un simple reload, pour ne
+  // pas dupliquer ceux déjà ajoutés par le socket quand il fonctionne, ni
+  // perdre les plus anciens chargés via "Charger plus de messages".
+  const pollMessages = useCallback(async () => {
+    if (!conversationId) return
+    try {
+      const latest = await messagerieService.getMessages(conversationId, { page: 1, limit: MESSAGES_LIMIT })
+      setMessages((prev) => {
+        const byId = new Map(prev.map((m) => [m.id, m]))
+        for (const m of latest) byId.set(m.id, m)
+        return Array.from(byId.values()).sort((a, b) => a.id - b.id)
+      })
+    } catch {
+      // silencieux — prochain tick réessaie
+    }
+  }, [conversationId])
+
+  usePolling(pollMessages, conversationId && user ? 5000 : null)
 
   // Marquer comme lu quand la page redevient visible
   useEffect(() => {

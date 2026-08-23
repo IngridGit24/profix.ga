@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import messagerieService from '../services/messagerie'
 import { getSocket } from '../services/socket'
+import { usePolling } from '../hooks/usePolling'
 
 export default function ConversationsList() {
   const { user } = useAuth()
@@ -37,6 +38,8 @@ export default function ConversationsList() {
     socket.on('conversation_updated', handler)
     return () => socket.off('conversation_updated', handler)
   }, [user])
+
+  usePolling(load, user ? 8000 : null)
 
   if (loading) {
     return (

@@ -9,6 +9,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { useAuth } from '../context/AuthContext'
 import { getSocket } from '../services/socket'
 import messagerieService from '../services/messagerie'
+import { usePolling } from '../hooks/usePolling'
 
 export default function Navbar() {
   const navigate = useNavigate()
@@ -43,6 +44,8 @@ export default function Navbar() {
     socket.on('conversation_updated', handler)
     return () => socket.off('conversation_updated', handler)
   }, [user, refreshUnreadCount])
+
+  usePolling(refreshUnreadCount, user ? 10000 : null)
 
   const handleLogout = async () => {
     await logout()

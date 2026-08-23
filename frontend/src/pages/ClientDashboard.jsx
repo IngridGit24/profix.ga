@@ -10,6 +10,7 @@ import authService from '../services/auth'
 import devisService from '../services/devis'
 import messagerieService from '../services/messagerie'
 import { getSocket } from '../services/socket'
+import { usePolling } from '../hooks/usePolling'
 import ConversationsList from '../components/ConversationsList'
 import DemandesList from '../components/DemandesList'
 import DevisList from '../components/DevisList'
@@ -58,6 +59,8 @@ export default function ClientDashboard() {
       socket.off('conversation_updated', handler)
     }
   }, [user, refreshBadges])
+
+  usePolling(refreshBadges, user ? 10000 : null)
 
   const switchToProviderMode = async () => {
     try {

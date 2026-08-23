@@ -15,6 +15,7 @@ import demandesService from '../services/demandes'
 import messagerieService from '../services/messagerie'
 import avisService from '../services/avis'
 import { getSocket } from '../services/socket'
+import { usePolling } from '../hooks/usePolling'
 import ConversationsList from '../components/ConversationsList'
 import DemandesList from '../components/DemandesList'
 import DevisList from '../components/DevisList'
@@ -145,6 +146,9 @@ export default function ProviderDashboard() {
       socket.off('conversation_updated', handler)
     }
   }, [prestataire, refreshBadges])
+
+  const pollBadges = useCallback(() => refreshBadges(prestataire?.id), [refreshBadges, prestataire?.id])
+  usePolling(pollBadges, prestataire ? 10000 : null)
 
   const toggleMode = async () => {
     try {

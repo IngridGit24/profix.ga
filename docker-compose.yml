@@ -9,7 +9,15 @@ services:
       MYSQL_PASSWORD: ${DB_PASSWORD:-devpassword}
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-devrootpassword}
     ports:
-      - "3306:3306"
+      # Host-side port bumped from the default 3306: on this machine, Docker
+      # can't bind 0.0.0.0:3306 ("forbidden by its access permissions") even
+      # with nothing else listening on it — a stuck Windows/Docker Desktop
+      # network handle, not a real conflict. Not load-bearing for the app
+      # itself (backend talks to `db:3306` over the internal Docker
+      # network, see DB_HOST below) — only affects connecting an external
+      # DB client (Workbench/DBeaver/mysql CLI) from the host, which should
+      # now point at localhost:33060 instead.
+      - "33060:3306"
     volumes:
       - dbdata:/var/lib/mysql
     healthcheck:
