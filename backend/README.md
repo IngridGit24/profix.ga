@@ -45,29 +45,30 @@ Also fixed along the way (see `services/devisService.js`):
   Firestore's `onSnapshot`.
 - Signed Cloudinary upload endpoint.
 
-## What's NOT done yet — read before assuming this is deployable
+## Remaining work
 
-1. **The frontend hasn't been migrated.** Every Firestore/Firebase Auth
-   call in `profixgabon/src/services/*.js`, `context/AuthContext.jsx`,
-   `components/ProtectedRoute.jsx`, and the pages themselves still talks
-   to Firebase directly. This backend exists and is tested independently,
-   but nothing in the frontend calls it yet — that's the next phase.
-2. **Existing users can't be migrated with their passwords.** Firebase
-   Auth never exposes usable password hashes for export in the general
-   case. The plan baked into the schema: migrate `users` by `firebase_uid`
-   with `password = NULL`, and any such account must go through
-   `POST /auth/request-password-reset` → `/auth/reset-password` before
-   their first login here. **No migration script exists yet** — this
-   needs a one-off script reading from the Firestore export and inserting
-   into MySQL, which isn't written.
-3. **Password reset emails aren't sent.** `requestPasswordReset` generates
-   and stores a token but only logs it (see the `TODO` in
-   `authController.js`) — no SMTP is wired up.
-4. **No tests.** `jest`/`supertest` are installed, nothing is written yet.
-5. **Firestore rules were never available to audit** (not in the frontend
-   repo) — if this migration goes ahead, the old Firestore rules should be
-   locked down to deny-all once the frontend cuts over, so no stale write
-   path remains.
+The current frontend in `../frontend/` uses this API for authentication and
+application data; it no longer imports the Firebase SDK. The former
+Firebase-based frontend is preserved on the `legacy-firebase` branch.
+
+The project still needs the following work before its migration and
+production-readiness can be considered complete:
+
+1. **Legacy account/data migration.** Firebase Auth does not generally expose
+   password hashes for export. No import script exists yet. Imported accounts
+   can use `password = NULL` and must reset their password before logging in.
+2. **Password reset email delivery.** `requestPasswordReset` currently stores
+   a token but only logs it; SMTP or another email provider is not configured.
+3. **Broader automated backend tests.** A small Jest suite now covers
+   conversation-participant authorization. The rest of the API still needs
+   automated coverage, including authentication, providers, requests, and
+   quotes.
+4. **Legacy Firebase access review.** Before retiring the old application,
+   audit and lock down its Firestore rules so an obsolete client cannot keep
+   writing to legacy data.
+5. **Production deployment.** The repository workflow builds and publishes
+   Docker images; deployment to a running environment must be configured
+   separately.
 
 ## Setup
 
@@ -75,8 +76,12 @@ Also fixed along the way (see `services/devisService.js`):
 cp .env.example .env   # fill in DB_*, JWT_SECRET, CLOUDINARY_*
 npm install
 npm run migrate        # creates all tables
+npm run seed:admin     # creates/promotes admin@profix.com using ADMIN_PASSWORD
 npm run dev
 ```
+
+Set a strong `ADMIN_PASSWORD` in `.env` before running the admin seeder. The
+password is hashed with bcrypt and is never stored in the source code.
 
 ## Structure
 

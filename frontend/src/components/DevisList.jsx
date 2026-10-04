@@ -1,8 +1,5 @@
-// src/components/DevisList.jsx
-// Replaces Firestore cursor-based pagination with the backend's page/limit
-// pagination — see services/devis.js.
-import { useState, useEffect, useMemo, useCallback } from 'react'
-import devisService from '../services/devis'
+import { useState, useEffect, useMemo, useCallback } from 'react';
+import devisService from '../services/devis';
 
 export default function DevisList({ type }) {
   const [devis, setDevis] = useState([])

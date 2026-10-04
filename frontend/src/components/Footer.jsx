@@ -1,6 +1,3 @@
-// src/components/Footer.jsx
-// Mirrors moncv.ga's landing-footer: centered, border-top, muted link to
-// ISM.Inc. Mounted once in App.jsx so it appears under every route.
 export default function Footer() {
   return (
     <footer style={{

@@ -1,9 +1,4 @@
-// src/services/upload.js
-// Replaces the old unsigned Cloudinary upload_preset flow — anyone, logged
-// in or not, could previously upload directly to the Cloudinary account.
-// Now the backend signs each upload request; only an authenticated user can
-// get a signature, and it's tied to a specific timestamp/folder.
-import api from './api'
+import api from './api';
 
 /**
  * Uploads `file` to Cloudinary using a fresh, backend-signed request.

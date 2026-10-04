@@ -13,7 +13,7 @@ env:
   REGISTRY: docker.io
   BACKEND_IMAGE_NAME: ingridcode/profixgabon-backend
   FRONTEND_IMAGE_NAME: ingridcode/profixgabon-frontend
-  VITE_API_BASE_URL: ${{ vars.VITE_API_BASE_URL || 'https://api.profixgabon.example.com/api/v1' }}
+  VITE_API_BASE_URL: ${{ vars.VITE_API_BASE_URL || 'https://api.profixgabon.com/api/v1' }}
 
 jobs:
   # ── 1a. Analyse — backend ────────────────────────────────────────────
@@ -36,6 +36,12 @@ jobs:
       - name: Lint (erreurs réelles — voir backend/.eslintrc.json)
         working-directory: backend
         run: npm run lint
+
+      - name: Tests
+        working-directory: backend
+        env:
+          NODE_OPTIONS: --experimental-vm-modules
+        run: npm test -- --runInBand
 
   # ── 1b. Analyse — frontend ───────────────────────────────────────────
   analyze-frontend:

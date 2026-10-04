@@ -47,6 +47,21 @@ export class MessagerieService {
     return rows[0] || null;
   }
 
+  static async getForParticipant(id, userId) {
+    const conversation = await this.getById(id);
+    if (!conversation) {
+      const err = new Error('Conversation introuvable');
+      err.statusCode = 404;
+      throw err;
+    }
+    if (Number(conversation.client_id) !== Number(userId) && Number(conversation.prestataire_id) !== Number(userId)) {
+      const err = new Error('Vous ne participez pas à cette conversation');
+      err.statusCode = 403;
+      throw err;
+    }
+    return conversation;
+  }
+
   /** Used to gate devis creation without a demandeId — see devisController.create. */
   static async conversationExists(clientId, prestataireUserId) {
     const rows = await executeQuery(
@@ -57,17 +72,7 @@ export class MessagerieService {
   }
 
   static async sendMessage(conversationId, expediteurId, contenu) {
-    const conversation = await this.getById(conversationId);
-    if (!conversation) {
-      const err = new Error('Conversation introuvable');
-      err.statusCode = 404;
-      throw err;
-    }
-    if (conversation.client_id !== expediteurId && conversation.prestataire_id !== expediteurId) {
-      const err = new Error("Vous ne participez pas à cette conversation");
-      err.statusCode = 403;
-      throw err;
-    }
+    const conversation = await this.getForParticipant(conversationId, expediteurId);
 
     const result = await executeQuery(
       'INSERT INTO messages (conversation_id, expediteur_id, contenu) VALUES (?, ?, ?)',
@@ -111,6 +116,7 @@ export class MessagerieService {
   }
 
   static async markAsRead(conversationId, userId) {
+    await this.getForParticipant(conversationId, userId);
     await executeQuery('UPDATE messages SET lu = TRUE WHERE conversation_id = ? AND expediteur_id != ? AND lu = FALSE', [conversationId, userId]);
     await executeQuery(
       `INSERT INTO conversation_reads (conversation_id, user_id, unread_count) VALUES (?, ?, 0)

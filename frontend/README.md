@@ -1,16 +1,43 @@
-# React + Vite
+# ProFixGabon Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React 19 single-page application built with Vite. It uses the ProFixGabon
+backend API for authentication and application data; Firebase SDK calls are
+not used by the current frontend.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Clients can browse providers, submit service requests, review quotes, chat
+  with providers, and leave reviews.
+- Providers can apply for a profile, manage their profile and availability,
+  and respond to client requests.
+- Administrators can review provider profiles and validate or reject them.
 
-## React Compiler
+## Local development
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Start the backend and MySQL database first; see `../backend/README.md` for
+backend configuration and migrations. Then run:
 
-## Expanding the ESLint configuration
+```sh
+npm ci
+npm run dev
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+The API base URL is configured with `VITE_API_BASE_URL`. For a local backend,
+create a `.env.local` file with:
+
+```sh
+VITE_API_BASE_URL=http://localhost:4000/api/v1
+```
+
+If unset, the frontend uses that local URL by default. Vite reads this value
+at build time, so a production build must be given the production API URL.
+
+## Checks and production build
+
+```sh
+npm run lint
+npm run build
+```
+
+For Docker, pass `VITE_API_BASE_URL` as a build argument; setting it only when
+starting the container does not change the already-built frontend bundle.

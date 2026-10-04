@@ -1,9 +1,3 @@
-// src/components/Navbar.jsx
-// Previously checked user.email === ADMIN_EMAIL (a hardcoded address) to
-// decide whether to show the Admin link — purely cosmetic even before,
-// since the real gate is now ProtectedRoute adminOnly + the backend's
-// authorizeRoles('admin'), but this now reflects the real role (user.type)
-// instead of a hardcoded string.
 import { Link, useNavigate } from 'react-router-dom'
 import { useCallback, useEffect, useState } from 'react'
 import { useAuth } from '../context/AuthContext'

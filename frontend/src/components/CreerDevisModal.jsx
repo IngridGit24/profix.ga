@@ -1,6 +1,5 @@
-// src/components/CreerDevisModal.jsx
-import { useState } from 'react'
-import devisService from '../services/devis'
+import { useState } from 'react';
+import devisService from '../services/devis';
 
 export default function CreerDevisModal({ demande, onClose, onSuccess }) {
   const [montant, setMontant] = useState('')

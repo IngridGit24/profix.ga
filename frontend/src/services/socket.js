@@ -1,6 +1,4 @@
-// src/services/socket.js
-// Real-time layer, replacing Firestore's onSnapshot listeners.
-import { io } from 'socket.io-client'
+import { io } from 'socket.io-client';
 
 const getSocketBaseUrl = () => {
   const apiUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000/api/v1'

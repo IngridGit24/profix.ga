@@ -1,12 +1,9 @@
-// src/components/ConversationsList.jsx
-// Replaces the Firestore onSnapshot listener with a fetch + a
-// 'conversation_updated' socket event to refresh (see services/socket.js).
-import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../context/AuthContext'
-import messagerieService from '../services/messagerie'
-import { getSocket } from '../services/socket'
-import { usePolling } from '../hooks/usePolling'
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import messagerieService from '../services/messagerie';
+import { getSocket } from '../services/socket';
+import { usePolling } from '../hooks/usePolling';
 
 export default function ConversationsList() {
   const { user } = useAuth()

@@ -2,8 +2,30 @@ import { Server } from 'socket.io';
 import jwt from 'jsonwebtoken';
 import config from './app.js';
 import logger from '../utils/logger.js';
+import MessagerieService from '../services/messagerieService.js';
 
 let io = null;
+
+export const joinConversationRoom = async (socket, conversationId, acknowledge) => {
+  const id = Number(conversationId);
+  if (!Number.isSafeInteger(id) || id <= 0) {
+    if (typeof acknowledge === 'function') acknowledge({ success: false, message: 'Identifiant invalide' });
+    return;
+  }
+
+  try {
+    await MessagerieService.getForParticipant(id, socket.userId);
+    socket.join(`conversation_${id}`);
+    if (typeof acknowledge === 'function') acknowledge({ success: true });
+  } catch (error) {
+    if (error.statusCode !== 403 && error.statusCode !== 404) {
+      logger.error('Socket conversation authorization failed:', error?.message);
+    }
+    if (typeof acknowledge === 'function') {
+      acknowledge({ success: false, message: error.statusCode === 404 ? 'Conversation introuvable' : 'Accès refusé' });
+    }
+  }
+};
 
 export const initSocket = (server) => {
   io = new Server(server, {
@@ -35,10 +57,8 @@ export const initSocket = (server) => {
     // that aren't tied to a specific open conversation.
     socket.join(`user_${socket.userId}`);
 
-    // Client explicitly joins a conversation room when they open the chat
-    // page — mirrors the customer app's join_order_room pattern.
-    socket.on('join_conversation', (conversationId) => {
-      socket.join(`conversation_${conversationId}`);
+    socket.on('join_conversation', (conversationId, acknowledge) => {
+      joinConversationRoom(socket, conversationId, acknowledge);
     });
 
     socket.on('leave_conversation', (conversationId) => {

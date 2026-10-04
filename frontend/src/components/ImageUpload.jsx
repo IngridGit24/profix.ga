@@ -1,11 +1,6 @@
-// src/components/ImageUpload.jsx
-// Previously posted straight to Cloudinary with an unsigned upload_preset —
-// no auth check, anyone could upload to the account. Now goes through
-// services/upload.js, which fetches a signed, authenticated request from
-// the backend first.
-import { useState } from 'react'
-import toast from 'react-hot-toast'
-import { uploadImage } from '../services/upload'
+import { useState } from 'react';
+import toast from 'react-hot-toast';
+import { uploadImage } from '../services/upload';
 
 export default function ImageUpload({ onUpload, label = 'Ajouter une photo', folder = 'general' }) {
   const [loading, setLoading] = useState(false)

@@ -7,8 +7,8 @@ dotenv.config();
 const dbConfig = {
   host: process.env.DB_HOST || 'localhost',
   port: process.env.DB_PORT || 3306,
-  database: process.env.DB_NAME || 'profixgabon_db',
-  user: process.env.DB_USER || 'profixgabon_user',
+  database: process.env.DB_NAME || 'profix_db',
+  user: process.env.DB_USER || 'profix_user',
   password: process.env.DB_PASSWORD,
   waitForConnections: true,
   connectionLimit: 20,

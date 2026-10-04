@@ -16,9 +16,9 @@ export const config = {
   jwtSecret: (() => {
     if (!process.env.JWT_SECRET) {
       if (process.env.NODE_ENV === 'production') {
-        throw new Error('🔒 SECURITY ERROR: JWT_SECRET must be set in production environment!');
+        throw new Error('SECURITY ERROR: JWT_SECRET must be set in production environment!');
       }
-      logger.warn('⚠️  WARNING: Using default JWT secret - NOT FOR PRODUCTION USE');
+      logger.warn('WARNING: Using default JWT secret - NOT FOR PRODUCTION USE');
       return 'dev-only-secret-key-change-in-production';
     }
     return process.env.JWT_SECRET;

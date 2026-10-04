@@ -1,4 +1,3 @@
-// src/components/Skeleton.jsx
 export const SkeletonCard = () => (
   <div style={{
     background: '#fff',

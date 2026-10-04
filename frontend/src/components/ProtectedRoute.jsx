@@ -1,7 +1,3 @@
-// src/components/ProtectedRoute.jsx
-// Previously did its own getDoc(doc(db,'users',uid)) on every route change
-// to figure out type/currentMode. AuthContext's `user` already carries
-// both directly from GET /auth/me now, so this is just a redirect gate.
 import { Navigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 

@@ -1,9 +1,6 @@
-// src/components/DemandesList.jsx
-// Replaces Firestore cursor-based pagination (lastVisible/startAfter) with
-// the backend's page/limit pagination — see services/demandes.js.
-import { useState, useEffect, useCallback } from 'react'
-import demandesService from '../services/demandes'
-import CreerDevisModal from './CreerDevisModal'
+import { useState, useEffect, useCallback } from 'react';
+import demandesService from '../services/demandes';
+import CreerDevisModal from './CreerDevisModal';
 
 export default function DemandesList({ type }) {
   const [demandes, setDemandes] = useState([])
