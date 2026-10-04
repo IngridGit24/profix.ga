@@ -21,6 +21,7 @@
 // with an unsigned upload_preset.
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { Eye, EyeOff } from 'lucide-react'
 import toast from 'react-hot-toast'
 import { VILLES, CATEGORIES } from '../data/data'
 import { isValidEmail, isStrongPassword, isValidName, isValidDescription, sanitizeText } from '../utils/validators'
@@ -42,6 +43,8 @@ export default function RegisterPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirm, setConfirm] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
+  const [showConfirm, setShowConfirm] = useState(false)
 
   const [ville, setVille] = useState('')
   const [categorie, setCategorie] = useState('')
@@ -184,7 +187,7 @@ export default function RegisterPage() {
     <div style={{
       minHeight: '100vh', display: 'flex', alignItems: 'center',
       justifyContent: 'center', background: '#F7F9F8',
-      padding: '24px', fontFamily: 'sans-serif',
+      padding: '88px 24px 24px', fontFamily: 'sans-serif',
     }}>
       <div style={{ width: '100%', maxWidth: '480px' }}>
 
@@ -300,16 +303,31 @@ export default function RegisterPage() {
                 {[
                   { label: 'Nom complet', val: nom, set: setNom, type: 'text', placeholder: 'Jean-Pierre Mboua' },
                   { label: 'Email', val: email, set: setEmail, type: 'email', placeholder: 'votre@email.com' },
-                  { label: 'Mot de passe', val: password, set: setPassword, type: 'password', placeholder: '••••••••' },
-                  { label: 'Confirmer le mot de passe', val: confirm, set: setConfirm, type: 'password', placeholder: '••••••••' },
+                  { label: 'Mot de passe', val: password, set: setPassword, type: 'password', placeholder: '••••••••', visible: showPassword, setVisible: setShowPassword },
+                  { label: 'Confirmer le mot de passe', val: confirm, set: setConfirm, type: 'password', placeholder: '••••••••', visible: showConfirm, setVisible: setShowConfirm },
                 ].map(f => (
                   <div key={f.label}>
                     <label style={{ fontSize: '13px', fontWeight: '700', color: '#4A5E55', display: 'block', marginBottom: '6px' }}>{f.label}</label>
-                    <input type={f.type} value={f.val} onChange={e => f.set(e.target.value)}
-                      placeholder={f.placeholder} required style={inputStyle}
-                      onFocus={e => e.target.style.borderColor = '#1A6B3C'}
-                      onBlur={e => e.target.style.borderColor = '#E2EBE7'}
-                    />
+                    <div className={f.setVisible ? 'password-field' : undefined}>
+                      <input type={f.visible ? 'text' : f.type} value={f.val} onChange={e => f.set(e.target.value)}
+                        placeholder={f.placeholder} required
+                        style={f.setVisible ? { ...inputStyle, padding: '12px 48px 12px 14px' } : inputStyle}
+                        onFocus={e => e.target.style.borderColor = '#1A6B3C'}
+                        onBlur={e => e.target.style.borderColor = '#E2EBE7'}
+                      />
+                      {f.setVisible && (
+                        <button
+                          className="password-visibility-toggle"
+                          type="button"
+                          aria-label={f.visible ? 'Masquer le mot de passe' : 'Afficher le mot de passe'}
+                          aria-pressed={f.visible}
+                          title={f.visible ? 'Masquer le mot de passe' : 'Afficher le mot de passe'}
+                          onClick={() => f.setVisible((visible) => !visible)}
+                        >
+                          {f.visible ? <EyeOff size={18} aria-hidden="true" /> : <Eye size={18} aria-hidden="true" />}
+                        </button>
+                      )}
+                    </div>
                   </div>
                 ))}
               </div>

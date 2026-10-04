@@ -45,11 +45,22 @@ Also fixed along the way (see `services/devisService.js`):
   Firestore's `onSnapshot`.
 - Signed Cloudinary upload endpoint.
 
-## Remaining work
+## Frontend integration
 
-The current frontend in `../frontend/` uses this API for authentication and
-application data; it no longer imports the Firebase SDK. The former
-Firebase-based frontend is preserved on the `legacy-firebase` branch.
+The React application in `../frontend/` uses this API for its current user
+flows. Its shared Axios client is configured with `VITE_API_BASE_URL`, and
+its service modules call the backend for:
+
+- registration, login, profile management, password changes, and account mode;
+- provider search and profiles, provider applications, and admin validation;
+- service requests, quotes, reviews, and signed image uploads;
+- conversations and messages, with Socket.io for real-time updates.
+
+The current frontend source does not import the Firebase SDK. Firebase
+references in comments describe the legacy implementation being replaced;
+the old Firebase-based frontend is preserved on the `legacy-firebase` branch.
+
+## Remaining work
 
 The project still needs the following work before its migration and
 production-readiness can be considered complete:
@@ -82,6 +93,23 @@ npm run dev
 
 Set a strong `ADMIN_PASSWORD` in `.env` before running the admin seeder. The
 password is hashed with bcrypt and is never stored in the source code.
+
+## API documentation
+
+With the backend running, open the interactive Swagger UI at
+`http://localhost:4000/docs` or fetch the OpenAPI document at
+`http://localhost:4000/docs.json`. The documented server URL follows
+`BACKEND_URL`, `API_PREFIX`, and `API_VERSION`.
+
+The versioned API root (for example, `GET /api/v1`) returns a discovery
+document with links to each route group, Swagger UI, the OpenAPI JSON, and the
+health check instead of returning a route-not-found response.
+
+For protected endpoints, log in first and use the returned JWT with Swagger's
+**Authorize** control. Paste the token without adding the `Bearer` prefix.
+Responses use the common `success`, `message`, `data`, `statusCode`, and
+`timestamp` envelope. Real-time Socket.IO events are not REST endpoints and
+are not listed as operations in the OpenAPI document.
 
 ## Structure
 

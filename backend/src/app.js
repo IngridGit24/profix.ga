@@ -7,9 +7,12 @@ import rateLimit from 'express-rate-limit';
 import { createServer } from 'http';
 import { config } from './config/app.js';
 import { testConnection } from './config/database.js';
+import { ApiResponse } from './types/index.js';
 import logger from './utils/logger.js';
 import { errorHandler, notFound } from './middlewares/errorHandler.js';
 import { initSocket } from './config/socket.js';
+import swaggerUi from 'swagger-ui-express';
+import { swaggerSpec } from './docs/swagger.js';
 
 import authRoutes from './routes/authRoutes.js';
 import prestataireRoutes from './routes/prestataireRoutes.js';
@@ -35,10 +38,10 @@ const corsOptions = {
 
     const isDevelopment = config.nodeEnv !== 'production';
     if (isDevelopment) {
-      const match = origin.match(/^https?:\/\/localhost:(\d+)$/);
+      const match = origin.match(/^https?:\/\/(localhost|127\.0\.0\.1):(\d+)$/);
       if (match) {
         const allowedPorts = ['5173', '5174', '3000', '4000'];
-        if (allowedPorts.includes(match[1])) return callback(null, true);
+        if (allowedPorts.includes(match[2])) return callback(null, true);
       }
     }
 
@@ -99,6 +102,11 @@ app.use(morgan(config.nodeEnv === 'development' ? 'dev' : 'combined'));
 app.use(express.json({ limit: '5mb' }));
 app.use(express.urlencoded({ extended: true, limit: '5mb' }));
 
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.get('/docs.json', (req, res) => {
+  res.json(swaggerSpec);
+});
+
 app.get('/health', (req, res) => {
   res.json({
     success: true,
@@ -110,6 +118,29 @@ app.get('/health', (req, res) => {
 });
 
 const apiPrefix = `${config.apiPrefix}/${config.apiVersion}`;
+const apiEndpoints = {
+  auth: `${apiPrefix}/auth`,
+  prestataires: `${apiPrefix}/prestataires`,
+  demandes: `${apiPrefix}/demandes`,
+  devis: `${apiPrefix}/devis`,
+  conversations: `${apiPrefix}/conversations`,
+  uploads: `${apiPrefix}/uploads`,
+  reference: `${apiPrefix}/reference`,
+  avis: `${apiPrefix}/avis`,
+};
+
+app.get(apiPrefix, (req, res) => {
+  res.json(ApiResponse.success({
+    name: 'ProFixGabon API',
+    version: config.apiVersion,
+    documentation: {
+      swagger: '/docs',
+      openapi: '/docs.json',
+      health: '/health',
+    },
+    endpoints: apiEndpoints,
+  }, 'API disponible'));
+});
 
 app.use(`${apiPrefix}/auth`, authRoutes);
 app.use(`${apiPrefix}/prestataires`, prestataireRoutes);
@@ -125,16 +156,13 @@ app.get('/api-info', (req, res) => {
     success: true,
     message: 'Welcome to the ProFixGabon API',
     version: '1.0.0',
+    documentation: {
+      swagger: '/docs',
+      openapi: '/docs.json',
+    },
     endpoints: {
       health: '/health',
-      auth: `${apiPrefix}/auth`,
-      prestataires: `${apiPrefix}/prestataires`,
-      demandes: `${apiPrefix}/demandes`,
-      devis: `${apiPrefix}/devis`,
-      conversations: `${apiPrefix}/conversations`,
-      uploads: `${apiPrefix}/uploads`,
-      reference: `${apiPrefix}/reference`,
-      avis: `${apiPrefix}/avis`,
+      ...apiEndpoints,
     },
   });
 });

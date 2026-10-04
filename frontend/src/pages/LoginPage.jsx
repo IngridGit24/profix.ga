@@ -6,6 +6,7 @@
 // against nothing, since a page refresh reset them.
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { Eye, EyeOff } from 'lucide-react'
 import toast from 'react-hot-toast'
 import { isValidEmail, isValidPassword } from '../utils/validators'
 import { useAuth } from '../context/AuthContext'
@@ -16,6 +17,7 @@ export default function LoginPage() {
   const { refreshUser } = useAuth()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const [showForgot, setShowForgot] = useState(false)
@@ -74,7 +76,7 @@ export default function LoginPage() {
     <div style={{
       minHeight: '100vh', display: 'flex', alignItems: 'center',
       justifyContent: 'center', background: '#F7F9F8',
-      padding: '24px', fontFamily: 'sans-serif',
+      padding: '88px 24px 24px', fontFamily: 'sans-serif',
     }}>
       <div style={{ width: '100%', maxWidth: '420px' }}>
 
@@ -117,16 +119,28 @@ export default function LoginPage() {
               <label style={{ fontSize: '13px', fontWeight: '700', color: '#4A5E55', display: 'block', marginBottom: '6px' }}>
                 Mot de passe
               </label>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••"
-                required
-                style={inputStyle}
-                onFocus={(e) => e.target.style.borderColor = '#1A6B3C'}
-                onBlur={(e) => e.target.style.borderColor = '#E2EBE7'}
-              />
+              <div className="password-field">
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="••••••••"
+                  required
+                  style={{ ...inputStyle, padding: '12px 48px 12px 14px' }}
+                  onFocus={(e) => e.target.style.borderColor = '#1A6B3C'}
+                  onBlur={(e) => e.target.style.borderColor = '#E2EBE7'}
+                />
+                <button
+                  className="password-visibility-toggle"
+                  type="button"
+                  aria-label={showPassword ? 'Masquer le mot de passe' : 'Afficher le mot de passe'}
+                  aria-pressed={showPassword}
+                  title={showPassword ? 'Masquer le mot de passe' : 'Afficher le mot de passe'}
+                  onClick={() => setShowPassword((visible) => !visible)}
+                >
+                  {showPassword ? <EyeOff size={18} aria-hidden="true" /> : <Eye size={18} aria-hidden="true" />}
+                </button>
+              </div>
             </div>
 
             {error && (

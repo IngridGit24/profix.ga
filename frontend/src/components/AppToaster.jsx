@@ -9,6 +9,7 @@ export default function AppToaster() {
         style: {
           background: '#fff',
           color: '#111',
+          borderRadius: 0,
           padding: '14px 18px',
           boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
           border: '1px solid #E2EBE7',

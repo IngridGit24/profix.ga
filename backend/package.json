@@ -11,7 +11,8 @@
     "lint": "eslint src/",
     "migrate": "node src/utils/migrate.js",
     "seed": "node src/utils/seed.js",
-    "seed:admin": "node src/utils/seedAdmin.js"
+    "seed:admin": "node src/utils/seedAdmin.js",
+    "build": "echo 'No build step for backend'"
   },
   "keywords": [
     "api",
@@ -33,7 +34,9 @@
     "jsonwebtoken": "^9.0.2",
     "morgan": "^1.10.0",
     "mysql2": "^3.6.5",
-    "socket.io": "^4.7.4"
+    "socket.io": "^4.7.4",
+    "swagger-jsdoc": "^6.3.0",
+    "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
     "@types/node": "^20.10.5",
